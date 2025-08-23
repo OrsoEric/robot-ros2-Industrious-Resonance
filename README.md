@@ -80,3 +80,12 @@ Power is good, now try with ping, putty and launching the streaming demo and enu
 ![](Images/2025-08-23_T1034%20Test%20RPI5%20Hailo%20Webserver.jpg)
 
 TODO: Do I really want to move to Ubuntu and have ROS2? If I'm already good like this perhaps I should drop the ROS2 requirement
+
+## Interface OrangeHat with Raspberry Pi 5
+
+Test that the power supply is good
+- 10V 0.5A streaming with camera and connected via webserver
+
+Connect with VS Code Remote
+
+Make an application that clears the reset 
