@@ -46,4 +46,18 @@ This is a good effort to make a raspberry pi lego robot.
 
 ![Unnamed Lego Robot](/Images/2025-08-23-Unnamed%20Lego%20Robot.jpg)
 
+# ROBOT 
+
+I choose to start from the LEGO robot, it should be very close to working
+
+## Electronics
+
+It uses an OrangeHat, I remember it has a screen, UART, reset, and SERVO interpolation, it should be good to do a two axis rotation. It has an IMU, and the front numbers show change when I move it, it might be working!
+
+I remember that if the OS isn't running, it keeps reset the OrangeHat and it stays offline, it's a deliberate design decision that works, it's why it wasn't showing anything.
+
+Power regulator is good.
+
+![Test OrangeHat Electronics](/Images/2025-08-23_T0956%20Test%20orangeHat.jpg)
+
 
