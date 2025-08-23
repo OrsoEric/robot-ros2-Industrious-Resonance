@@ -60,4 +60,23 @@ Power regulator is good.
 
 ![Test OrangeHat Electronics](/Images/2025-08-23_T0956%20Test%20orangeHat.jpg)
 
+## Operating System and Raspicam Streaming
 
+Now I need to choose a Raspberry and setup the OS.
+
+I do have a Raspberry with Hailo 8L and raspiocam streaming already setup, test that instead, it saves lots of work!
+
+
+![](Images/2025-08-23_T1034%20Test%20RPI5%20Hailo.jpg)
+
+Power is good, now try with ping, putty and launching the streaming demo and enumerating the Hailo
+
+- ETH0 (static): 192.168.1.65 
+- User: raspi
+- Password: raspi
+
+![](Images/2025-08-23_T1034%20Test%20RPI5%20Hailo%20Putty.png)
+
+![](Images/2025-08-23_T1034%20Test%20RPI5%20Hailo%20Webserver.jpg)
+
+TODO: Do I really want to move to Ubuntu and have ROS2? If I'm already good like this perhaps I should drop the ROS2 requirement
