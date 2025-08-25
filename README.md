@@ -89,3 +89,23 @@ Test that the power supply is good
 Connect with VS Code Remote
 
 Make an application that clears the reset 
+
+### Serial Commands
+
+OrangeHat is programmed with the following functions
+
+```
+ARG_S8 = 's',
+ARG_U8 = 'u',
+ARG_S16 = 'S',
+ARG_U16 = 'U',
+ARG_U32 = 'D',
+ARG_S32 = 'd'
+
+//Register ping command. It's used to reset the communication timeout
+f_ret = parser_tmp.add_cmd( "P", (void *)&ping_handler );
+//Register the Find command. Board answers with board signature
+f_ret |= parser_tmp.add_cmd( "F", (void *)&send_signature_handler );
+//Platform set PPM command
+f_ret |= parser_tmp.add_cmd( "PPM%u:%S:%S", (void *)&set_servo_ppm );
+```
