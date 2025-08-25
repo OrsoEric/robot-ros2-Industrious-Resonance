@@ -60,4 +60,52 @@ Power regulator is good.
 
 ![Test OrangeHat Electronics](/Images/2025-08-23_T0956%20Test%20orangeHat.jpg)
 
+## Operating System and Raspicam Streaming
 
+Now I need to choose a Raspberry and setup the OS.
+
+I do have a Raspberry with Hailo 8L and raspiocam streaming already setup, test that instead, it saves lots of work!
+
+
+![](Images/2025-08-23_T1034%20Test%20RPI5%20Hailo.jpg)
+
+Power is good, now try with ping, putty and launching the streaming demo and enumerating the Hailo
+
+- ETH0 (static): 192.168.1.65 
+- User: raspi
+- Password: raspi
+
+![](Images/2025-08-23_T1034%20Test%20RPI5%20Hailo%20Putty.png)
+
+![](Images/2025-08-23_T1034%20Test%20RPI5%20Hailo%20Webserver.jpg)
+
+TODO: Do I really want to move to Ubuntu and have ROS2? If I'm already good like this perhaps I should drop the ROS2 requirement
+
+## Interface OrangeHat with Raspberry Pi 5
+
+Test that the power supply is good
+- 10V 0.5A streaming with camera and connected via webserver
+
+Connect with VS Code Remote
+
+Make an application that clears the reset 
+
+### Serial Commands
+
+OrangeHat is programmed with the following functions
+
+```
+ARG_S8 = 's',
+ARG_U8 = 'u',
+ARG_S16 = 'S',
+ARG_U16 = 'U',
+ARG_U32 = 'D',
+ARG_S32 = 'd'
+
+//Register ping command. It's used to reset the communication timeout
+f_ret = parser_tmp.add_cmd( "P", (void *)&ping_handler );
+//Register the Find command. Board answers with board signature
+f_ret |= parser_tmp.add_cmd( "F", (void *)&send_signature_handler );
+//Platform set PPM command
+f_ret |= parser_tmp.add_cmd( "PPM%u:%S:%S", (void *)&set_servo_ppm );
+```
