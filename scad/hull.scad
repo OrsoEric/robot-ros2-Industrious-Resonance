@@ -1,11 +1,11 @@
 //Model of the Rasperry Pi 3 and 5
-include <raspberry_pi_3.scad>
+include <libs/raspberry_pi_3.scad>
 //Model of the servo
-include <hs422-servo.scad>
+include <libs/hs422-servo.scad>
 //Model of the batteries
-include <battery-18650.scad>
+include <libs/battery-18650.scad>
 //Holder for a pivot tennis ball
-include <ball_holder.scad>
+include <libs/ball_holder.scad>
 
 module ellipse
 (
@@ -102,6 +102,7 @@ module industrious_resonance
 	i_x_show_rpi = true,
 	i_x_show_servo = true,
 	i_x_show_battery = true,
+	i_x_show_pivot = true,
 	//Thickness of the base
 	i_t_base = 3.5,
 	dummy
@@ -111,15 +112,27 @@ module industrious_resonance
 	c_r_base_major = 120.0;
 	c_r_base_minor = 90.0;
 
+	//Height offset of wheels
+	ho_wheel = 11.0;
 	//Specs of the wheels
 	d_wheel = 70.0;
 	t_wheel = 2.5;
 	//Margin to apply to the wheel hole
 	m_wheel = 2.0;
 	//Position of the motors on the base
-	l_wheel = 50.0;
+	l_wheel = 45.0;
 	w_wheel = 55.0;
-	
+
+	//Offset of the pivot wheel
+	lo_pivot = -70;
+	//This is a number to control anchor between pivot mechanism and its base
+	//I can't be bothered to work out the angles with the arcsin to make it work without this parameter
+	ho_pivot = 12;
+	//Diameter of the hole where I'll stot in the pivot wheel mechanism
+	d_pivot_cutout = 60;
+	//Diameter of the pivot sphere (a tennis ball I had laying around)
+	d_pivot_sphere = 40.0;
+
 	//BASE parameters<
 	t_base = i_t_base;
 
@@ -156,17 +169,25 @@ module industrious_resonance
 			{
 				//Right Wheel
 				
-				translate([l_wheel,-w_wheel,gw_hs422/2+i_t_base])
+				translate([l_wheel,-w_wheel,gw_hs422/2+i_t_base+ho_wheel])
 				rotate([0,180,90])
 				HS422_wheel(i_d_wheel = d_wheel,i_t_wheel = t_wheel);
 				//Left Wheel
-				translate([l_wheel,w_wheel,gw_hs422/2+i_t_base])
+				translate([l_wheel,w_wheel,gw_hs422/2+i_t_base+ho_wheel])
 				rotate([0,0,90])
 				HS422_wheel(i_d_wheel = d_wheel,i_t_wheel = t_wheel);
 				
 			}
-		}
 
+			if (i_x_show_pivot==true)
+			{
+				color("#ffffff")
+				translate([lo_pivot,0,ho_pivot])
+				sphere(d=gd_ball,$fn=100);
+			}
+
+		}
+		//Extrude
 		union()
 		{
 			//Right Wheel
@@ -177,9 +198,24 @@ module industrious_resonance
 			translate([l_wheel,+w_wheel+1.5*t_wheel+0.5*m_wheel,0])
 			linear_extrude(h=i_t_base)
 			square([d_wheel+m_wheel,t_wheel+m_wheel],center=true);
+			//An hole where I'll slot in the pivot wheel
+			translate([lo_pivot,0,0])
+			cylinder(h=i_t_base,d=d_pivot_cutout, $fn=80);
+
+
 		}
 	}
 
+	translate([lo_pivot,0,0])
+	ball_holder
+	(
+		i_d_ball = 40.0,
+		i_d_base = d_pivot_cutout,
+		//Height margin of the base
+		i_ho_base = ho_pivot,
+
+		i_t_base = i_t_base
+	);
 
 }
 

@@ -5,7 +5,7 @@
 //I create three arms, each with two semisphere that converge above the ball
 //Other three arms go anchor to the base where it's screwed
 
-include <libs/primitive_arm_arc.scad>
+include <primitive_arm_arc.scad>
 
 //Diameter of the ball that needs to be held
 gd_ball = 40.0;
@@ -90,7 +90,7 @@ module ball_holder_base
 	i_d_external = 65,
 
 	i_h_base = 5,
-	i_n_resolution = 60,
+	
 	//Number of sectors cut into the base for the holders
 	i_n_sector = 3,
 	//Margin separation between sector and base, game of the arm
@@ -98,7 +98,9 @@ module ball_holder_base
 	//Size of the sector
 	i_d_sector = 30,
 	//Interference between sector and base, it's an arc
-	i_di_sector = 10
+	i_di_sector = 10,
+
+	i_n_resolution = 60
 )
 {
 
@@ -126,7 +128,7 @@ module ball_holder_base
 					i_r_internal = i_d_sector,
 					i_d_external = i_d_sector+i_m_sector,
 					i_h = 5,
-					i_n_resolution = 80
+					i_n_resolution = i_n_resolution
 				);
 			}
 			
@@ -141,12 +143,14 @@ module ball_holder_base
 
 module ball_holder
 (
+	
 	i_d_ball = 40.0,
-
+	i_d_base = 70.0,
 	//Height margin of the base
-	i_ho_base = -13,
+	i_ho_base = 13,
 
-	dummy
+	i_t_base = 5
+
 )
 {
 	//How much bigger are the structural arm in diameter
@@ -171,13 +175,13 @@ module ball_holder
 
 	n_resolution = 50;
 
-	translate([0,0,i_ho_base])
+	
 	ball_holder_base
 	(
 		i_d_hole = i_d_ball+1,
-		i_d_external = 65,
+		i_d_external = i_d_base,
 
-		i_h_base = 5,
+		i_h_base = i_t_base,
 		i_n_resolution = n_resolution,
 		//Number of sectors cut into the base for the holders
 		i_n_sector = 3,
@@ -190,11 +194,11 @@ module ball_holder
 	);
 
 	//Add a cap to smooth out the merging of the arms
-	translate([0,0,d_arm_struct/2-t_arm_struct*0.0])
+	translate([0,0,d_arm_struct/2+i_ho_base])
 	cylinder(h=t_arm_struct*1.0,d=0.7*i_d_ball,$fn=n_resolution);
 
 
-	translate([0,0,0*dm_struct_hold])
+	translate([0,0,i_ho_base])
 	for (a_ray = [0+60,120+60,240+60])
 		rotate([0,0,a_ray])
 		arm_arc
@@ -207,6 +211,7 @@ module ball_holder
 			i_n_points = n_resolution    // Number of points for arc approximation
 		);
 
+	translate([0,0,i_ho_base])
 	for (a_ray = [0,120,240])
 		rotate([0,0,a_ray])
 		arm_arc_with_balls
@@ -228,6 +233,7 @@ module ball_holder
 
 if (false)
 color("#ffffff")
+translate([0,0,13])
 sphere(d=gd_ball,$fn=100);
 
 if (false)
