@@ -27,17 +27,17 @@ module ellipse
 module industrious_resonance
 (
 	i_x_show_rpi = true,
-	i_x_show_servo = true,
+	i_x_show_servo = false,
 	i_x_show_battery = false,
-	i_x_show_pivot = true,
+	i_x_show_pivot = false,
 	//Thickness of the base
 	i_t_base = 3.5,
 	dummy
 )
 {
 
-	c_r_base_major = 120.0;
-	c_r_base_minor = 90.0;
+	c_r_base_major = 90.0;
+	c_r_base_minor = 60.0;
 
 	//Height offset of wheels
 	ho_wheel = 11.0;
@@ -45,13 +45,14 @@ module industrious_resonance
 	d_wheel = 70.0;
 	t_wheel = 2.5;
 	//Margin to apply to the wheel hole
-	m_wheel = 2.0;
+	lm_wheel = -5.0;
+	wm_wheel = 2.0;
 	//Position of the motors on the base
-	l_wheel = 45.0;
-	w_wheel = 55.0;
+	l_wheel = 22.0;
+	w_wheel = 37.0;
 
 	//Offset of the pivot wheel
-	lo_pivot = -70;
+	lo_pivot = -40;
 	//This is a number to control anchor between pivot mechanism and its base
 	//I can't be bothered to work out the angles with the arcsin to make it work without this parameter
 	ho_pivot = 12;
@@ -74,8 +75,8 @@ module industrious_resonance
 
 			if (i_x_show_rpi == true)
 			{
-				translate([-40,+00,t_base+5])
-				rotate([0,0,270])
+				translate([65,30,t_base+40])
+				rotate([0,0,180])
 				raspberry_pi_3();
 			}
 
@@ -116,13 +117,14 @@ module industrious_resonance
 		union()
 		{
 			//Right Wheel
-			translate([l_wheel,-w_wheel-1.5*t_wheel-0.5*m_wheel,0])
+			translate([l_wheel,-w_wheel-1.5*t_wheel-0.5*wm_wheel,0])
 			linear_extrude(h=i_t_base)
-			square([d_wheel+m_wheel,t_wheel+m_wheel],center=true);
+			square([d_wheel+lm_wheel,t_wheel+wm_wheel],center=true);
 			//Left Wheel
-			translate([l_wheel,+w_wheel+1.5*t_wheel+0.5*m_wheel,0])
+			translate([l_wheel,+w_wheel+1.5*t_wheel+0.5*wm_wheel,0])
 			linear_extrude(h=i_t_base)
-			square([d_wheel+m_wheel,t_wheel+m_wheel],center=true);
+			square([d_wheel+lm_wheel,t_wheel+wm_wheel],center=true);
+
 			//An hole where I'll slot in the pivot wheel
 			translate([lo_pivot,0,0])
 			cylinder(h=i_t_base,d=d_pivot_cutout, $fn=80);

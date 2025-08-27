@@ -66,6 +66,12 @@ As pivot wheel, I think of using a 40mm tennis ball. I can make a 3D printed str
 
 https://github.com/user-attachments/assets/4e690c88-9136-435e-aecc-3a0f2ad5ae8a
 
+### Servo Holder
+
+I reused some of my previous work but decided I should do pillars without overhangs since I'm printing them on the robot platform
+
+![](/Images/2025-08-27_16_07_servo_pillars.jpg)
+
 ### Shell
 
 Using Flux to generate possible images for the shell
@@ -75,6 +81,9 @@ Below is an idea I like that plays on the industrious resonance name, a shell th
 ![](/Art/Shell_t6.png)
 
 
+### Platform
+
+![](/Images/2025-08-27T1725-Platform-norpi-nobat-noraspi.png)
 
 
 
