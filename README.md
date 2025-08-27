@@ -58,6 +58,14 @@ Iterations
 
 ![](/Images/2025-08-27-T083848%20OpenSCAD%20WIP.png)
 
+### Ball Holder
+
+As pivot wheel, I think of using a 40mm tennis ball. I can make a 3D printed structure to hold it with low friction, I'm thinking of three holding arms and three structural arms. I went with OpenSCAD to make it
+
+![](/Images/Design-Ball-Holder.png)
+
+
+
 ### Shell
 
 Using Flux to generate possible images for the shell

@@ -4,6 +4,8 @@ include <raspberry_pi_3.scad>
 include <hs422-servo.scad>
 //Model of the batteries
 include <battery-18650.scad>
+//Holder for a pivot tennis ball
+include <ball_holder.scad>
 
 module ellipse
 (
@@ -94,19 +96,6 @@ module servo_holder
 
 }
 
-//servo_holder();
-
-module ball_holder
-(
-
-)
-{
-	sphere(d=40,$fn=40);
-}
-
-ball_holder();
-
-//
 
 module industrious_resonance
 (
@@ -123,7 +112,7 @@ module industrious_resonance
 	c_r_base_minor = 90.0;
 
 	//Specs of the wheels
-	d_wheel = 60.0;
+	d_wheel = 70.0;
 	t_wheel = 2.5;
 	//Margin to apply to the wheel hole
 	m_wheel = 2.0;
