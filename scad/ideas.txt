@@ -15,3 +15,14 @@ A sleek ellipsoidal shell with shifting fractal patterns interwoven with flowing
 I'll have the full might of Flux/HiDream/Qwen render it, then deploy the Hunyuan3D to make it 3D and have the shell of Industrious Resonance.
 
 The LLM had a field day developing it, I used my novel prepront and made the whole backstory :D
+
+
+I have a series of options for the battery
+Down loading?
+Vertical?
+I can also do a boundary, and have side loading with sliding door?
+But the contact?
+
+Now, down loading with lid seems the most sensible option
+
+With four or two batteries, the lid just needs metal tabs, but no wire, it just needs to connect two batteries
