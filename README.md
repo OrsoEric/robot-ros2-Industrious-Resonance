@@ -64,7 +64,7 @@ As pivot wheel, I think of using a 40mm tennis ball. I can make a 3D printed str
 
 ![](/Images/Design-Ball-Holder.png)
 
-![](/Videos/Pivot%20Ball%20Holder.mp4)
+https://github.com/user-attachments/assets/4e690c88-9136-435e-aecc-3a0f2ad5ae8a
 
 ### Shell
 
@@ -73,6 +73,10 @@ Using Flux to generate possible images for the shell
 Below is an idea I like that plays on the industrious resonance name, a shell that is weavy with interference patterns and a frontal lens
 
 ![](/Art/Shell_t6.png)
+
+
+
+
 
 
 ## Electronics
