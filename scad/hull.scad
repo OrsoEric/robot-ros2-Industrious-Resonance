@@ -2,6 +2,7 @@
 include <libs/raspberry_pi_3.scad>
 //Model of the servo
 include <libs/hs422-servo.scad>
+include <libs/servo_holder.scad>
 //Model of the batteries
 include <libs/battery-18650.scad>
 //Holder for a pivot tennis ball
@@ -23,85 +24,11 @@ module ellipse
     polygon(ap_ellipse);
 }
 
-module vertical_support
-(
-	i_h_beam = 30,
-	i_l_vein = 10,
-	i_t_vein = 1
-)
-{
-	translate([i_t_vein,0,i_h_beam])
-	rotate([-90,0,90])
-	linear_extrude(h=i_t_vein)
-	polygon
-	([
-		[0,0],
-		[0,i_h_beam],
-		[i_l_vein,i_h_beam]
-	]);
-}
-
-
-module vein
-(
-	i_d_hole = 3.2,
-	i_h_hole = gw_hs422/2,
-
-	i_h_beam = 30,
-	i_w_beam = 8,
-	i_t_beam = 2,
-	i_l_vein = 10,
-	i_t_vein = 1
-)
-{
-	difference()
-	{
-		union()
-		{
-			linear_extrude(h=i_h_beam)
-			square([i_w_beam,i_t_beam]);
-
-			vertical_support
-			(
-				i_h_beam = i_h_beam,
-				i_l_vein = i_l_vein,
-				i_t_vein = i_t_vein
-			);
-
-		}
-		union()
-		{
-			translate([i_w_beam/2,i_t_beam,i_h_hole+gwi_hs422_hole/2])
-			rotate([90,0,0])
-			cylinder(d=i_d_hole,h=i_t_beam,$fn=20);
-
-			translate([i_w_beam/2,i_t_beam,i_h_hole-gwi_hs422_hole/2])
-			rotate([90,0,0])
-			cylinder(d=i_d_hole,h=i_t_beam,$fn=20);
-
-
-		}
-	}
-}
-
-//vein();
-
-//This creates two vertical brackets with screw hole and reinforcing veins
-module servo_holder
-(
-
-)
-{
-
-
-}
-
-
 module industrious_resonance
 (
 	i_x_show_rpi = true,
 	i_x_show_servo = true,
-	i_x_show_battery = true,
+	i_x_show_battery = false,
 	i_x_show_pivot = true,
 	//Thickness of the base
 	i_t_base = 3.5,
@@ -144,8 +71,6 @@ module industrious_resonance
 			linear_extrude(h=i_t_base)
 			ellipse(x_r=c_r_base_major, y_r=c_r_base_minor);
 
-
-			vein();
 
 			if (i_x_show_rpi == true)
 			{
@@ -217,6 +142,23 @@ module industrious_resonance
 		i_t_base = i_t_base
 	);
 
+	g_lo_wheel = 9.5;
+
+	//Right Wheel
+	translate([l_wheel+g_lo_wheel,-w_wheel,i_t_base])
+	rotate([0,0,90])
+	servo_holder
+	(
+		i_x_show_servo = false
+	);
+
+	//Left Wheel
+	translate([l_wheel+g_lo_wheel,+w_wheel,i_t_base])
+	rotate([0,0,-90])
+	servo_holder
+	(
+		i_x_show_servo = false
+	);
 }
 
 industrious_resonance();
