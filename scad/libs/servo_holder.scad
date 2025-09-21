@@ -6,7 +6,7 @@ include <hs422-servo.scad>
 
 
 //This is a wide pillar that houses one side of the servo
-module pillar
+module servo_pillar_full
 (
 	i_l_base = 40,
 	i_h_base = 10,
@@ -39,7 +39,7 @@ module pillar
 
 }
 
-//pillar();
+//servo_pillar_full();
 
 
 //I extrude from the pillar a cutout for the flange, and the holes for the screw
@@ -79,7 +79,7 @@ module servo_pillar
 
 		union()
 		{
-			pillar
+			servo_pillar_full
 			(
 				i_l_base = i_l_base,
 				i_h_base = i_h_base,

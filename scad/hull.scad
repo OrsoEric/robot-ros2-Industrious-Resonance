@@ -1,5 +1,6 @@
 //Model of the Rasperry Pi 3 and 5
 include <libs/raspberry_pi_3.scad>
+include <libs/rpi_support.scad>
 //Model of the servo
 include <libs/hs422-servo.scad>
 include <libs/servo_holder.scad>
@@ -43,7 +44,7 @@ module industrious_resonance
 	ho_wheel = 11.0;
 	//Specs of the wheels
 	d_wheel = 70.0;
-	t_wheel = 2.5;
+	t_wheel = 8;
 	//Margin to apply to the wheel hole
 	lm_wheel = -5.0;
 	wm_wheel = 2.0;
@@ -161,6 +162,18 @@ module industrious_resonance
 	(
 		i_x_show_servo = false
 	);
+
+	//RPI Support
+	translate([5,-20,t_base+30])
+	rpi_support_pillars
+	(
+		i_d_top = 6,
+		i_d_bot = 10,
+		i_h_pillar = 20,
+		i_h_vertical = 4
+	);
+
+
 }
 
 industrious_resonance();
