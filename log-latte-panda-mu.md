@@ -95,6 +95,10 @@ Now, this being linux, it's not easy to install.
 
 ![](/Images/2025-09-20-T1135%20LM%20Studio%20Acceleration.jpg)
 
+Make sure to select the NVME as target folder for the LLMs, I had to redo it after boot, I am not sure why, but the model still works, LM Studio will find them as long as you select the correct folder where to search the models. I suspect user/media changes the hex hash? Not sure.
+
+![](/Images/2025-09-21-T1119%20LLM%20Folder.jpg)
+
 LM Studio being competently made, uses a llama cpp Vulkan runtime that works out of the box
 
 ![](/Images/2025-09-20-T1144%20LM%20Studio%20Inference.jpg)
