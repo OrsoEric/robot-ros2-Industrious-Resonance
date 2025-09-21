@@ -1,0 +1,28 @@
+I need a raspberry pi housing
+
+I need 18650 battery slots
+
+I need a raspicam holder
+
+I need two servo brackets
+
+I need a pivot ball
+
+I'm thinking of hunyuan a star wars droid head
+
+A sleek ellipsoidal shell with shifting fractal patterns interwoven with flowing waveforms; iridescent surfaces reflect deep blue and gold, glowing lines trace the fractal pathways, and smooth convex lenses sit at the front, radiating harmony between precision and infinite complexity.
+
+I'll have the full might of Flux/HiDream/Qwen render it, then deploy the Hunyuan3D to make it 3D and have the shell of Industrious Resonance.
+
+The LLM had a field day developing it, I used my novel prepront and made the whole backstory :D
+
+
+I have a series of options for the battery
+Down loading?
+Vertical?
+I can also do a boundary, and have side loading with sliding door?
+But the contact?
+
+Now, down loading with lid seems the most sensible option
+
+With four or two batteries, the lid just needs metal tabs, but no wire, it just needs to connect two batteries

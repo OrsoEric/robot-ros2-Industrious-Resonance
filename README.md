@@ -50,6 +50,44 @@ This is a good effort to make a raspberry pi lego robot.
 
 I choose to start from the LEGO robot, it should be very close to working
 
+## Mechanical
+
+Using OpenSCAD to design the base
+
+Iterations
+
+![](/Images/2025-08-27-T083848%20OpenSCAD%20WIP.png)
+
+### Ball Holder
+
+As pivot wheel, I think of using a 40mm tennis ball. I can make a 3D printed structure to hold it with low friction, I'm thinking of three holding arms and three structural arms. I went with OpenSCAD to make it
+
+![](/Images/Design-Ball-Holder.png)
+
+https://github.com/user-attachments/assets/4e690c88-9136-435e-aecc-3a0f2ad5ae8a
+
+### Servo Holder
+
+I reused some of my previous work but decided I should do pillars without overhangs since I'm printing them on the robot platform
+
+![](/Images/2025-08-27_16_07_servo_pillars.jpg)
+
+### Shell
+
+Using Flux to generate possible images for the shell
+
+Below is an idea I like that plays on the industrious resonance name, a shell that is weavy with interference patterns and a frontal lens
+
+![](/Art/Shell_t6.png)
+
+
+### Platform
+
+![](/Images/2025-08-27T1725-Platform-norpi-nobat-noraspi.png)
+
+
+
+
 ## Electronics
 
 It uses an OrangeHat, I remember it has a screen, UART, reset, and SERVO interpolation, it should be good to do a two axis rotation. It has an IMU, and the front numbers show change when I move it, it might be working!
