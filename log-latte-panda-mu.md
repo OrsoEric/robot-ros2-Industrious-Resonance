@@ -116,6 +116,41 @@ The Latte Panda Mu has a MIPI CSI 2 interface. I connected the raspicam, and it 
 ![](/Images/2025-09-20-T1222%20Raspicam.jpg)
 
 
+# Remote Desktop (FAIL)
+
+I want to remote into Ubuntu 24 on the LPMU
+
+I tried to install install xrdp, and work out configuration to no avail. 
+
+![](/Images/2025-09-20-T1034%20Remote%20Desktop%20from%20windows%20to%20ubuntu%20fail.jpg)
+
+I think it's missing some shared objects? Not sure. I expected ubuntu to support remote desktop out of the box, and online guides have me install all sort of dependencies and open ports on the firewall that do not work. I can't connect.
+
+# SSH
+
+Again SSH didn't work out of the box, but it was easy to setup
+
+```
+sudo apt install openssh-server
+
+sudo systemctl enable ssh
+
+sudo systemctl status ssh
+
+sudo ufw allow ssh
+
+sudo reboot now
+
+```
+
+I can connect easily with Putty
+
+![](/Images/2025-09-20-T1055.png)
+
+
+
+
+
 # TODO
 
 ### Test UART Ports
