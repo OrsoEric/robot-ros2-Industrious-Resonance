@@ -116,6 +116,55 @@ The Latte Panda Mu has a MIPI CSI 2 interface. I connected the raspicam, and it 
 ![](/Images/2025-09-20-T1222%20Raspicam.jpg)
 
 
+# Remote Desktop (FAIL)
+
+I want to remote into Ubuntu 24 on the LPMU
+
+I tried to install install xrdp, and work out configuration to no avail. 
+
+![](/Images/2025-09-20-T1034%20Remote%20Desktop%20from%20windows%20to%20ubuntu%20fail.jpg)
+
+I think it's missing some shared objects? Not sure. I expected ubuntu to support remote desktop out of the box, and online guides have me install all sort of dependencies and open ports on the firewall that do not work. I can't connect.
+
+# SSH
+
+Again SSH didn't work out of the box, but it was easy to setup
+
+```
+sudo apt install openssh-server
+
+sudo systemctl enable ssh
+
+sudo systemctl status ssh
+
+sudo ufw allow ssh
+
+sudo reboot now
+
+```
+
+I can connect easily with Putty
+
+![](/Images/2025-09-20-T1055.png)
+
+# VS Code Remote
+
+Having SSH and having VS Code, I can use my windows VS Code to develop and execute remotely code on the latte panda mu
+
+- VS Code Remote
+- On bottom left, there is the connect button
+- On top center screen
+- connect to host sona@192.168.1.239 
+- it'll ask you linux continue, etc...
+- if it fails, it's because windows is dumb and incompetent, and stores SSH key base on IP, so if your board moved to another IP, it'll fail. If so, go to user/you/.ssh and wipe the keys stored there known_host
+
+
+![](/Images/2025-09-21-1202%20VS%20Code%20Remote.png)
+
+On top left, you can open folder, and go to the home folder, and this way you have the terminal into the machine to execute python script, and the file explorer to create folders and script
+
+![](/Images/2025-09-21-1212%20VS%20Code%20Python.png)
+
 # TODO
 
 ### Test UART Ports
