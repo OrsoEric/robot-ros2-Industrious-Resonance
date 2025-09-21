@@ -147,9 +147,23 @@ I can connect easily with Putty
 
 ![](/Images/2025-09-20-T1055.png)
 
+# VS Code Remote
+
+Having SSH and having VS Code, I can use my windows VS Code to develop and execute remotely code on the latte panda mu
+
+- VS Code Remote
+- On bottom left, there is the connect button
+- On top center screen
+- connect to host sona@192.168.1.239 
+- it'll ask you linux continue, etc...
+- if it fails, it's because windows is dumb and incompetent, and stores SSH key base on IP, so if your board moved to another IP, it'll fail. If so, go to user/you/.ssh and wipe the keys stored there known_host
 
 
+![](/Images/2025-09-21-1202%20VS%20Code%20Remote.png)
 
+On top left, you can open folder, and go to the home folder, and this way you have the terminal into the machine to execute python script, and the file explorer to create folders and script
+
+![](/Images/2025-09-21-1212%20VS%20Code%20Python.png)
 
 # TODO
 
