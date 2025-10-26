@@ -207,6 +207,26 @@ This looks wrong, I can select the quant... Is this FP16? No it looks Q4M that i
 
 It's also not in the SSD, the export did nothing -.-
 
+### Ollama Default Folder
+
+This is HORRIBLE. Ollama turns out stores blobs as hashes in user folder!!!
+
+```bash
+sona@sona-lp-n100-8gb:~$ sudo find / -type d -name "blobs" 2>/dev/null | grep -i ollama
+[sudo] password for sona:
+/usr/share/ollama/.ollama/models/blobs
+
+sona@sona-lp-n100-8gb:~$ ls /usr/share/ollama/.ollama/models/blobs
+ls: cannot access '/usr/share/ollama/.ollama/models/blobs': Permission denied
+
+sona@sona-lp-n100-8gb:~$ sudo ls /usr/share/ollama/.ollama/models/blobs
+sha256-3e4cb14174460404e7a233e531675303b2fbf7749c02f91864fe311ab6344e4f  sha256-8cdb57cbb880d313736a9bc4e3d3d2485f145b5e19cf33783746e753e82641fc  sha256-e18a783aae5525fd2852fc94c985541a77e791e034abc2d3056474d59de336fc
+sha256-506fb3bc0dff7fcb027f3903d93ea1f3d7c22b3bb449192e85977484f95a571f  sha256-cff3f395ef3756ab63e58b0ad1b32bb6f802905cae1472e6a12034e4246fbbdb
+sha256-53e4ea15e8f5f17f5052c5ef6aef5f79b4266708c93e7c893dbe4b3e211a815d  sha256-d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12
+```
+
+TODO: If I really want to use ollama, I need to properly use gguf in the NVME, not whatever this garbage ollama does...
+
 ## Benchmark
 
 [Text comprehension test](https://www.esl-lounge.com/student/reading/4r6-snake-bites-boy.php)
@@ -359,4 +379,5 @@ eval duration:        4m53.823911237s
 eval rate:            7.08 tokens/s
 ```
 
-My glob, he pulled a thinking model, it overthings so, SO much as to make it useless.
+My glob, he pulled a thinking model, it overthinks so, SO much as to make it useless.
+
