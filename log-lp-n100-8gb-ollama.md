@@ -8,13 +8,21 @@ I test ollama on the lattepanda
 
 Then I'll test OpenVINO and get a comparison
 
+### Second Board N100 16GB
+
 ## Install
 
 [Ollama Ubuntu Instructions](https://ollama.com/download/linux)
 
 ```bash
 curl -fsSL https://ollama.com/install.sh | sh
+
+ollama
+
 ```
+
+<details>
+<summary>2025-09-20 Install Ollama LOG</summary>
 
 ```bash
 sona@sona-lp-n100-8gb:~$ sudo apt install curl
@@ -80,6 +88,56 @@ Flags:
 Use "ollama [command] --help" for more information about a command.
 ```
 
+</details>
+
+## Select Model Folder 
+
+Create model folder
+
+
+```
+sona@lpn10016gb:~$ mkdir /mnt/external_disk/ollama_models
+
+sudo chown -R ollama:ollama /mnt/external_disk/ollama_models
+
+sona@lpn10016gb:~$ ls /mnt/external_disk/
+lost+found  ollama_models  test_file.txt
+
+```
+
+```
+sudo mount /dev/nvme0n1 /mnt/external_disk
+
+ls /mnt/external_disk
+
+export OLLAMA_MODELS="/mnt/external_disk/ollama_models"
+```
+
+```
+sudo systemctl edit ollama.service
+
+sudo systemctl show ollama --property=Environment
+
+```
+
+add the following lineollama piu
+
+```
+[Service]
+Environment="OLLAMA_MODELS=/mnt/external_disk/"
+```
+
+
+```
+sudo systemctl daemon-reload
+sudo systemctl restart ollama
+
+```
+
+## xxx
+
+
+
 ## Model
 
 I already have a model downloaded on the NVMe drive
@@ -89,6 +147,30 @@ Qwen 3-2507 3B Q4M
 ```bash
 sona@sona-lp-n100-8gb:~$ ls /media/sona/fe4d92e2-b743-4576-b445-e47f511902d0/models_llm/lmstudio-community/
 Qwen3-4B-Instruct-2507-GGUF
+```
+
+## Ollama Models
+
+```
+ollama run gemma3:1b
+
+sona@lpn10016gb:~$ ollama pull gemma3:1b
+pulling manifest
+pulling 7cd4618c1faf: 100% ▕██████████████████████████████████████████████████████████████████████▏ 815 MB
+pulling e0a42594d802: 100% ▕██████████████████████████████████████████████████████████████████████▏  358 B
+pulling dd084c7d92a3: 100% ▕██████████████████████████████████████████████████████████████████████▏ 8.4 KB
+pulling 3116c5225075: 100% ▕██████████████████████████████████████████████████████████████████████▏   77 B
+pulling 120007c81bf8: 100% ▕██████████████████████████████████████████████████████████████████████▏  492 B
+verifying sha256 digest
+writing manifest
+success
+sona@lpn10016gb:~$ ollama list
+NAME         ID              SIZE      MODIFIED
+gemma3:1b    8648f39daa8f    815 MB    14 seconds ago
+sona@lpn10016gb:~$ ollama run gemma3:1b
+>>> shaka
+
+
 ```
 
 ## Ollama Model Card
