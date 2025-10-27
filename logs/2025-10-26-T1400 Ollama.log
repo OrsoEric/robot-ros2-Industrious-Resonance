@@ -1,0 +1,1180 @@
+Discarding device blocks: done
+Creating filesystem with 62514774 4k blocks and 15630336 inodes
+Filesystem UUID: 2034bbe5-49af-4ac2-b7c6-2bd821244e86
+Superblock backups stored on blocks:
+        32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208,
+        4096000, 7962624, 11239424, 20480000, 23887872
+
+Allocating group tables: done
+Writing inode tables: done
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information: done
+
+sona@lpn10016gb:~$
+
+^C
+sona@lpn10016gb:~$ mount | grep ext4
+/dev/mmcblk0p2 on / type ext4 (rw,relatime)
+sona@lpn10016gb:~$ ls -ld /media/sona/
+ls: cannot access '/media/sona/': No such file or directory
+sona@lpn10016gb:~$ ls /media/sona/
+ls: cannot access '/media/sona/': No such file or directory
+sona@lpn10016gb:~$ sudo ls /media/sona/
+ls: cannot access '/media/sona/': No such file or directory
+sona@lpn10016gb:~$ sudo ls /media
+sona@lpn10016gb:~$ sl /media/
+Command 'sl' not found, but can be installed with:
+sudo apt install sl
+sona@lpn10016gb:~$ ls /media/
+sona@lpn10016gb:~$ lsblk
+NAME         MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+mmcblk0      179:0    0  58.2G  0 disk
+├─mmcblk0p1  179:1    0     1G  0 part /boot/efi
+└─mmcblk0p2  179:2    0  57.2G  0 part /
+mmcblk0boot0 179:8    0     4M  1 disk
+mmcblk0boot1 179:16   0     4M  1 disk
+nvme0n1      259:0    0 238.5G  0 disk
+sona@lpn10016gb:~$ sudo mount /dev/nvme0n1
+mount: /dev/nvme0n1: can't find in /etc/fstab.
+sona@lpn10016gb:~$ ls /dev
+autofs           gpiochip0  i2c-7         mei0          ppp       tty10  tty28  tty45  tty62      ttyS20  udmabuf      vcsa6
+block            hidraw3    i2c-8         mem           psaux     tty11  tty29  tty46  tty63      ttyS21  uhid         vcsu
+btrfs-control    hpet       i2c-9         mmcblk0       ptmx      tty12  tty3   tty47  tty7       ttyS22  uinput       vcsu1
+bus              hugepages  initctl       mmcblk0boot0  pts       tty13  tty30  tty48  tty8       ttyS23  urandom      vcsu2
+char             hwrng      input         mmcblk0boot1  random    tty14  tty31  tty49  tty9       ttyS24  userfaultfd  vcsu3
+console          i2c-0      kmsg          mmcblk0p1     rfkill    tty15  tty32  tty5   ttyprintk  ttyS25  userio       vcsu4
+core             i2c-1      kvm           mmcblk0p2     rtc       tty16  tty33  tty50  ttyS0      ttyS26  vcs          vcsu5
+cpu              i2c-10     log           mmcblk0rpmb   rtc0      tty17  tty34  tty51  ttyS1      ttyS27  vcs1         vcsu6
+cpu_dma_latency  i2c-11     loop0         mqueue        shm       tty18  tty35  tty52  ttyS10     ttyS28  vcs2         vfio
+cuse             i2c-12     loop1         mtd           snapshot  tty19  tty36  tty53  ttyS11     ttyS29  vcs3         vga_arbiter
+disk             i2c-13     loop2         mtd0          snd       tty2   tty37  tty54  ttyS12     ttyS3   vcs4         vhci
+dma_heap         i2c-14     loop3         mtd0ro        stderr    tty20  tty38  tty55  ttyS13     ttyS30  vcs5         vhost-net
+dri              i2c-15     loop4         net           stdin     tty21  tty39  tty56  ttyS14     ttyS31  vcs6         vhost-vsock
+drm_dp_aux0      i2c-16     loop5         ng0n1         stdout    tty22  tty4   tty57  ttyS15     ttyS4   vcsa         zero
+ecryptfs         i2c-2      loop6         null          tpm0      tty23  tty40  tty58  ttyS16     ttyS5   vcsa1        zfs
+fb0              i2c-3      loop7         nvme0         tpmrm0    tty24  tty41  tty59  ttyS17     ttyS6   vcsa2
+fd               i2c-4      loop-control  nvme0n1       tty       tty25  tty42  tty6   ttyS18     ttyS7   vcsa3
+full             i2c-5      mapper        nvram         tty0      tty26  tty43  tty60  ttyS19     ttyS8   vcsa4
+fuse             i2c-6      mcelog        port          tty1      tty27  tty44  tty61  ttyS2      ttyS9   vcsa5
+sona@lpn10016gb:~$ ^C
+sona@lpn10016gb:~$ sudo mkfs.ext4 /dev/nvme0n1
+mke2fs 1.47.0 (5-Feb-2023)
+/dev/nvme0n1 contains a ext4 file system
+        created on Sun Oct 26 11:03:49 2025
+Proceed anyway? (y,N) y
+Discarding device blocks: done
+Creating filesystem with 62514774 4k blocks and 15630336 inodes
+Filesystem UUID: 7e68a2d7-b91a-4a03-bfe4-43aae9666b18
+Superblock backups stored on blocks:
+        32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208,
+        4096000, 7962624, 11239424, 20480000, 23887872
+
+Allocating group tables: done
+Writing inode tables: done
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information: done
+
+sona@lpn10016gb:~$ lsblk
+NAME         MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+mmcblk0      179:0    0  58.2G  0 disk
+├─mmcblk0p1  179:1    0     1G  0 part /boot/efi
+└─mmcblk0p2  179:2    0  57.2G  0 part /
+mmcblk0boot0 179:8    0     4M  1 disk
+mmcblk0boot1 179:16   0     4M  1 disk
+nvme0n1      259:0    0 238.5G  0 disk
+sona@lpn10016gb:~$ ^C
+sona@lpn10016gb:~$ ls /mnt/
+sona@lpn10016gb:~$ sudo mkdir /mnt/external_disk
+sona@lpn10016gb:~$ ls /mnt/
+external_disk
+sona@lpn10016gb:~$ sudo mount /dev/nvme0n1 /mnt/external_disk
+sona@lpn10016gb:~$ ls /mnt/
+external_disk
+sona@lpn10016gb:~$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           1.6G  1.7M  1.6G   1% /run
+efivarfs        192K   85K  103K  46% /sys/firmware/efi/efivars
+/dev/mmcblk0p2   56G  6.7G   47G  13% /
+tmpfs           7.7G     0  7.7G   0% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+/dev/mmcblk0p1  1.1G  6.2M  1.1G   1% /boot/efi
+tmpfs           1.6G   12K  1.6G   1% /run/user/1000
+/dev/nvme0n1    234G   28K  222G   1% /mnt/external_disk
+sona@lpn10016gb:~$ ^C
+sona@lpn10016gb:~$ sudo chown -R sona:sona /mnt/external_disk
+sona@lpn10016gb:~$ touch /mnt/external_disk/test_file.txt
+sona@lpn10016gb:~$ ls /mnt/external_disk/
+lost+found  test_file.txt
+sona@lpn10016gb:~$ ^C
+sona@lpn10016gb:~$ ^C
+sona@lpn10016gb:~$ ^C
+sona@lpn10016gb:~$ ^C
+sona@lpn10016gb:~$ ^C
+sona@lpn10016gb:~$ ^C
+sona@lpn10016gb:~$ ^Crl -fsSL https://ollama.com/install.sh | sh
+sona@lpn10016gb:~$
+ls /mnt/external_disk/^C
+sona@lpn10016gb:~$
+sona@lpn10016gb:~$ curl -fsSL https://ollama.com/install.sh | sh
+>>> Installing ollama to /usr/local
+[sudo] password for sona:
+Sorry, try again.
+[sudo] password for sona:
+>>> Downloading Linux amd64 bundle
+######################################################################## 100.0%
+>>> Creating ollama user...
+>>> Adding ollama user to render group...
+>>> Adding ollama user to video group...
+>>> Adding current user to ollama group...
+>>> Creating ollama systemd service...
+>>> Enabling and starting ollama service...
+Created symlink /etc/systemd/system/default.target.wants/ollama.service → /etc/systemd/system/ollama.service.
+>>> The Ollama API is now available at 127.0.0.1:11434.
+>>> Install complete. Run "ollama" from the command line.
+WARNING: No NVIDIA/AMD GPU detected. Ollama will run in CPU-only mode.
+sona@lpn10016gb:~$ ollama
+Usage:
+  ollama [flags]
+  ollama [command]
+
+Available Commands:
+  serve       Start ollama
+  create      Create a model
+  show        Show information for a model
+  run         Run a model
+  stop        Stop a running model
+  pull        Pull a model from a registry
+  push        Push a model to a registry
+  signin      Sign in to ollama.com
+  signout     Sign out from ollama.com
+  list        List models
+  ps          List running models
+  cp          Copy a model
+  rm          Remove a model
+  help        Help about any command
+
+Flags:
+  -h, --help      help for ollama
+  -v, --version   Show version information
+
+Use "ollama [command] --help" for more information about a command.
+sona@lpn10016gb:~$ echo $OLLAMA_MODELS
+
+sona@lpn10016gb:~$
+ls ~/.ollama/models
+ls: cannot access '/home/sona/.ollama/models': No such file or directory
+sona@lpn10016gb:~$ ^C
+sona@lpn10016gb:~$
+systemctl edit ollama.service
+Failed to create parent directories for '/etc/systemd/system/ollama.service.d/override.conf': Permission denied
+sona@lpn10016gb:~$ sudo systemctl edit ollama.service
+sona@lpn10016gb:~$ ls /mnt
+external_disk
+sona@lpn10016gb:~$ ls /mnt/ex
+ls: cannot access '/mnt/ex': No such file or directory
+sona@lpn10016gb:~$ ls /mnt/external_disk/
+lost+found  test_file.txt
+sona@lpn10016gb:~$ mkdir /mnt/external_disk/ollama_models
+sona@lpn10016gb:~$ mkdir /mnt/external_disk/ollama_models
+mkdir: cannot create directory ‘/mnt/external_disk/ollama_models’: File exists
+sona@lpn10016gb:~$ ls /mnt/external_disk/
+lost+found  ollama_models  test_file.txt
+sona@lpn10016gb:~$ ^C
+sona@lpn10016gb:~$ systemctl edit ollama.service
+Failed to create parent directories for '/etc/systemd/system/ollama.service.d/override.conf': Permission denied
+sona@lpn10016gb:~$ sudo systemctl edit ollama.service
+sona@lpn10016gb:~$ ^C
+sona@lpn10016gb:~$ ^C
+sona@lpn10016gb:~$ sudo systemctl edit ollama.service
+Successfully installed edited file '/etc/systemd/system/ollama.service.d/override.conf'.
+sona@lpn10016gb:~$ restart systemctl ollama.service
+Command 'restart' not found, did you mean:
+  command 'restartd' from deb restartd (0.2.3-1.1)
+  command 'rstart' from deb x11-session-utils (7.7+6)
+Try: sudo apt install <deb name>
+sona@lpn10016gb:~$ ^C
+sona@lpn10016gb:~$ sudo chown -R ollama:ollama /your/custom/pathsudo chown -R ollama:ollama /mnt/external_disk/ollama_models^C
+sona@lpn10016gb:~$ sudo chown -R ollama:ollama /mnt/external_disk/ollama_models
+sona@lpn10016gb:~$ ls /mnt/external_disk/
+lost+found  ollama_models  test_file.txt
+sona@lpn10016gb:~$ sudo systemctl show ollama --property=Environment
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin OLLAMA_MODELS=/>
+lines 1-1/1 (END)
+sona@lpn10016gb:~$ sudo systemctl show ollama --property=Environment
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin OLLAMA_MODELS=/>
+ ESCOC
+:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin OLLAMA_MODELS=/mnt/external_disk/
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+ ESCOD
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin OLLAMA_MODELS=/>
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+lines 1-1/1 (END)
+sona@lpn10016gb:~$ ^C
+sona@lpn10016gb:~$ sudo systemctl show ollama --property=Environment
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin OLLAMA_MODELS=/>
+lines 1-1/1 (END)
+sona@lpn10016gb:~$ sudo systemctl show ollama --property=Service
+sona@lpn10016gb:~$ ^C
+sona@lpn10016gb:~$ sudo nano /etc/systemd/system/ollama.service.d/override.conf
+sona@lpn10016gb:~$ sudo systemctl daemon-reload
+sona@lpn10016gb:~$ sudo systemctl restart ollama
+sona@lpn10016gb:~$ ollama
+Usage:
+  ollama [flags]
+  ollama [command]
+
+Available Commands:
+  serve       Start ollama
+  create      Create a model
+  show        Show information for a model
+  run         Run a model
+  stop        Stop a running model
+  pull        Pull a model from a registry
+  push        Push a model to a registry
+  signin      Sign in to ollama.com
+  signout     Sign out from ollama.com
+  list        List models
+  ps          List running models
+  cp          Copy a model
+  rm          Remove a model
+  help        Help about any command
+
+Flags:
+  -h, --help      help for ollama
+  -v, --version   Show version information
+
+Use "ollama [command] --help" for more information about a command.
+sona@lpn10016gb:~$ ollama list
+Error: ollama server not responding - could not connect to ollama server, run 'ollama serve' to start it
+sona@lpn10016gb:~$ ollama list
+Error: ollama server not responding - could not connect to ollama server, run 'ollama serve' to start it
+sona@lpn10016gb:~$ ollama lis
+Error: unknown command "lis" for "ollama"
+
+Did you mean this?
+        list
+        ps
+
+sona@lpn10016gb:~$ ollama
+Usage:
+  ollama [flags]
+  ollama [command]
+
+Available Commands:
+  serve       Start ollama
+  create      Create a model
+  show        Show information for a model
+  run         Run a model
+  stop        Stop a running model
+  pull        Pull a model from a registry
+  push        Push a model to a registry
+  signin      Sign in to ollama.com
+  signout     Sign out from ollama.com
+  list        List models
+  ps          List running models
+  cp          Copy a model
+  rm          Remove a model
+  help        Help about any command
+
+Flags:
+  -h, --help      help for ollama
+  -v, --version   Show version information
+
+Use "ollama [command] --help" for more information about a command.
+sona@lpn10016gb:~$ ollama list
+Error: ollama server not responding - could not connect to ollama server, run 'ollama serve' to start it
+sona@lpn10016gb:~$ sudo systemctl show ollama --property=Environment
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin OLLAMA_MODELS=/>
+ ESCOC
+:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin OLLAMA_MODELS=/mnt/external_disk/
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+ ESCOC
+nt/external_disk/
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+ ESCOC
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+lines 1-1/1 (END)
+sona@lpn10016gb:~$ sudo reboot
+
+Broadcast message from root@lpn10016gb on pts/1 (Sun 2025-10-26 11:52:13 UTC):
+
+The system will reboot now!
+
+sona@lpn10016gb:~$
+login as: sona
+sona@192.168.1.240's password:
+Welcome to Ubuntu 24.04.3 LTS (GNU/Linux 6.8.0-86-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Sun Oct 26 11:53:58 AM UTC 2025
+
+  System load:  0.03               Temperature:             36.0 C
+  Usage of /:   17.6% of 55.99GB   Processes:               135
+  Memory usage: 2%                 Users logged in:         0
+  Swap usage:   0%                 IPv4 address for enp2s0: 192.168.1.240
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Sun Oct 26 10:55:15 2025 from 192.168.1.100
+sona@lpn10016gb:~$ ollama
+Usage:
+  ollama [flags]
+  ollama [command]
+
+Available Commands:
+  serve       Start ollama
+  create      Create a model
+  show        Show information for a model
+  run         Run a model
+  stop        Stop a running model
+  pull        Pull a model from a registry
+  push        Push a model to a registry
+  signin      Sign in to ollama.com
+  signout     Sign out from ollama.com
+  list        List models
+  ps          List running models
+  cp          Copy a model
+  rm          Remove a model
+  help        Help about any command
+
+Flags:
+  -h, --help      help for ollama
+  -v, --version   Show version information
+
+Use "ollama [command] --help" for more information about a command.
+sona@lpn10016gb:~$ ollama list
+Error: ollama server not responding - could not connect to ollama server, run 'ollama serve' to start it
+sona@lpn10016gb:~$ ollama serve
+Couldn't find '/home/sona/.ollama/id_ed25519'. Generating new private key.
+Your new public key is:
+
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJrlW0L+5YNmwR9+rNTXtKpS/D9ud2dmuY1KkduITURR
+
+time=2025-10-26T11:54:28.448Z level=INFO source=routes.go:1511 msg="server config" env="map[CUDA_VISIBLE_DEVICES: GGML_VK_VISIBLE_DEVICES: GPU_DEVICE_ORDINAL: HIP_VISIBLE_DEVICES: HSA_OVERRIDE_GFX_VERSION: HTTPS_PROXY: HTTP_PROXY: NO_PROXY: OLLAMA_CONTEXT_LENGTH:4096 OLLAMA_DEBUG:INFO OLLAMA_FLASH_ATTENTION:false OLLAMA_GPU_OVERHEAD:0 OLLAMA_HOST:http://127.0.0.1:11434 OLLAMA_INTEL_GPU:false OLLAMA_KEEP_ALIVE:5m0s OLLAMA_KV_CACHE_TYPE: OLLAMA_LLM_LIBRARY: OLLAMA_LOAD_TIMEOUT:5m0s OLLAMA_MAX_LOADED_MODELS:0 OLLAMA_MAX_QUEUE:512 OLLAMA_MODELS:/home/sona/.ollama/models OLLAMA_MULTIUSER_CACHE:false OLLAMA_NEW_ENGINE:false OLLAMA_NOHISTORY:false OLLAMA_NOPRUNE:false OLLAMA_NUM_PARALLEL:1 OLLAMA_ORIGINS:[http://localhost https://localhost http://localhost:* https://localhost:* http://127.0.0.1 https://127.0.0.1 http://127.0.0.1:* https://127.0.0.1:* http://0.0.0.0 https://0.0.0.0 http://0.0.0.0:* https://0.0.0.0:* app://* file://* tauri://* vscode-webview://* vscode-file://*] OLLAMA_REMOTES:[ollama.com] OLLAMA_SCHED_SPREAD:false ROCR_VISIBLE_DEVICES: http_proxy: https_proxy: no_proxy:]"
+time=2025-10-26T11:54:28.449Z level=INFO source=images.go:522 msg="total blobs: 0"
+time=2025-10-26T11:54:28.449Z level=INFO source=images.go:529 msg="total unused blobs removed: 0"
+time=2025-10-26T11:54:28.450Z level=INFO source=routes.go:1564 msg="Listening on 127.0.0.1:11434 (version 0.12.6)"
+time=2025-10-26T11:54:28.452Z level=INFO source=runner.go:80 msg="discovering available GPUs..."
+time=2025-10-26T11:54:28.557Z level=INFO source=types.go:129 msg="inference compute" id=cpu library=cpu compute="" name=cpu description=cpu libdirs=ollama driver="" pci_id="" type="" total="15.3 GiB" available="14.8 GiB"
+time=2025-10-26T11:54:28.557Z level=INFO source=routes.go:1605 msg="entering low vram mode" "total vram"="0 B" threshold="20.0 GiB"
+^Csona@lpn10016gb:~$ ollama pull
+Error: accepts 1 arg(s), received 0
+sona@lpn10016gb:~$ ollama list
+Error: ollama server not responding - could not connect to ollama server, run 'ollama serve' to start it
+sona@lpn10016gb:~$ ollama -h
+Large language model runner
+
+Usage:
+  ollama [flags]
+  ollama [command]
+
+Available Commands:
+  serve       Start ollama
+  create      Create a model
+  show        Show information for a model
+  run         Run a model
+  stop        Stop a running model
+  pull        Pull a model from a registry
+  push        Push a model to a registry
+  signin      Sign in to ollama.com
+  signout     Sign out from ollama.com
+  list        List models
+  ps          List running models
+  cp          Copy a model
+  rm          Remove a model
+  help        Help about any command
+
+Flags:
+  -h, --help      help for ollama
+  -v, --version   Show version information
+
+Use "ollama [command] --help" for more information about a command.
+sona@lpn10016gb:~$ ollama show
+Error: accepts 1 arg(s), received 0
+sona@lpn10016gb:~$ ollama pull qwen3:4b
+Error: ollama server not responding - could not connect to ollama server, run 'ollama serve' to start it
+sona@lpn10016gb:~$ sudo chown -R ollama:ollama /mnt/external_disk/ollama_models^C
+sona@lpn10016gb:~$ sudo systemctl show ollama --property=Environment
+[sudo] password for sona:
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin OLLAMA_MODELS=/>
+lines 1-1/1 (END)
+sona@lpn10016gb:~$ sudo nano /etc/systemd/system/ollama.service.d/override.conf
+sona@lpn10016gb:~$ ls /etc/sys
+sysctl.conf  sysctl.d/    sysstat/     systemd/
+sona@lpn10016gb:~$ ls /etc/systemd/
+journald.conf      networkd.conf      sleep.conf         system-generators/ user.conf
+logind.conf        pstore.conf        system/            timesyncd.conf
+network/           resolved.conf      system.conf        user/
+sona@lpn10016gb:~$ ls /etc/systemd/ol^C
+sona@lpn10016gb:~$ ^C
+sona@lpn10016gb:~$ ^C
+sona@lpn10016gb:~$ sudo systemctl edit ollama.service
+Successfully installed edited file '/etc/systemd/system/ollama.service.d/override.conf'.
+sona@lpn10016gb:~$ sudo systemctl edit ollama.service
+Successfully installed edited file '/etc/systemd/system/ollama.service.d/override.conf'.
+sona@lpn10016gb:~$ sudo systemctl daemon-reload
+sona@lpn10016gb:~$ sudo systemctl restart ollama
+sona@lpn10016gb:~$ sudo systemctl show ollama --property=Environment
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin OLLAMA_MODELS=/>
+...skipping...
+
+sona@lpn10016gb:~$ sudo systemctl edit ollama.service
+Successfully installed edited file '/etc/systemd/system/ollama.service.d/override.conf'.
+sona@lpn10016gb:~$ sudo reboot
+
+Broadcast message from root@lpn10016gb on pts/1 (Sun 2025-10-26 12:11:57 UTC):
+
+The system will reboot now!
+
+sona@lpn10016gb:~$
+login as: sona
+sona@192.168.1.240's password:
+Welcome to Ubuntu 24.04.3 LTS (GNU/Linux 6.8.0-86-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Sun Oct 26 12:15:43 PM UTC 2025
+
+  System load:  0.0                Temperature:             33.0 C
+  Usage of /:   17.6% of 55.99GB   Processes:               136
+  Memory usage: 2%                 Users logged in:         0
+  Swap usage:   0%                 IPv4 address for enp2s0: 192.168.1.240
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Sun Oct 26 11:53:59 2025 from 192.168.1.100
+sona@lpn10016gb:~$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute
+       valid_lft forever preferred_lft forever
+2: enp2s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 0a:8c:76:da:80:3f brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.240/23 metric 100 brd 192.168.1.255 scope global dynamic enp2s0
+       valid_lft 99804sec preferred_lft 99804sec
+    inet6 fe80::88c:76ff:feda:803f/64 scope link
+       valid_lft forever preferred_lft forever
+sona@lpn10016gb:~$ sudo systemctl show ollama --property=Environment
+[sudo] password for sona:
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+sona@lpn10016gb:~$ ls /mnt/external_disk
+sona@lpn10016gb:~$ sudo mount /dev/nvme0n1 /mnt/external_disk
+sona@lpn10016gb:~$ ls /mnt/external_disk
+lost+found  ollama_models  test_file.txt
+sona@lpn10016gb:~$ export OLLAMA_MODELS="/mnt/external_disk/ollama_models"
+sona@lpn10016gb:~$ sudo systemctl show ollama --property=Environment
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+sona@lpn10016gb:~$ sudo systemctl edit ollama.service
+Successfully installed edited file '/etc/systemd/system/ollama.service.d/override.conf'.
+sona@lpn10016gb:~$ sudo systemctl edit ollama.service
+Successfully installed edited file '/etc/systemd/system/ollama.service.d/override.conf'.
+sona@lpn10016gb:~$
+    inet6 ::1/128 scope host noprefixroute
+Command 'inet6' not found, did you mean:
+  command 'inetd' from deb openbsd-inetd (0.20221205-3)
+Try: sudo apt install <deb name>
+sona@lpn10016gb:~$ sudo systemctl daemon-reload
+sona@lpn10016gb:~$ sudo systemctl restart ollama
+sona@lpn10016gb:~$ sudo systemctl show ollama --property=Environment
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin OLLAMA_MODELS=/>
+lines 1-1/1 (END)
+sona@lpn10016gb:~$ sudo systemctl edit ollama.service^C
+sona@lpn10016gb:~$ ollama pull
+Error: accepts 1 arg(s), received 0
+sona@lpn10016gb:~$ ollama pull qwen3-4b
+pulling manifest
+Error: pull model manifest: file does not exist
+sona@lpn10016gb:~$ ollama pull gemma3:1b
+pulling manifest
+pulling 7cd4618c1faf: 100% ▕██████████████████████████████████████████████████████████████████████▏ 815 MB
+pulling e0a42594d802: 100% ▕██████████████████████████████████████████████████████████████████████▏  358 B
+pulling dd084c7d92a3: 100% ▕██████████████████████████████████████████████████████████████████████▏ 8.4 KB
+pulling 3116c5225075: 100% ▕██████████████████████████████████████████████████████████████████████▏   77 B
+pulling 120007c81bf8: 100% ▕██████████████████████████████████████████████████████████████████████▏  492 B
+verifying sha256 digest
+writing manifest
+success
+sona@lpn10016gb:~$ ollama list
+NAME         ID              SIZE      MODIFIED
+gemma3:1b    8648f39daa8f    815 MB    14 seconds ago
+sona@lpn10016gb:~$ ollama run gemma3:1b
+>>> shaka
+Okay, let's talk about Shaka! It's a really significant and complex topic, and we can cover a lot of ground. Here’s a
+breakdown of what Shaka is, his life, his legacy, and why he's so important:
+
+**1. Who Was Shaka Zulu?**
+
+* **The Warrior King:** Shaka Zulu was a pivotal figure in Zulu history, born around 1810 in the Drakula area of present-day
+KwaZulu-Natal, South Africa. He's widely considered the founder of the Zulu Kingdom, one of the largest and most powerful
+kingdoms in Southern Africa.
+* **A Military Genius:** He wasn’t just a strong warrior; he was a brilliant strategist, tactician, and administrator. He
+revolutionized Zulu warfare.
+* **The “Lion of the Plains”:** He developed a sophisticated system of military discipline, including a strict code of
+conduct, well-trained warriors, and an effective, mobile cavalry force.  His forces were exceptionally disciplined and
+ruthless.
+
+**2. Key Aspects of His Rise to Power:**
+
+* **The “Umkhuba” System:** He created a "Umkhuba" - a system of ranks and obedience within his army. This was a revolutionary
+concept that instilled absolute loyalty and ensured the army's effectiveness.
+* **Military Innovation:** He pioneered techniques like:
+    * **Mobile Warfare:** He shifted the focus from a stationary war to a fluid, rapid-moving force.
+    * **Siege Warfare:** He developed advanced siege techniques, including the use of elephants.
+    * **Training and Discipline:** He established rigorous training programs for his warriors, emphasizing speed, strength,
+and unwavering obedience.
+* **Ruthlessness and Conquest:**  He systematically conquered neighboring tribes, securing the Zulu territories and
+establishing dominance over the region.
+
+**3. His Legacy & Significance**
+
+* **Formation of the Zulu Kingdom:** Shaka’s military success established the Zulu Kingdom, which became one of the largest
+and most influential kingdoms in Southern Africa.
+* **Cultural Impact:** His legacy profoundly influenced Zulu culture, including their warrior ethos, social structure, and way
+of life.
+* **Influence on African History:**  Shaka’s military innovations had a significant impact on the development of warfare and
+leadership throughout Southern Africa and beyond. He became an icon of African resilience and military prowess.
+* **Symbol of Zulu Pride:** He is now a deeply revered figure within Zulu culture, symbolizing strength, leadership, and a
+fiercely independent spirit.
+
+**4.  A Controversial Figure -  The “Dark Ages” Theory**
+
+* **The Narrative:** There's a persistent, though debated, theory that Shaka's reign was a period of decline and weakness,
+leading to a “Dark Age” for the Zulu. This narrative often suggests his military campaigns were driven by cruelty and
+disregard for the well-being of his people.
+* **Scholarly Debate:** Historians largely dispute this theory.  While there were undoubtedly periods of instability, the
+evidence points to a successful and prosperous era under Shaka, characterized by expansion and strong leadership.
+
+**5.  Key Facts & Statistics:**
+
+* **Born:** 1810
+* **Died:** 1835
+* **Kingdom Established:** 1870
+* **Territory Controlled:** Approximately 100,000 square kilometers (36,000 square miles)
+* **Military Strength:**  His army was estimated to be 100,000 strong, a massive force at the time.
+
+**Resources for Further Learning:**
+
+* **Wikipedia - Shaka Zulu:** [https://en.wikipedia.org/wiki/Shaka_Zulu](https://en.wikipedia.org/wiki/Shaka_Zulu) - A good
+starting point for basic information.
+* **History.com - Shaka Zulu:**
+[https://www.history.com/topics/africa/shaka-zulu](https://www.history.com/topics/africa/shaka-zulu) – Provides a detailed
+overview.
+* **PBS - Shaka Zulu:** [https://www.pbs.org/wgbh/zetelstein/shaka/](https://www.pbs.org/wgbh/zetelstein/shaka/) –  Offers a
+more in-depth historical perspective.
+
+
+---
+
+**To help me give you a more tailored response, could you tell me:**
+
+*   **What specifically are you interested in learning about Shaka?** (e.g., his military tactics, his impact on Zulu culture,
+his legacy, a particular aspect of his life?)
+
+>>>
+Use Ctrl + d or /bye to exit.
+>>>
+Use Ctrl + d or /bye to exit.
+>>> /bye
+sona@lpn10016gb:~$ ls /dev
+autofs           gpiochip0  i2c-7         mei0          ppp       tty10  tty28  tty45  tty62      ttyS20  udmabuf      vcsa6
+block            hidraw0    i2c-8         mem           psaux     tty11  tty29  tty46  tty63      ttyS21  uhid         vcsu
+btrfs-control    hpet       i2c-9         mmcblk0       ptmx      tty12  tty3   tty47  tty7       ttyS22  uinput       vcsu1
+bus              hugepages  initctl       mmcblk0boot0  pts       tty13  tty30  tty48  tty8       ttyS23  urandom      vcsu2
+char             hwrng      input         mmcblk0boot1  random    tty14  tty31  tty49  tty9       ttyS24  userfaultfd  vcsu3
+console          i2c-0      kmsg          mmcblk0p1     rfkill    tty15  tty32  tty5   ttyprintk  ttyS25  userio       vcsu4
+core             i2c-1      kvm           mmcblk0p2     rtc       tty16  tty33  tty50  ttyS0      ttyS26  vcs          vcsu5
+cpu              i2c-10     log           mmcblk0rpmb   rtc0      tty17  tty34  tty51  ttyS1      ttyS27  vcs1         vcsu6
+cpu_dma_latency  i2c-11     loop0         mqueue        shm       tty18  tty35  tty52  ttyS10     ttyS28  vcs2         vfio
+cuse             i2c-12     loop1         mtd           snapshot  tty19  tty36  tty53  ttyS11     ttyS29  vcs3         vga_arbiter
+disk             i2c-13     loop2         mtd0          snd       tty2   tty37  tty54  ttyS12     ttyS3   vcs4         vhci
+dma_heap         i2c-14     loop3         mtd0ro        stderr    tty20  tty38  tty55  ttyS13     ttyS30  vcs5         vhost-net
+dri              i2c-15     loop4         net           stdin     tty21  tty39  tty56  ttyS14     ttyS31  vcs6         vhost-vsock
+drm_dp_aux0      i2c-16     loop5         ng0n1         stdout    tty22  tty4   tty57  ttyS15     ttyS4   vcsa         zero
+ecryptfs         i2c-2      loop6         null          tpm0      tty23  tty40  tty58  ttyS16     ttyS5   vcsa1        zfs
+fb0              i2c-3      loop7         nvme0         tpmrm0    tty24  tty41  tty59  ttyS17     ttyS6   vcsa2
+fd               i2c-4      loop-control  nvme0n1       tty       tty25  tty42  tty6   ttyS18     ttyS7   vcsa3
+full             i2c-5      mapper        nvram         tty0      tty26  tty43  tty60  ttyS19     ttyS8   vcsa4
+fuse             i2c-6      mcelog        port          tty1      tty27  tty44  tty61  ttyS2      ttyS9   vcsa5
+sona@lpn10016gb:~$

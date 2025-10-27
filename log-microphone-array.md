@@ -15,3 +15,10 @@ It worked immediately
 I installed the sounde recorder from the store, and it just worked OOB
 
 ![](/Images/2025-09-21-0914%20Ubuntu%20Sound%20Recorder.jpg)
+
+# CLI
+
+```
+mkdir test_microphone
+
+```

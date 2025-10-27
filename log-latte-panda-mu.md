@@ -39,26 +39,32 @@ It's painless to install and boot into ubuntu, on the EMMC 64GB drive, and wipe 
 
 ![](/Images/2025-09-20-T1015%20Ubuntu%2024%20Ethernet%20IP.jpg)
 
+# Install Ubuntu Server 24 LTS
+
+[Ubuntu Server 24 ISO Download](https://mirror.dogado.de/ubuntu-releases/24.04.3/ubuntu-24.04.3-live-server-amd64.iso)
+
+Use RUFUS to burn USB key
+
+![](/Images/2025-10-26-T1022%20Burn%20Ubuntu%20Server%2024.png)
+
+Go into bios
+
+Use keyboard and screen
+
 # Format NVME
 
 This being linux, it's not easy to format a drive and use it
 
-First enumerate the drives
 
-```
-lsblk
-```
+My first attempt to format and add the drive, it has some issues like weird folder names
 
-![](/Images/2025-09-20-T1106%20Enumerate%20Drives.jpg)
-
-Our target is the 256GB drive root ```nvme0n1```
-
-Now that drive needs to be formatted ext4, mounted, and given user permission to be used, then create a folder for LLM models so they reside on the external NVME drive and not the EMMC compute module drive
+<details>
+<summary>2025-09-20 LP NVME Setup</summary>
 
 ```
 sudo umount /dev/nvme0n1
 
-sudo mkfs.ext4/nvme0n1
+sudo mkfs.ext4 /nvme0n1
 
 mount | grep ext4
 
@@ -74,7 +80,134 @@ ls /media/sona/fe4d92e2-b743-4576-b445-e47f511902d0
 
 ```
 
+![](/Images/2025-09-20-T1106%20Enumerate%20Drives.jpg)
+
 ![](/Images/2025-09-20-T1108%20Format%20EXT4.jpg)
+
+</details>
+
+New instructions
+
+First enumerate drives
+
+```
+lsblk
+
+sona@lpn10016gb:~$ lsblk
+mmcblk0      179:0    0  58.2G  0 disk
+├─mmcblk0p1  179:1    0     1G  0 part /boot/efi
+└─mmcblk0p2  179:2    0  57.2G  0 part /
+mmcblk0boot0 179:8    0     4M  1 disk
+mmcblk0boot1 179:16   0     4M  1 disk
+nvme0n1      259:0    0 238.5G  0 disk
+```
+
+Target is the 256GB drive root ```nvme0n1```
+
+Now that drive needs to be formatted ext4, mounted, and given user permission to be used, then create a folder for LLM models so they reside on the external NVME drive and not the EMMC compute module drive
+
+```
+sudo umount /dev/nvme0n1
+
+sudo mkfs.ext4 /nvme0n1
+
+lsblk
+```
+
+
+
+Now create a folder where driver can be mounted and mount the drive
+
+```
+ls /mnt/
+
+sudo mkdir /mnt/external_disk
+
+ls /mnt/
+
+sudo mount /dev/nvme0n1 /mnt/external_disk
+
+ls /mnt/
+
+df -h
+
+sudo chown -R sona:sona /mnt/external_disk
+
+touch /mnt/external_disk/test_file.txt
+
+ls /mnt/external_disk/
+```
+
+<details>
+<summary>2025-10-26 LP NVME Setup LOGS</summary>
+
+```
+sona@lpn10016gb:~$ lsblk
+mmcblk0      179:0    0  58.2G  0 disk
+├─mmcblk0p1  179:1    0     1G  0 part /boot/efi
+└─mmcblk0p2  179:2    0  57.2G  0 part /
+mmcblk0boot0 179:8    0     4M  1 disk
+mmcblk0boot1 179:16   0     4M  1 disk
+nvme0n1      259:0    0 238.5G  0 disk
+
+sona@lpn10016gb:~$ sudo mkfs.ext4 /dev/nvme0n1
+mke2fs 1.47.0 (5-Feb-2023)
+/dev/nvme0n1 contains a ext4 file system
+        created on Sun Oct 26 11:03:49 2025
+Proceed anyway? (y,N) y
+Discarding device blocks: done
+Creating filesystem with 62514774 4k blocks and 15630336 inodes
+Filesystem UUID: 7e68a2d7-b91a-4a03-bfe4-43aae9666b18
+Superblock backups stored on blocks:
+        32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208,
+        4096000, 7962624, 11239424, 20480000, 23887872
+
+Allocating group tables: done
+Writing inode tables: done
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information: done
+
+sona@lpn10016gb:~$ lsblk
+NAME         MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+mmcblk0      179:0    0  58.2G  0 disk
+├─mmcblk0p1  179:1    0     1G  0 part /boot/efi
+└─mmcblk0p2  179:2    0  57.2G  0 part /
+mmcblk0boot0 179:8    0     4M  1 disk
+mmcblk0boot1 179:16   0     4M  1 disk
+nvme0n1      259:0    0 238.5G  0 disk
+
+sona@lpn10016gb:~$ ls /mnt/
+
+sona@lpn10016gb:~$ sudo mkdir /mnt/external_disk
+
+sona@lpn10016gb:~$ ls /mnt/
+external_disk
+
+sona@lpn10016gb:~$ sudo mount /dev/nvme0n1 /mnt/external_disk
+
+sona@lpn10016gb:~$ ls /mnt/
+external_disk
+
+sona@lpn10016gb:~$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           1.6G  1.7M  1.6G   1% /run
+efivarfs        192K   85K  103K  46% /sys/firmware/efi/efivars
+/dev/mmcblk0p2   56G  6.7G   47G  13% /
+tmpfs           7.7G     0  7.7G   0% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+/dev/mmcblk0p1  1.1G  6.2M  1.1G   1% /boot/efi
+tmpfs           1.6G   12K  1.6G   1% /run/user/1000
+/dev/nvme0n1    234G   28K  222G   1% /mnt/external_disk
+
+sona@lpn10016gb:~$ sudo chown -R sona:sona /mnt/external_disk
+
+sona@lpn10016gb:~$ touch /mnt/external_disk/test_file.txt
+
+sona@lpn10016gb:~$ ls /mnt/external_disk/
+lost+found  test_file.txt
+```
+
+</details>
 
 With this now I have an external, big, fast drive where I can dump the LLM models
 
