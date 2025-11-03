@@ -8,7 +8,7 @@ Constructing a ROS2 robot to experiment with using LLMs as poors man AGI.
     - runs Ubuntu 22
     - runs ROS2
 - uses OrangeHat
-- uses 18650 battieries
+- uses 18650 batteries
 - sensors
     - Raspicam
     - Microphone
