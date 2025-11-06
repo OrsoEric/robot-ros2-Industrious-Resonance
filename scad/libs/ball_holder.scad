@@ -200,7 +200,6 @@ module ball_holder
 		i_d_external = i_d_base,
 
 		i_h_base = i_t_base,
-		i_n_resolution = n_resolution,
 		//Number of sectors cut into the base for the holders
 		i_n_sector = 3,
 		//Margin separation between sector and base, game of the arm

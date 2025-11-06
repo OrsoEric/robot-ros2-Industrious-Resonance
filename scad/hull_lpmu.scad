@@ -3,17 +3,18 @@ include <libs/shape_rounded_rectangle.scad>
 
 //Model of the Rasperry Pi 3 and 5
 //include <libs/raspberry_pi_3.scad>
-//include <libs/rpi_support.scad>
+include <libs/sbc_support.scad>
 //Model of the servo
 include <libs/hs422-servo.scad>
 include <libs/servo_holder.scad>
-//Model of the batteries
-include <libs/battery-18650.scad>
+
 //Holder for a pivot tennis ball
 include <libs/ball_holder.scad>
 
 
 include <battery-18650-holder.scad>
+
+include <sbc_lattepanda_mu_lite_board.scad>
 
 
 module ellipse
@@ -34,22 +35,35 @@ module ellipse
 
 module industrious_resonance
 (
-	i_x_show_rpi = false,
+	i_x_show_sbc = false,
 	i_x_show_servo = false,
 	i_x_show_battery = false,
 	i_x_show_pivot = false,
 	//Thickness of the base
-	i_t_base = 3.5,
+	i_t_base = 2.0,
 	//Precision
 	i_e_precision = 0.05
 )
 {
+	//------------------------------------------------------------------
+	//	BASE
+	//------------------------------------------------------------------
+
 	//Base Dimension
-	c_l_base = 200.0;
-	c_w_base = 140.0;
-	c_r_base = 50.0;
+	c_l_base = 210.0;
+	c_w_base = 150.0;
+	c_r_base = 60.0;
 
+	//BASE parameters
+	t_base = i_t_base;
 
+	//------------------------------------------------------------------
+	//	WHEELS
+	//------------------------------------------------------------------
+
+	//Position of the motors on the base
+	l_wheel = 40.0;
+	w_wheel = 51.0;
 	//Height offset of wheels
 	ho_wheel = 11.0;
 	//Specs of the wheels
@@ -57,13 +71,14 @@ module industrious_resonance
 	t_wheel = 7.0 + 2.0;
 	//Margin to apply to the wheel hole
 	lm_wheel = -5.0;
-	wm_wheel = 2.0;
-	//Position of the motors on the base
-	l_wheel = 28.0;
-	w_wheel = 42.0;
+	wm_wheel = 2.0;	
+
+	//------------------------------------------------------------------
+	//	PIVOT
+	//------------------------------------------------------------------
 
 	//Offset of the pivot wheel
-	lo_pivot = -60;
+	lo_pivot = -70;
 	//This is a number to control anchor between pivot mechanism and its base
 	//I can't be bothered to work out the angles with the arcsin to make it work without this parameter
 	ho_pivot = 12;
@@ -72,17 +87,34 @@ module industrious_resonance
 	//Diameter of the pivot sphere (a tennis ball I had laying around)
 	d_pivot_sphere = 40.0;
 
-	//BASE parameters
-	t_base = i_t_base;
+	//------------------------------------------------------------------
+	//	BATTERY
+	//------------------------------------------------------------------
 
+	//Battery Offset
+	lo_battery = -20;
+	wo_battery = 0;
+
+	//------------------------------------------------------------------
+	//	SBC
+	//------------------------------------------------------------------
+
+	lo_sbc = 19.0;
+	wo_sbc = 0.0;
+
+	li_sbc_hole = g_li_lpmu_hole;
+	wi_sbc_hole = g_wi_lpmu_hole;
+
+	t_sbc = 33;
+
+	//------------------------------------------------------------------
+	//	GEOMETRY
+	//------------------------------------------------------------------
 
 	difference()
 	{
 		union()
 		{
-			//linear_extrude(h=i_t_base)
-			//ellipse(x_r=c_r_base_major, y_r=c_r_base_minor);
-
 			shape_rounded_rectangle
 			(
 				//Dimensions of the rectangle
@@ -96,24 +128,50 @@ module industrious_resonance
 			);
 
 
-			if (i_x_show_rpi == true)
+			if (i_x_show_sbc == true)
 			{
-				if (false)
-				translate([65,30,t_base+40])
-				rotate([0,0,180])
-				raspberry_pi_3();
+				translate
+				([
+					lo_sbc,
+					wo_sbc,
+					t_base+t_sbc
+				])
+				sbc_lattepanda_mu_lite_board();
 			}
 
+			//SBC Support
+			color("orange")
+			translate
+			([
+				lo_sbc,
+				wo_sbc,
+				t_base
+			])
+			sbc_support_pillars
+			(
+				i_d_top = 6,
+				i_d_bot = 10,
+				i_h_pillar = t_sbc,
+				i_h_vertical = 6,
+				//Interaxis between holes
+				i_li_sbc = li_sbc_hole,
+				i_wi_sbc = wi_sbc_hole
+			);
 
-			if (i_x_show_battery == true)
-			{
 
-				for (n_cnt =[0:4-1])
-				{
-					translate([-20,+(n_cnt-1.5)*gd_18650,t_base])
-					battery_18650(ix_sideway = 0,in_invert_poles=false );
-				}
-			}
+			translate
+			([
+				lo_battery,
+				wo_battery - c_w_base / 2,
+				t_base
+			])
+			rotate([0,0,90])
+			holder_18650_2s2p
+			(
+				ix_show_battery = i_x_show_battery,
+				ix_show_tab = i_x_show_battery
+			);
+
 
 			if (i_x_show_servo == true)
 			{
@@ -146,8 +204,6 @@ module industrious_resonance
 				sphere(d=gd_ball,$fn=100);
 			}
 
-			holder_18650_2s1p( ix_show_battery = true, ix_show_tab = true );
-
 		}
 		//Extrude
 		union()
@@ -159,8 +215,18 @@ module industrious_resonance
 				-w_wheel - t_wheel * 0.5 - wm_wheel,
 				0
 			])
-			linear_extrude(h=i_t_base)
-			square([d_wheel+lm_wheel,t_wheel+wm_wheel],center=true);
+			shape_rounded_rectangle
+			(
+				//Dimensions of the rectangle
+				i_l = d_wheel+lm_wheel,
+				i_w = t_wheel+wm_wheel,
+				i_h = i_t_base,
+				//Rounding of the corners in the XY direction
+				i_r_rounding = 2,
+				//Error by the approximation
+				i_n_error = i_e_precision
+			);
+
 
 			//Left Wheel
 			translate
@@ -169,8 +235,17 @@ module industrious_resonance
 				+w_wheel + t_wheel * 0.5 + wm_wheel,
 				0
 			])
-			linear_extrude(h=i_t_base)
-			square([d_wheel+lm_wheel,t_wheel+wm_wheel],center=true);
+			shape_rounded_rectangle
+			(
+				//Dimensions of the rectangle
+				i_l = d_wheel+lm_wheel,
+				i_w = t_wheel+wm_wheel,
+				i_h = i_t_base,
+				//Rounding of the corners in the XY direction
+				i_r_rounding = 2,
+				//Error by the approximation
+				i_n_error = i_e_precision
+			);
 
 			//An hole where I'll slot in the pivot wheel
 			translate([lo_pivot,0,0])
@@ -212,22 +287,18 @@ module industrious_resonance
 		i_x_show_servo = false
 	);
 
-	//RPI Support
-	if (false)
-	translate([5,-20,t_base+30])
-	rpi_support_pillars
-	(
-		i_d_top = 6,
-		i_d_bot = 10,
-		i_h_pillar = 20,
-		i_h_vertical = 4
-	);
+
 
 
 }
 
+//industrious_resonance();
+
+//if (false)
 industrious_resonance
 (
+	i_x_show_sbc = true,
+	i_x_show_battery = true,
 	i_x_show_servo = true,
 	i_x_show_pivot = true
 );
