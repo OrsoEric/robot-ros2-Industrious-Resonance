@@ -391,16 +391,19 @@ module HS422_wheel
 		color("#00ff00")
 		translate(
 		[
-			gh_hs422_base_to_axel-gh_hs422_total+0.0,
+			gh_hs422_flange,
 			0,
 			0
 		])
-		rotate([0,-90,0])
-		cylinder(h=i_t_wheel,d=i_d_wheel,$fa=0.1,$fs=0.1);
+		rotate([0,-90,180])
+		cylinder
+		(
+			h=i_t_wheel,
+			d=i_d_wheel,
+			$fa=0.1,
+			$fs=0.1
+		);
 	}
-
-
-
 }
 
 
@@ -414,4 +417,9 @@ module HS422_wheel
 
 //hs422_seat_vertical();
 
-//HS422_wheel();
+if (false)
+HS422_wheel
+(
+	i_d_wheel = 60.0,
+	i_t_wheel = 8.5
+);

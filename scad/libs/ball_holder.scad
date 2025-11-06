@@ -5,6 +5,8 @@
 //I create three arms, each with two semisphere that converge above the ball
 //Other three arms go anchor to the base where it's screwed
 
+include <shape_cylinder.scad>
+
 include <primitive_arm_arc.scad>
 
 //Diameter of the ball that needs to be held
@@ -60,10 +62,10 @@ module arm_arc_with_balls
 
 module donut
 (
-	i_r_internal = 40,
+	i_d_internal = 40,
 	i_d_external = 60,
 	i_h = 5,
-	i_n_resolution = 80
+	i_e_precision = 0.05
 )
 {
 	difference()
@@ -71,12 +73,22 @@ module donut
 		union()
 		{
 			//Base
-			cylinder(h=i_h,d=i_d_external,$fn=i_n_resolution);
+			shape_cylinder
+			(
+				i_d = i_d_external,
+				i_h = i_h,
+				i_e = i_e_precision
+			);
 		}
 		union()
 		{
 			//Drill
-			cylinder(h=i_h,d=i_r_internal,$fn=i_n_resolution);
+			shape_cylinder
+			(
+				i_d = i_d_internal,
+				i_h = i_h,
+				i_e = i_e_precision
+			);
 
 		}
 
@@ -100,7 +112,7 @@ module ball_holder_base
 	//Interference between sector and base, it's an arc
 	i_di_sector = 10,
 
-	i_n_resolution = 60
+	i_e_precision = 0.05
 )
 {
 
@@ -108,12 +120,16 @@ module ball_holder_base
 	{
 		union()
 		{
-			donut(i_d_hole,i_d_external,i_h_base,i_n_resolution);
+			donut
+			(
+				i_d_hole,
+				i_d_external,
+				i_h_base,
+				i_e_precision
+			);
 		}
 		union()
 		{
-			//Ball hole
-			//cylinder(h=i_h_base,d=i_d_hole,$fn=i_n_resolution);
 			//Sector
 			for (n_cnt = [0:(i_n_sector-1)])
 			{
@@ -125,10 +141,10 @@ module ball_holder_base
 				])
 				donut
 				(
-					i_r_internal = i_d_sector,
-					i_d_external = i_d_sector+i_m_sector,
-					i_h = 5,
-					i_n_resolution = i_n_resolution
+					i_d_sector,
+					i_d_sector+i_m_sector,
+					5,
+					i_e_precision
 				);
 			}
 			
@@ -143,14 +159,18 @@ module ball_holder_base
 
 module ball_holder
 (
-	
+	//Ball
 	i_d_ball = 40.0,
-	i_d_base = 70.0,
+	i_d_base = 60.0,
+	//Structural Strength
+	i_t_structure = 4.0,
+	i_t_hold = 3.0,
 	//Height margin of the base
 	i_ho_base = 13,
-
-	i_t_base = 5
-
+	//Thickness of the base
+	i_t_base = 5,
+	//Error
+	i_e_precision = 0.01
 )
 {
 	//How much bigger are the structural arm in diameter
@@ -162,19 +182,17 @@ module ball_holder
 	i_ball_cushion = 0.0;
 
 	//The structural arm have a bigger radious
-	d_arm_struct = i_d_ball +dm_struct_hold;
-	w_arm_struct = 20;
-	t_arm_struct = 10;
+	d_arm_struct = i_d_ball + dm_struct_hold;
+	w_arm_struct = 22;
+	t_arm_struct = i_t_structure;
 
 	d_arm_hold = i_d_ball;
-	w_arm_hold = 10;
-	t_arm_hold = 5;
+	w_arm_hold = 12;
+	t_arm_hold = i_t_hold;
 
 	t_base = 2;
 
-
-	n_resolution = 50;
-
+	n_resolution = 100;
 	
 	ball_holder_base
 	(
@@ -190,14 +208,20 @@ module ball_holder
 		//Size of the sector
 		i_d_sector = 20,
 		//Interference between sector and base, it's an arc
-		i_di_sector = 15
+		i_di_sector = 15,
+		i_e_precision = i_e_precision
 	);
 
 	//Add a cap to smooth out the merging of the arms
 	translate([0,0,d_arm_struct/2+i_ho_base])
-	cylinder(h=t_arm_struct*1.0,d=0.7*i_d_ball,$fn=n_resolution);
+	shape_cylinder
+	(
+		i_d = 0.7*i_d_ball,
+		i_h = t_arm_struct*1.2,
+		i_e = i_e_precision
+	);
 
-
+	//Structural Arms
 	translate([0,0,i_ho_base])
 	for (a_ray = [0+60,120+60,240+60])
 		rotate([0,0,a_ray])
@@ -206,7 +230,7 @@ module ball_holder
 			i_r_inner = d_arm_struct/2,   // Inner radius of the arc
 			i_r_outer = d_arm_struct/2+t_arm_struct,   // Outer radius of the arc
 			i_a_arc_start = 90, // Start angle in degrees
-			i_a_arc_end = -16,   // End angle in degrees
+			i_a_arc_end = -19,   // End angle in degrees
 			i_t = w_arm_struct,          // Thickness (height) of the extruded arc
 			i_n_points = n_resolution    // Number of points for arc approximation
 		);
@@ -225,8 +249,6 @@ module ball_holder
 			i_d_sphere = d_cushion,		//Diameter of the cushion sphere
 			i_n_sphere = 3		//Number of cushion spheres
 		);
-
-
 
 
 }
