@@ -166,9 +166,9 @@ module ball_holder
 	i_t_structure = 4.0,
 	i_t_hold = 3.0,
 	//Height margin of the base
-	i_ho_base = 13,
+	i_ho_base = 10,
 	//Thickness of the base
-	i_t_base = 5,
+	i_t_base = 2,
 	//Error
 	i_e_precision = 0.01
 )

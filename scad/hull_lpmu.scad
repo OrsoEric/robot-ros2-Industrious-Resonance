@@ -86,7 +86,7 @@ module industrious_resonance
 	lo_pivot = -70;
 	//This is a number to control anchor between pivot mechanism and its base
 	//I can't be bothered to work out the angles with the arcsin to make it work without this parameter
-	ho_pivot = 12;
+	ho_pivot = 10;
 	//Diameter of the hole where I'll stot in the pivot wheel mechanism
 	d_pivot_cutout = 60;
 	//Diameter of the pivot sphere (a tennis ball I had laying around)
@@ -292,8 +292,6 @@ module industrious_resonance
 		//Thickness of the base
 		i_t_base = i_t_base
 	);
-
-	
 
 
 
