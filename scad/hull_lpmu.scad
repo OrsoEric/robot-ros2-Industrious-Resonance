@@ -55,29 +55,6 @@ module industrious_resonance
 
 	//BASE parameters
 	t_base = i_t_base;
-
-	//------------------------------------------------------------------
-	//	WHEELS
-	//------------------------------------------------------------------
-
-	//Position of the motors on the base
-	l_wheel = 40.0;
-	w_wheel = 51.0;
-	//Height offset of wheels
-	ho_wheel = 11.0;
-	//Specs of the wheels
-	d_wheel = 62.0;
-	t_wheel = 7.0;
-	//Margin to apply to the wheel hole
-	wm_wheel = -0.5;
-	tm_wheel = 2.0;
-	dm_wheel = 5.0;
-	//Parameters to adjust the relative position of wheel and servo
-	wo_wheel = gh_hs422_flange / 2;
-
-	//Height of the servo from floor of pillar
-	h_floor_servo = 0.0;
-
 	//------------------------------------------------------------------
 	//	PIVOT
 	//------------------------------------------------------------------
@@ -91,6 +68,33 @@ module industrious_resonance
 	d_pivot_cutout = 60;
 	//Diameter of the pivot sphere (a tennis ball I had laying around)
 	d_pivot_sphere = 40.0;
+	//Clearance under the base
+	h_pivot_clearance = d_pivot_sphere / 2 - ho_pivot;
+
+	echo("Pivot ball clearance: ",h_pivot_clearance);
+	//------------------------------------------------------------------
+	//	WHEELS
+	//------------------------------------------------------------------
+
+	//Position of the motors on the base
+	l_wheel = 40.0;
+	w_wheel = 51.0;
+	//Height offset of wheels
+	//ho_wheel = 0.0;
+	//Specs of the wheels
+	d_wheel = 62.0;
+	t_wheel = 7.0;
+	//Margin to apply to the wheel hole
+	wm_wheel = -0.5;
+	tm_wheel = 2.0;
+	dm_wheel = 5.0;
+	//Parameters to adjust the relative position of wheel and servo
+	wo_wheel = gh_hs422_flange / 2;
+
+	//Height of the servo from floor of pillar
+	//Wheel radious minus half servo thickness minus base thickness MINUS pivot height from floor clearance
+	//
+	h_floor_servo = d_wheel / 2 - 10 - t_base - h_pivot_clearance;
 
 	//------------------------------------------------------------------
 	//	BATTERY
@@ -222,13 +226,6 @@ module industrious_resonance
 				i_e_precision = 0.01
 			);
 
-			if (i_x_show_pivot==true)
-			{
-				color("#ffffff")
-				translate([lo_pivot,0,ho_pivot])
-				sphere(d=gd_ball,$fn=100);
-			}
-
 		}
 		//Extrude
 		union()
@@ -290,10 +287,10 @@ module industrious_resonance
 		//Height margin of the base
 		i_ho_base = ho_pivot,
 		//Thickness of the base
-		i_t_base = i_t_base
+		i_t_base = i_t_base,
+		//Show ball
+		i_x_show_ball = i_x_show_pivot
 	);
-
-
 
 
 }

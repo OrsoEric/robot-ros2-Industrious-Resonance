@@ -169,6 +169,8 @@ module ball_holder
 	i_ho_base = 10,
 	//Thickness of the base
 	i_t_base = 2,
+
+	i_x_show_ball = true,
 	//Error
 	i_e_precision = 0.01
 )
@@ -223,6 +225,7 @@ module ball_holder
 	//Structural Arms
 	translate([0,0,i_ho_base])
 	for (a_ray = [0+60,120+60,240+60])
+	{
 		rotate([0,0,a_ray])
 		arm_arc
 		(
@@ -233,9 +236,12 @@ module ball_holder
 			i_t = w_arm_struct,          // Thickness (height) of the extruded arc
 			i_n_points = n_resolution    // Number of points for arc approximation
 		);
+	}
+
 
 	translate([0,0,i_ho_base])
 	for (a_ray = [0,120,240])
+	{
 		rotate([0,0,a_ray])
 		arm_arc_with_balls
 		(
@@ -248,14 +254,18 @@ module ball_holder
 			i_d_sphere = d_cushion,		//Diameter of the cushion sphere
 			i_n_sphere = 3		//Number of cushion spheres
 		);
+	}
 
+	if (i_x_show_ball == true)
+	{
+		color("#ffffff")
+		translate([0,0,i_ho_base])
+		sphere(d=gd_ball,$fn=100);
+	}
 
+	echo("Margin floor to bottom of base: ", gd_ball/2-i_ho_base );
 }
 
-if (false)
-color("#ffffff")
-translate([0,0,13])
-sphere(d=gd_ball,$fn=100);
 
 if (false)
 ball_holder();
