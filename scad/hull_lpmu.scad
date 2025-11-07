@@ -181,7 +181,8 @@ module industrious_resonance
 
 			if (i_x_show_servo == true)
 			{
-				//Right Wheel				
+				//Right Wheel		
+				if (false)
 				translate
 				([
 					l_wheel,
@@ -225,10 +226,17 @@ module industrious_resonance
 			rotate([0,0,90])
 			servo_holder
 			(
-				i_x_show_servo = false
+				//Wheel
+				i_d_wheel = d_wheel,
+				i_t_wheel = t_wheel,
+				//Visualize components
+				i_x_show_servo = true,
+				i_x_show_wheel = true,
+				i_e_precision = 0.01
 			);
 
 			//Left Wheel
+			if (false)
 			translate([l_wheel+g_lo_wheel,+w_wheel,i_t_base])
 			rotate([0,0,-90])
 			servo_holder

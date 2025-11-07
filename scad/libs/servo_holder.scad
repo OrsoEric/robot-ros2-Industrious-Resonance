@@ -129,17 +129,33 @@ module servo_pillar
 
 module servo_holder
 (
+	//Holder
 	i_li_hole = 49.5,
 	i_l_servo = gl_hs422_base,
 	i_lm_servo = 1,
 	i_ho_servo = 10,
-	i_x_show_servo = false
+	//Wheel
+	i_d_wheel = 60,
+	i_t_wheel = 7,
+	//The hub is asymmetric, it can be near the left or right pillar
+	i_x_wheel_right = true,
+	//Visualize components
+	i_x_show_servo = false,
+	i_x_show_wheel = false,
+	i_e_precision = 0.01
 )
 {
 	if (i_x_show_servo==true)
-	translate([0,-9.5,gw_hs422/2+i_ho_servo])
+	translate([0,-9.5*0,gw_hs422/2+i_ho_servo])
 	rotate([0,0,180])
-	HS422();
+	HS422_wheel
+	(
+		//Parameters of the wheel
+		i_d_wheel = i_d_wheel,
+		i_t_wheel = i_t_wheel,
+		i_x_show_wheel = i_x_show_wheel,
+		i_e_precision = i_e_precision
+	);
 
 	translate([0,(i_l_servo+i_lm_servo)/2,0])
 	servo_pillar
@@ -157,5 +173,9 @@ module servo_holder
 	);
 }
 
-//servo_holder(i_x_show_servo=true);
+servo_holder
+(
+	i_x_show_servo=true,
+	i_x_show_wheel=true
+);
 

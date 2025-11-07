@@ -102,7 +102,12 @@ module HS422()
 		[0, -gl_hs422_base],
     ];
 	//Build the geometry, translate it so the axel is in the origin
-	translate([-gh_hs422_total,gw_hs422_axel,-gw_hs422/2])
+	translate
+	([
+		-gh_hs422_total,
+		gw_hs422_axel,
+		-gw_hs422/2
+	])
 	color("gray")
 	difference()
 	{
@@ -389,6 +394,7 @@ module HS422_wheel
 	//Parameters of the wheel
 	i_d_wheel = 60.0,
 	i_t_wheel = 2.5,
+	i_x_show_wheel = false,
 	i_e_precision = 0.01
 )
 {
@@ -397,6 +403,8 @@ module HS422_wheel
 		HS422
 		(
 		);
+
+		if (i_x_show_wheel == true)
 		color("#33cc33")
 		translate(
 		[
