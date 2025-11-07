@@ -69,8 +69,7 @@ module industrious_resonance
 	d_wheel = 62.0;
 	t_wheel = 7.0;
 	//Margin to apply to the wheel hole
-	//lm_wheel = -5.0;
-	//wm_wheel = 2.0;	
+	wm_wheel = -0.5;
 	tm_wheel = 2.0;
 	dm_wheel = 5.0;
 	//Parameters to adjust the relative position of wheel and servo
@@ -238,7 +237,7 @@ module industrious_resonance
 			translate
 			([
 				l_wheel,
-				-w_wheel - (t_wheel + tm_wheel) * 0.5,
+				-w_wheel - wm_wheel - (t_wheel + tm_wheel) * 0.5,
 				0
 			])
 			shape_rounded_rectangle
@@ -258,7 +257,7 @@ module industrious_resonance
 			translate
 			([
 				l_wheel,
-				+w_wheel + (t_wheel + tm_wheel) * 0.5,
+				+w_wheel + wm_wheel + (t_wheel + tm_wheel) * 0.5,
 				0
 			])
 			shape_rounded_rectangle
