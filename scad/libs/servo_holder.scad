@@ -139,7 +139,7 @@ module servo_holder
 	//Margin for the servo size
 	i_lm_servo = 0.5,
 
-	i_ho_servo = 10,
+	i_ho_servo = 20,
 	//Wheel
 	i_d_wheel = 60,
 	i_t_wheel = 7,
@@ -188,10 +188,11 @@ module servo_holder
 		iho_cutout = i_ho_servo
 	);
 }
+
 if (false)
 servo_holder
 (
 	i_x_right = false,
 	i_x_show_servo=true,
-	i_x_show_wheel=false
+	i_x_show_wheel=true
 );

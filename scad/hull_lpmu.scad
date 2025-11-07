@@ -76,6 +76,8 @@ module industrious_resonance
 	//Parameters to adjust the relative position of wheel and servo
 	wo_wheel = gh_hs422_flange / 2;
 
+	//Height of the servo from floor of pillar
+	h_floor_servo = 0.0;
 
 	//------------------------------------------------------------------
 	//	PIVOT
@@ -177,20 +179,18 @@ module industrious_resonance
 				ix_show_tab = i_x_show_battery
 			);
 
-
-			//Length Offset of wheels
-			g_lo_wheel = 9.5;
-
 			//Right Wheel
 			translate
 			([
-				l_wheel+g_lo_wheel,
+				l_wheel,
 				-w_wheel,
 				i_t_base
 			])
 			rotate([0,0,90])
 			servo_holder
 			(
+				//Height of the servo from floor of pillar
+				i_ho_servo = h_floor_servo,
 				//Wheel
 				i_d_wheel = d_wheel,
 				i_t_wheel = t_wheel,
@@ -204,13 +204,15 @@ module industrious_resonance
 			//Left Wheel
 			translate
 			([
-				l_wheel+g_lo_wheel,
+				l_wheel,
 				+w_wheel,
 				i_t_base
 			])
 			rotate([0,0,-90])
 			servo_holder
 			(
+				//Height of the servo from floor of pillar
+				i_ho_servo = h_floor_servo,
 				//Wheel
 				i_d_wheel = d_wheel,
 				i_t_wheel = t_wheel,
@@ -220,7 +222,6 @@ module industrious_resonance
 				i_x_show_wheel = true,
 				i_e_precision = 0.01
 			);
-
 
 			if (i_x_show_pivot==true)
 			{
@@ -254,18 +255,17 @@ module industrious_resonance
 
 
 			//Left Wheel Hole
-			if (false)
 			translate
 			([
 				l_wheel,
-				+w_wheel + t_wheel * 0.5 + wm_wheel,
+				+w_wheel + (t_wheel + tm_wheel) * 0.5,
 				0
 			])
 			shape_rounded_rectangle
 			(
 				//Dimensions of the rectangle
-				i_l = d_wheel+lm_wheel,
-				i_w = t_wheel+wm_wheel,
+				i_l = d_wheel+dm_wheel,
+				i_w = t_wheel+tm_wheel,
 				i_h = i_t_base,
 				//Rounding of the corners in the XY direction
 				i_r_rounding = 2,

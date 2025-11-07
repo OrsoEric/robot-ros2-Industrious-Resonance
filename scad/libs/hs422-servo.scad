@@ -419,7 +419,7 @@ module HS422_wheel
 		color("#33cc33")
 		translate(
 		[
-			gh_hs422_bearing +0.5,
+			0.0,
 			0,
 			0
 		])
@@ -451,5 +451,6 @@ HS422_wheel
 (
 	i_d_wheel = 60.0,
 	i_t_wheel = 8.5,
-	i_x_right = false
+	i_x_right = false,
+	i_x_show_wheel = true
 );
