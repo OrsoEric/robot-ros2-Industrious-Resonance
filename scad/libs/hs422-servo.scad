@@ -1,3 +1,5 @@
+include <shape_donut_square.scad>
+
 //Use polygon and linear extrude
 //The origin is placed at the root of the axel in XY
 
@@ -55,6 +57,8 @@ gm_hs422_hole = 0.1;
 
     //AXEL
     //The bearing is on the top that protrudes, and from there thaaxel extends upward, the
+//Height of the bearing
+gh_hs422_bearing = gh_hs422_base_to_top-gh_hs422_total;
 //Diameter of the bearing at the base of the axel
 gd_hs422_bearing = 20;
 //Axel offset from top of servo
@@ -107,6 +111,7 @@ module HS422()
 			//Body of the servo
 			linear_extrude(gw_hs422)
 			polygon(aan_points);
+
 			//Cable stub
 			translate([6,0,gw_hs422/2])
 			rotate([90,0,180])
@@ -162,17 +167,18 @@ module HS422()
 
 		}
 	}
+
     //Bearing under the axel
-    color("red")
+    color("#772222")
     rotate([0,90,0])
-    linear_extrude(gh_hs422_base_to_top-gh_hs422_total)
+    linear_extrude(gh_hs422_bearing)
     circle(d=gd_hs422_bearing,$fa=0.5,$fs=0.5);
 
     //Add servo axel in the origin
     color("red")
     rotate([0,90,0])
     linear_extrude(gh_hs422_base_to_axel-gh_hs422_total)
-    circle(d=gd_hs422_hole,$fa=0.5,$fs=0.5);
+    circle(d=gd_hs422_axel,$fa=0.5,$fs=0.5);
 
 }
 
@@ -382,27 +388,31 @@ module HS422_wheel
 (
 	//Parameters of the wheel
 	i_d_wheel = 60.0,
-	i_t_wheel = 2.5
+	i_t_wheel = 2.5,
+	i_e_precision = 0.01
 )
 {
 	union()
 	{
-		HS422();
-		color("#00ff00")
+		HS422
+		(
+		);
+		color("#33cc33")
 		translate(
 		[
-			gh_hs422_flange,
+			gh_hs422_bearing +0.5,
 			0,
 			0
 		])
 		rotate([0,-90,180])
-		cylinder
+		shape_donut_square
 		(
-			h=i_t_wheel,
-			d=i_d_wheel,
-			$fa=0.1,
-			$fs=0.1
+			ir_inner = gd_hs422_axel / 2 +0.5,
+			ir_outer = i_d_wheel / 2,
+			it = i_t_wheel,
+			ie_precision = i_e_precision
 		);
+		
 	}
 }
 
@@ -417,7 +427,7 @@ module HS422_wheel
 
 //hs422_seat_vertical();
 
-if (false)
+//if (false)
 HS422_wheel
 (
 	i_d_wheel = 60.0,

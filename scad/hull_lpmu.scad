@@ -67,11 +67,16 @@ module industrious_resonance
 	//Height offset of wheels
 	ho_wheel = 11.0;
 	//Specs of the wheels
-	d_wheel = 70.0 + 5.0;
-	t_wheel = 7.0 + 2.0;
+	d_wheel = 62.0;
+	t_wheel = 7.0;
 	//Margin to apply to the wheel hole
-	lm_wheel = -5.0;
-	wm_wheel = 2.0;	
+	//lm_wheel = -5.0;
+	//wm_wheel = 2.0;	
+	tm_wheel = 2.0;
+	dm_wheel = 5.0;
+	//Parameters to adjust the relative position of wheel and servo
+	wo_wheel = gh_hs422_flange / 2;
+
 
 	//------------------------------------------------------------------
 	//	PIVOT
@@ -136,6 +141,7 @@ module industrious_resonance
 					wo_sbc,
 					t_base+t_sbc
 				])
+				rotate([0,0,180])
 				sbc_lattepanda_mu_lite_board();
 			}
 
@@ -183,9 +189,14 @@ module industrious_resonance
 					gw_hs422/2+i_t_base+ho_wheel
 				])
 				rotate([0,180,90])
-				HS422_wheel(i_d_wheel = d_wheel,i_t_wheel = t_wheel);
+				HS422_wheel
+				(
+					i_d_wheel = d_wheel,
+					i_t_wheel = t_wheel
+				);
 
 				//Left Wheel
+				if (false)
 				translate
 				([
 					l_wheel,
@@ -193,9 +204,38 @@ module industrious_resonance
 					gw_hs422/2+i_t_base+ho_wheel
 				])
 				rotate([0,0,90])
-				HS422_wheel(i_d_wheel = d_wheel,i_t_wheel = t_wheel);
+				HS422_wheel
+				(
+					i_d_wheel = d_wheel,
+					i_t_wheel = t_wheel
+				);
 				
 			}
+
+			//Length Offset of wheels
+			g_lo_wheel = 9.5;
+
+			//Right Wheel
+			translate
+			([
+				l_wheel+g_lo_wheel,
+				-w_wheel,
+				i_t_base
+			])
+			rotate([0,0,90])
+			servo_holder
+			(
+				i_x_show_servo = false
+			);
+
+			//Left Wheel
+			translate([l_wheel+g_lo_wheel,+w_wheel,i_t_base])
+			rotate([0,0,-90])
+			servo_holder
+			(
+				i_x_show_servo = true
+			);
+
 
 			if (i_x_show_pivot==true)
 			{
@@ -208,18 +248,18 @@ module industrious_resonance
 		//Extrude
 		union()
 		{
-			//Right Wheel
+			//Right Wheel Hole
 			translate
 			([
 				l_wheel,
-				-w_wheel - t_wheel * 0.5 - wm_wheel,
+				-w_wheel - (t_wheel + tm_wheel) * 0.5,
 				0
 			])
 			shape_rounded_rectangle
 			(
 				//Dimensions of the rectangle
-				i_l = d_wheel+lm_wheel,
-				i_w = t_wheel+wm_wheel,
+				i_l = d_wheel + dm_wheel,
+				i_w = t_wheel + tm_wheel,
 				i_h = i_t_base,
 				//Rounding of the corners in the XY direction
 				i_r_rounding = 2,
@@ -228,7 +268,8 @@ module industrious_resonance
 			);
 
 
-			//Left Wheel
+			//Left Wheel Hole
+			if (false)
 			translate
 			([
 				l_wheel,
@@ -268,24 +309,7 @@ module industrious_resonance
 		i_t_base = i_t_base
 	);
 
-	//Length Offset of wheels
-	g_lo_wheel = 9.5;
-
-	//Right Wheel
-	translate([l_wheel+g_lo_wheel,-w_wheel,i_t_base])
-	rotate([0,0,90])
-	servo_holder
-	(
-		i_x_show_servo = false
-	);
-
-	//Left Wheel
-	translate([l_wheel+g_lo_wheel,+w_wheel,i_t_base])
-	rotate([0,0,-90])
-	servo_holder
-	(
-		i_x_show_servo = false
-	);
+	
 
 
 
