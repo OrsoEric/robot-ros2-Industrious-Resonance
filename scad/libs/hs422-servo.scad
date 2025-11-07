@@ -76,7 +76,11 @@ gw_hs422_cable_stub = 10.0;
 gl_hs422_cable_stub = 25.0;
 
 //Model of the HS422 servo
-module HS422()
+module HS422
+(
+	//Axel is to the left orr the right
+	i_x_right = true
+)
 {
 	//Create the outline of the base
 	aan_points =
@@ -102,9 +106,10 @@ module HS422()
 		[0, -gl_hs422_base],
     ];
 	//Build the geometry, translate it so the axel is in the origin
+	rotate([i_x_right?180:0,0,0])
 	translate
 	([
-		-gh_hs422_total,
+		-gh_hs422_total - gh_hs422_bearing,
 		gw_hs422_axel,
 		-gw_hs422/2
 	])
@@ -173,18 +178,22 @@ module HS422()
 		}
 	}
 
-    //Bearing under the axel
-    color("#772222")
-    rotate([0,90,0])
-    linear_extrude(gh_hs422_bearing)
-    circle(d=gd_hs422_bearing,$fa=0.5,$fs=0.5);
+	translate([-gh_hs422_bearing,0,0])
+	union()
+	{
 
-    //Add servo axel in the origin
-    color("red")
-    rotate([0,90,0])
-    linear_extrude(gh_hs422_base_to_axel-gh_hs422_total)
-    circle(d=gd_hs422_axel,$fa=0.5,$fs=0.5);
+		//Bearing under the axel
+		color("#772222")
+		rotate([0,90,0])
+		linear_extrude(gh_hs422_bearing)
+		circle(d=gd_hs422_bearing,$fa=0.5,$fs=0.5);
 
+		//Add servo axel in the origin
+		color("red")
+		rotate([0,90,0])
+		linear_extrude(gh_hs422_base_to_axel-gh_hs422_total)
+		circle(d=gd_hs422_axel,$fa=0.5,$fs=0.5);
+	}
 }
 
 module hexagon(id_outer = 0, id_inner = 0)
@@ -424,10 +433,8 @@ module HS422_wheel
 	}
 }
 
-
-
 //Show the model
-//HS422();
+HS422();
 
 //HS422_vertical();
 
@@ -435,7 +442,7 @@ module HS422_wheel
 
 //hs422_seat_vertical();
 
-//if (false)
+if (false)
 HS422_wheel
 (
 	i_d_wheel = 60.0,

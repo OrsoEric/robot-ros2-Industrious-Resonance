@@ -11,7 +11,6 @@ include <libs/servo_holder.scad>
 //Holder for a pivot tennis ball
 include <libs/ball_holder.scad>
 
-
 include <battery-18650-holder.scad>
 
 include <sbc_lattepanda_mu_lite_board.scad>
