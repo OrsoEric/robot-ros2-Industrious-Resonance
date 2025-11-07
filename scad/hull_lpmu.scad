@@ -178,40 +178,6 @@ module industrious_resonance
 			);
 
 
-			if (i_x_show_servo == true)
-			{
-				//Right Wheel		
-				if (false)
-				translate
-				([
-					l_wheel,
-					-w_wheel,
-					gw_hs422/2+i_t_base+ho_wheel
-				])
-				rotate([0,180,90])
-				HS422_wheel
-				(
-					i_d_wheel = d_wheel,
-					i_t_wheel = t_wheel
-				);
-
-				//Left Wheel
-				if (false)
-				translate
-				([
-					l_wheel,
-					w_wheel,
-					gw_hs422/2+i_t_base+ho_wheel
-				])
-				rotate([0,0,90])
-				HS422_wheel
-				(
-					i_d_wheel = d_wheel,
-					i_t_wheel = t_wheel
-				);
-				
-			}
-
 			//Length Offset of wheels
 			g_lo_wheel = 9.5;
 
@@ -229,18 +195,30 @@ module industrious_resonance
 				i_d_wheel = d_wheel,
 				i_t_wheel = t_wheel,
 				//Visualize components
+				i_x_right = true,
 				i_x_show_servo = true,
 				i_x_show_wheel = true,
 				i_e_precision = 0.01
 			);
 
 			//Left Wheel
-			if (false)
-			translate([l_wheel+g_lo_wheel,+w_wheel,i_t_base])
+			translate
+			([
+				l_wheel+g_lo_wheel,
+				+w_wheel,
+				i_t_base
+			])
 			rotate([0,0,-90])
 			servo_holder
 			(
-				i_x_show_servo = true
+				//Wheel
+				i_d_wheel = d_wheel,
+				i_t_wheel = t_wheel,
+				//Visualize components
+				i_x_right = false,
+				i_x_show_servo = true,
+				i_x_show_wheel = true,
+				i_e_precision = 0.01
 			);
 
 
@@ -328,7 +306,7 @@ module industrious_resonance
 //if (false)
 industrious_resonance
 (
-	i_x_show_sbc = true,
+	i_x_show_sbc = false,
 	i_x_show_battery = true,
 	i_x_show_servo = true,
 	i_x_show_pivot = true
