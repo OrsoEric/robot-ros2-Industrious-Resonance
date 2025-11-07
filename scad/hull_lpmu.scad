@@ -5,7 +5,7 @@ include <libs/shape_rounded_rectangle.scad>
 //include <libs/raspberry_pi_3.scad>
 include <libs/sbc_support.scad>
 //Model of the servo
-include <libs/hs422-servo.scad>
+//include <libs/hs422-servo.scad>
 include <libs/servo_holder.scad>
 
 //Holder for a pivot tennis ball

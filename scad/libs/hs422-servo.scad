@@ -79,7 +79,7 @@ gl_hs422_cable_stub = 25.0;
 module HS422
 (
 	//Axel is to the left orr the right
-	i_x_right = true
+	i_x_right = false
 )
 {
 	//Create the outline of the base
@@ -403,6 +403,7 @@ module HS422_wheel
 	//Parameters of the wheel
 	i_d_wheel = 60.0,
 	i_t_wheel = 2.5,
+	i_x_right = false,
 	i_x_show_wheel = false,
 	i_e_precision = 0.01
 )
@@ -411,6 +412,7 @@ module HS422_wheel
 	{
 		HS422
 		(
+			i_x_right = i_x_right
 		);
 
 		if (i_x_show_wheel == true)
@@ -429,12 +431,14 @@ module HS422_wheel
 			it = i_t_wheel,
 			ie_precision = i_e_precision
 		);
-		
 	}
 }
 
 //Show the model
-HS422();
+//HS422();
+
+//HS422 with axel to the right
+//HS422( i_x_right = true );
 
 //HS422_vertical();
 
@@ -446,5 +450,6 @@ if (false)
 HS422_wheel
 (
 	i_d_wheel = 60.0,
-	i_t_wheel = 8.5
+	i_t_wheel = 8.5,
+	i_x_right = false
 );
