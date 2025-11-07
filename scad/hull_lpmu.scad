@@ -124,6 +124,8 @@ module industrious_resonance
 	{
 		union()
 		{
+			//ROBOT BASE
+			color("#888888")
 			shape_rounded_rectangle
 			(
 				//Dimensions of the rectangle
