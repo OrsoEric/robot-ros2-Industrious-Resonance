@@ -1,3 +1,5 @@
+include <shape_donut_square.scad>
+
 //Use polygon and linear extrude
 //The origin is placed at the root of the axel in XY
 
@@ -55,6 +57,8 @@ gm_hs422_hole = 0.1;
 
     //AXEL
     //The bearing is on the top that protrudes, and from there thaaxel extends upward, the
+//Height of the bearing
+gh_hs422_bearing = gh_hs422_base_to_top-gh_hs422_total;
 //Diameter of the bearing at the base of the axel
 gd_hs422_bearing = 20;
 //Axel offset from top of servo
@@ -72,7 +76,11 @@ gw_hs422_cable_stub = 10.0;
 gl_hs422_cable_stub = 25.0;
 
 //Model of the HS422 servo
-module HS422()
+module HS422
+(
+	//Axel is to the left orr the right
+	i_x_right = false
+)
 {
 	//Create the outline of the base
 	aan_points =
@@ -98,7 +106,13 @@ module HS422()
 		[0, -gl_hs422_base],
     ];
 	//Build the geometry, translate it so the axel is in the origin
-	translate([-gh_hs422_total,gw_hs422_axel,-gw_hs422/2])
+	rotate([i_x_right?180:0,0,0])
+	translate
+	([
+		-gh_hs422_total - gh_hs422_bearing,
+		gw_hs422_axel,
+		-gw_hs422/2
+	])
 	color("gray")
 	difference()
 	{
@@ -107,6 +121,7 @@ module HS422()
 			//Body of the servo
 			linear_extrude(gw_hs422)
 			polygon(aan_points);
+
 			//Cable stub
 			translate([6,0,gw_hs422/2])
 			rotate([90,0,180])
@@ -162,18 +177,23 @@ module HS422()
 
 		}
 	}
-    //Bearing under the axel
-    color("red")
-    rotate([0,90,0])
-    linear_extrude(gh_hs422_base_to_top-gh_hs422_total)
-    circle(d=gd_hs422_bearing,$fa=0.5,$fs=0.5);
 
-    //Add servo axel in the origin
-    color("red")
-    rotate([0,90,0])
-    linear_extrude(gh_hs422_base_to_axel-gh_hs422_total)
-    circle(d=gd_hs422_hole,$fa=0.5,$fs=0.5);
+	translate([-gh_hs422_bearing,0,0])
+	union()
+	{
 
+		//Bearing under the axel
+		color("#772222")
+		rotate([0,90,0])
+		linear_extrude(gh_hs422_bearing)
+		circle(d=gd_hs422_bearing,$fa=0.5,$fs=0.5);
+
+		//Add servo axel in the origin
+		color("red")
+		rotate([0,90,0])
+		linear_extrude(gh_hs422_base_to_axel-gh_hs422_total)
+		circle(d=gd_hs422_axel,$fa=0.5,$fs=0.5);
+	}
 }
 
 module hexagon(id_outer = 0, id_inner = 0)
@@ -382,31 +402,43 @@ module HS422_wheel
 (
 	//Parameters of the wheel
 	i_d_wheel = 60.0,
-	i_t_wheel = 2.5
+	i_t_wheel = 2.5,
+	i_x_right = false,
+	i_x_show_wheel = false,
+	i_e_precision = 0.01
 )
 {
 	union()
 	{
-		HS422();
-		color("#00ff00")
+		HS422
+		(
+			i_x_right = i_x_right
+		);
+
+		if (i_x_show_wheel == true)
+		color("#33cc33")
 		translate(
 		[
-			gh_hs422_base_to_axel-gh_hs422_total+0.0,
+			0.0,
 			0,
 			0
 		])
-		rotate([0,-90,0])
-		cylinder(h=i_t_wheel,d=i_d_wheel,$fa=0.1,$fs=0.1);
+		rotate([0,-90,180])
+		shape_donut_square
+		(
+			ir_inner = gd_hs422_axel / 2 +0.5,
+			ir_outer = i_d_wheel / 2,
+			it = i_t_wheel,
+			ie_precision = i_e_precision
+		);
 	}
-
-
-
 }
-
-
 
 //Show the model
 //HS422();
+
+//HS422 with axel to the right
+//HS422( i_x_right = true );
 
 //HS422_vertical();
 
@@ -414,4 +446,11 @@ module HS422_wheel
 
 //hs422_seat_vertical();
 
-//HS422_wheel();
+if (false)
+HS422_wheel
+(
+	i_d_wheel = 60.0,
+	i_t_wheel = 8.5,
+	i_x_right = false,
+	i_x_show_wheel = true
+);
