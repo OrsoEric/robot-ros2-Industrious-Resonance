@@ -1,9 +1,16 @@
-
+//Primitives
 include <libs/shape_rounded_rectangle.scad>
+
+include <libs/shape_donut_square.scad>
+
+include <libs/shape_cylinder.scad>
+
+include <libs/shape_hexagon.scad>
 
 //Model of the Rasperry Pi 3 and 5
 //include <libs/raspberry_pi_3.scad>
 include <libs/sbc_support.scad>
+
 //Model of the servo
 //include <libs/hs422-servo.scad>
 include <libs/servo_holder.scad>
@@ -104,7 +111,7 @@ module industrious_resonance
 	t_wheel = 8.0;
 	//Margin to apply to the wheel hole
 	wm_wheel = -1.0;
-	tm_wheel = 2.0;
+	tm_wheel = 2.5;
 	dm_wheel = -5.0;
 	//Parameters to adjust the relative position of wheel and servo
 	wo_wheel = gh_hs422_flange / 2;
@@ -122,10 +129,22 @@ module industrious_resonance
 	lo_sbc = 20.0;
 	wo_sbc = 0.0;
 
+	//Height of the SBC from the top of the base
+	t_sbc = 36;
+
+	//HOLE
 	li_sbc_hole = g_li_lpmu_hole;
 	wi_sbc_hole = g_wi_lpmu_hole;
 
-	t_sbc = 36;
+
+
+	d_hole = 3.0 + 0.5;
+
+	d_sbc_nut = 6.0 + 0.5;
+
+	d_sbc_support_top = 6.0;
+	d_sbc_support_base = 8.0;
+	
 
 	//------------------------------------------------------------------
 	//	GEOMETRY
@@ -156,19 +175,54 @@ module industrious_resonance
 			// SBC
 			//---------------------------------------------------------------------
 
-			if (i_x_show_sbc == true)
+			translate
+			([
+				lo_sbc,
+				wo_sbc,
+				t_base
+			])
+			union()
 			{
-				translate
-				([
-					lo_sbc,
-					wo_sbc,
-					t_base+t_sbc
-				])
-				rotate([0,0,180])
-				sbc_lattepanda_mu_lite_board();
-			}
+				//SBC BOARD
+				if (i_x_show_sbc == true)
+				{
+					translate
+					([
+						0,
+						0,
+						t_sbc
+					])
+					rotate([0,0,180])
+					sbc_lattepanda_mu_lite_board();
+				}
+
+				for (lo_temp = [-li_sbc_hole/2,li_sbc_hole/2])
+				for (wo_temp = [-wi_sbc_hole/2,wi_sbc_hole/2])
+				{
+					translate
+					([
+						lo_temp,
+						wo_temp,
+						0
+					])
+					solid_pillar
+					(
+						//Top diameter
+						i_d_top = d_sbc_support_top,
+						//Bottom diameter
+						i_d_base = d_sbc_support_base,
+						//Height of the pillar
+						i_h_pillar = t_sbc,
+						//Straight section at top and bottom
+						i_h_vertical = 5,
+						//Precision
+						i_e_precision = i_e_precision
+					);
+				}
+			}	//SBC SUPPORT
 
 			//SBC Support
+			if(false)
 			color("orange")
 			translate
 			([
@@ -184,7 +238,7 @@ module industrious_resonance
 				i_h_vertical = 6,
 				//Interaxis between holes
 				i_li_sbc = li_sbc_hole,
-				i_wi_sbc = wi_sbc_hole
+				i_wi_sbc = wi_sbc_hole,
 			);
 
 			//---------------------------------------------------------------------
@@ -208,9 +262,8 @@ module industrious_resonance
 				i_t_wheel = t_wheel,
 				//Visualize components
 				i_x_right = true,
-				i_x_show_servo = true,
-				i_x_show_wheel = true,
-				i_e_precision = 0.01
+				i_x_show_servo = i_x_show_servo,
+				i_x_show_wheel = i_x_show_servo
 			);
 
 			//Left Wheel
@@ -230,9 +283,8 @@ module industrious_resonance
 				i_t_wheel = t_wheel,
 				//Visualize components
 				i_x_right = false,
-				i_x_show_servo = true,
-				i_x_show_wheel = true,
-				i_e_precision = 0.01
+				i_x_show_servo = i_x_show_servo,
+				i_x_show_wheel = i_x_show_servo
 			);
 		}
 		//Extrude
@@ -284,8 +336,51 @@ module industrious_resonance
 			translate([lo_battery,0,0])
 			linear_extrude(t_base)
 			square([d_battery * 3.0,c_w_base-t_battery_cap_wall*2],center=true);
-		}
-	}
+
+			//---------------------------------------------------------------------
+			// SBC HOLE
+			//---------------------------------------------------------------------
+
+			translate
+			([
+				lo_sbc,
+				wo_sbc,
+				0
+			])
+			union()
+			{
+				for (lo_temp = [-li_sbc_hole/2,li_sbc_hole/2])
+				for (wo_temp = [-wi_sbc_hole/2,wi_sbc_hole/2])
+				{
+					translate
+					([
+						lo_temp,
+						wo_temp,
+						0
+					])
+					shape_cylinder
+					(
+						i_d = d_hole,
+						i_h = t_base+t_sbc,
+						i_e = i_e_precision
+					);
+
+					translate
+					([
+						lo_temp,
+						wo_temp,
+						0
+					])
+					shape_hexagon
+					(
+						i_d = d_sbc_nut,
+						i_h = 2.5
+					);
+				}
+			}	//SBC SUPPORT
+
+		}	//Geometry difference
+	}	//Geometry
 
 	//---------------------------------------------------------------------
 	//	PIVOT
