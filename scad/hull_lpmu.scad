@@ -302,7 +302,7 @@ module industrious_resonance
 //if (false)
 industrious_resonance
 (
-	i_x_show_sbc = false,
+	i_x_show_sbc = true,
 	i_x_show_battery = true,
 	i_x_show_servo = true,
 	i_x_show_pivot = true
