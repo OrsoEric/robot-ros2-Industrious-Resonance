@@ -49,7 +49,7 @@ module industrious_resonance
 	//------------------------------------------------------------------
 
 	//Battery Offset
-	lo_battery = -17;
+	lo_battery = -13;
 	wo_battery = 0;
 	//Battery dimensions
 	d_battery = 18.4+0.5;
@@ -98,15 +98,14 @@ module industrious_resonance
 	//Position of the motors on the base
 	l_wheel = 49.0;
 	w_wheel = 55.0;
-	//Height offset of wheels
-	//ho_wheel = 0.0;
+
 	//Specs of the wheels
-	d_wheel = 62.0;
-	t_wheel = 7.0;
+	d_wheel = 68.0;
+	t_wheel = 8.0;
 	//Margin to apply to the wheel hole
-	wm_wheel = -0.5;
+	wm_wheel = -1.0;
 	tm_wheel = 2.0;
-	dm_wheel = 5.0;
+	dm_wheel = -5.0;
 	//Parameters to adjust the relative position of wheel and servo
 	wo_wheel = gh_hs422_flange / 2;
 
@@ -119,13 +118,14 @@ module industrious_resonance
 	//	SBC
 	//------------------------------------------------------------------
 
-	lo_sbc = 19.0;
+	//SBC Offset Position
+	lo_sbc = 20.0;
 	wo_sbc = 0.0;
 
 	li_sbc_hole = g_li_lpmu_hole;
 	wi_sbc_hole = g_wi_lpmu_hole;
 
-	t_sbc = 33;
+	t_sbc = 36;
 
 	//------------------------------------------------------------------
 	//	GEOMETRY
