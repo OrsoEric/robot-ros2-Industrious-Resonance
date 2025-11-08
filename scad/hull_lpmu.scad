@@ -45,22 +45,40 @@ module industrious_resonance
 )
 {
 	//------------------------------------------------------------------
+	//	BATTERY
+	//------------------------------------------------------------------
+
+	//Battery Offset
+	lo_battery = -17;
+	wo_battery = 0;
+	//Battery dimensions
+	d_battery = 18.4+0.5;
+	l_battery = 71.0;
+	//Battery Holder structural dimensions
+	t_battery_cap_wall = 2.0;
+	t_battery_cap = 4.0;
+	l_spring_loaded = 3.0;
+
+	//------------------------------------------------------------------
 	//	BASE
 	//------------------------------------------------------------------
 
 	//Base Dimension
-	c_l_base = 210.0;
-	c_w_base = 150.0;
+	c_l_base = 220.0;
+	c_w_base = 2 * l_battery + 2 * t_battery_cap + l_spring_loaded;
 	c_r_base = 60.0;
+
+	echo("Dimension L: ", c_l_base, " | W: ", c_w_base );
 
 	//BASE parameters
 	t_base = i_t_base;
+
 	//------------------------------------------------------------------
 	//	PIVOT
 	//------------------------------------------------------------------
 
 	//Offset of the pivot wheel
-	lo_pivot = -70;
+	lo_pivot = -80;
 	//This is a number to control anchor between pivot mechanism and its base
 	//I can't be bothered to work out the angles with the arcsin to make it work without this parameter
 	ho_pivot = 10;
@@ -72,13 +90,14 @@ module industrious_resonance
 	h_pivot_clearance = d_pivot_sphere / 2 - ho_pivot;
 
 	echo("Pivot ball clearance: ",h_pivot_clearance);
+
 	//------------------------------------------------------------------
 	//	WHEELS
 	//------------------------------------------------------------------
 
 	//Position of the motors on the base
-	l_wheel = 40.0;
-	w_wheel = 51.0;
+	l_wheel = 49.0;
+	w_wheel = 55.0;
 	//Height offset of wheels
 	//ho_wheel = 0.0;
 	//Specs of the wheels
@@ -95,14 +114,6 @@ module industrious_resonance
 	//Wheel radious minus half servo thickness minus base thickness MINUS pivot height from floor clearance
 	//
 	h_floor_servo = d_wheel / 2 - 10 - t_base - h_pivot_clearance;
-
-	//------------------------------------------------------------------
-	//	BATTERY
-	//------------------------------------------------------------------
-
-	//Battery Offset
-	lo_battery = -20;
-	wo_battery = 0;
 
 	//------------------------------------------------------------------
 	//	SBC
@@ -124,7 +135,10 @@ module industrious_resonance
 	{
 		union()
 		{
-			//ROBOT BASE
+			//---------------------------------------------------------------------
+			// BASE
+			//---------------------------------------------------------------------
+
 			color("#888888")
 			shape_rounded_rectangle
 			(
@@ -138,6 +152,9 @@ module industrious_resonance
 				i_n_error = i_e_precision
 			);
 
+			//---------------------------------------------------------------------
+			// SBC
+			//---------------------------------------------------------------------
 
 			if (i_x_show_sbc == true)
 			{
@@ -170,19 +187,9 @@ module industrious_resonance
 				i_wi_sbc = wi_sbc_hole
 			);
 
-
-			translate
-			([
-				lo_battery,
-				wo_battery - c_w_base / 2,
-				t_base
-			])
-			rotate([0,0,90])
-			holder_18650_2s2p
-			(
-				ix_show_battery = i_x_show_battery,
-				ix_show_tab = i_x_show_battery
-			);
+			//---------------------------------------------------------------------
+			//	SERVO WHEEL
+			//---------------------------------------------------------------------
 
 			//Right Wheel
 			translate
@@ -227,7 +234,6 @@ module industrious_resonance
 				i_x_show_wheel = true,
 				i_e_precision = 0.01
 			);
-
 		}
 		//Extrude
 		union()
@@ -251,7 +257,6 @@ module industrious_resonance
 				i_n_error = i_e_precision
 			);
 
-
 			//Left Wheel Hole
 			translate
 			([
@@ -274,8 +279,17 @@ module industrious_resonance
 			//An hole where I'll slot in the pivot wheel
 			translate([lo_pivot,0,0])
 			cylinder(h=i_t_base,d=d_pivot_cutout, $fn=80);
+	
+			//Hole to access the batteries from below
+			translate([lo_battery,0,0])
+			linear_extrude(t_base)
+			square([d_battery * 3.0,c_w_base-t_battery_cap_wall*2],center=true);
 		}
 	}
+
+	//---------------------------------------------------------------------
+	//	PIVOT
+	//---------------------------------------------------------------------
 
 	translate([lo_pivot,0,0])
 	ball_holder
@@ -292,6 +306,32 @@ module industrious_resonance
 		i_t_base = i_t_base,
 		//Show ball
 		i_x_show_ball = i_x_show_pivot
+	);
+
+	//---------------------------------------------------------------------
+	// BATTERY HOLDER
+	//---------------------------------------------------------------------
+
+	translate
+	([
+		lo_battery,
+		wo_battery,
+		0
+	])
+	rotate([0,0,90])
+	holder_18650_2s2p_inverted
+	(
+		//Diameter of the 18650 battery plus tollerance
+		id_18650 = d_battery,
+		//Length of the 18650 battery from base to button
+		il_18650 = l_battery,
+		//Thickness of the Holder walls
+		it_wall = t_base,
+		//Thickness of the cap plus rails
+		it_cap = t_battery_cap,
+		//Show non printable elements
+		ix_show_battery = i_x_show_battery,
+		ix_show_tab = i_x_show_battery
 	);
 
 
