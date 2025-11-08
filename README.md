@@ -54,10 +54,6 @@ I choose to start from the LEGO robot, it should be very close to working
 
 Using OpenSCAD to design the base
 
-Iterations
-
-![](/Images/2025-08-27-T083848%20OpenSCAD%20WIP.png)
-
 ### Ball Holder
 
 As pivot wheel, I think of using a 40mm tennis ball. I can make a 3D printed structure to hold it with low friction, I'm thinking of three holding arms and three structural arms. I went with OpenSCAD to make it
@@ -86,9 +82,38 @@ Below is an idea I like that plays on the industrious resonance name, a shell th
 ![](/Images/2025-08-27T1725-Platform-norpi-nobat-noraspi.png)
 
 
+### Assembly 
 
+Place a raspberry, batteries and servomotors on an ellipse
+
+![](/Images/2025-08-27-T083848%20OpenSCAD%20WIP.png)
+
+Considerations
+- I switch to a Latte Panda MU to improve on LLM performance
+- In the future I do a proper LPMU carry board
+- I need to think of battery holder
+
+Base is a rectangle with tounded corner. Developed servo pillars, used 18650 battery holder and ping pong ball holder for pivot.
+
+![](/Images/2025-11-07-T1749_Base_2P2S.png)
+
+With the Lattepanda Mu electronics on top and base properly resized to carry it
+
+![](/Images/2025-11-06-T1735_lpmu_assembly.png)
+
+Considerations:
+- Batteries are hard to reach, I'd like bottom facing battery holder, but how would supports work?
+- I need a camara stand
+- I need lips to attach a shell, or a border
+- I need to decide on the electronics and spaces to platce that electronics
+- I need to improve on the LPMU pillars, I need to make them through hole to the bottom
+- I need a power switch
+
+---
 
 ## Electronics
+
+### Raspberry Pi
 
 It uses an OrangeHat, I remember it has a screen, UART, reset, and SERVO interpolation, it should be good to do a two axis rotation. It has an IMU, and the front numbers show change when I move it, it might be working!
 
@@ -97,6 +122,18 @@ I remember that if the OS isn't running, it keeps reset the OrangeHat and it sta
 Power regulator is good.
 
 ![Test OrangeHat Electronics](/Images/2025-08-23_T0956%20Test%20orangeHat.jpg)
+
+### Lattepanda Mu
+
+Using the Lattepanda Mu I need a different electronics setup
+
+I think I'll do a Longan Nano because of the screen, use one of my regulators, and an adapter to connect the servomotors. Feels like a good experimental setup without committing too much
+
+I would like encoders on the motors...
+
+
+
+---
 
 ## Operating System and Raspicam Streaming
 
