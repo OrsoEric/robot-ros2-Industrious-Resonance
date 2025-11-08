@@ -11,6 +11,8 @@ include <libs/shape_hexagon.scad>
 //include <libs/raspberry_pi_3.scad>
 include <libs/sbc_support.scad>
 
+include <pcb_regulator.scad>
+
 //Model of the servo
 //include <libs/hs422-servo.scad>
 include <libs/servo_holder.scad>
@@ -130,7 +132,7 @@ module industrious_resonance
 	wo_sbc = 0.0;
 
 	//Height of the SBC from the top of the base
-	t_sbc = 36;
+	t_sbc = 35;
 
 	//HOLE
 	li_sbc_hole = g_li_lpmu_hole;
@@ -145,6 +147,22 @@ module industrious_resonance
 	d_sbc_support_top = 6.0;
 	d_sbc_support_base = 8.0;
 	
+	//------------------------------------------------------------------
+	//	PCB
+	//------------------------------------------------------------------
+
+	///	Regulator
+	//Size
+	l_regulator = 55.0;
+	w_regulator = 30.0;
+	h_regulator = 20;
+	//Holes
+	li_regulator_hole = 50.0;
+	wi_regulator_hole = 25.0;
+	//Position Offset on the robot
+	lo_regulator = 50.0;
+	wo_regulator = 00.0;
+	ho_regulator = 10.0;
 
 	//------------------------------------------------------------------
 	//	GEOMETRY
@@ -221,25 +239,57 @@ module industrious_resonance
 				}
 			}	//SBC SUPPORT
 
-			//SBC Support
-			if(false)
-			color("orange")
 			translate
 			([
-				lo_sbc,
-				wo_sbc,
+				lo_regulator,
+				wo_regulator,
 				t_base
 			])
-			sbc_support_pillars
-			(
-				i_d_top = 6,
-				i_d_bot = 10,
-				i_h_pillar = t_sbc,
-				i_h_vertical = 6,
-				//Interaxis between holes
-				i_li_sbc = li_sbc_hole,
-				i_wi_sbc = wi_sbc_hole,
-			);
+			union()
+			{
+				if (i_x_show_sbc == true)
+				{
+					//REGULATOR
+					translate([0,0,ho_regulator])
+					shape_pcb
+					(
+						//Size
+						i_l = l_regulator,
+						i_w = w_regulator,
+						i_h = h_regulator,
+						//Hole
+						i_d = 3.0 + 0.5,
+						i_li = li_regulator_hole,
+						i_wi = wi_regulator_hole,
+						
+						i_e_precision = 0.01
+					);
+				}
+
+				for (lo_temp = [-li_regulator_hole/2,li_regulator_hole/2])
+				for (wo_temp = [-wi_regulator_hole/2,wi_regulator_hole/2])
+				{
+					translate
+					([
+						lo_temp,
+						wo_temp,
+						0
+					])
+					solid_pillar
+					(
+						//Top diameter
+						i_d_top = d_sbc_support_top,
+						//Bottom diameter
+						i_d_base = d_sbc_support_base,
+						//Height of the pillar
+						i_h_pillar = ho_regulator,
+						//Straight section at top and bottom
+						i_h_vertical = h_regulator/8,
+						//Precision
+						i_e_precision = i_e_precision
+					);
+				}
+			}
 
 			//---------------------------------------------------------------------
 			//	SERVO WHEEL
@@ -379,6 +429,46 @@ module industrious_resonance
 				}
 			}	//SBC SUPPORT
 
+			//REGULATOR HOLE AND NUT
+			translate
+			([
+				lo_regulator,
+				wo_regulator,
+				0
+			])
+			union()
+			{
+				for (lo_temp = [-li_regulator_hole/2,li_regulator_hole/2])
+				for (wo_temp = [-wi_regulator_hole/2,wi_regulator_hole/2])
+				{
+					translate
+					([
+						lo_temp,
+						wo_temp,
+						0
+					])
+					shape_cylinder
+					(
+						i_d = d_hole,
+						i_h = t_base+ho_regulator,
+						i_e = i_e_precision
+					);
+
+					translate
+					([
+						lo_temp,
+						wo_temp,
+						0
+					])
+					shape_hexagon
+					(
+						i_d = d_sbc_nut,
+						i_h = 2.5
+					);
+				}
+			}	//REGULATOR HOLE AND NUT
+
+
 		}	//Geometry difference
 	}	//Geometry
 
@@ -437,7 +527,7 @@ module industrious_resonance
 //if (false)
 industrious_resonance
 (
-	i_x_show_sbc = true,
+	i_x_show_sbc = false,
 	i_x_show_battery = true,
 	i_x_show_servo = true,
 	i_x_show_pivot = true
