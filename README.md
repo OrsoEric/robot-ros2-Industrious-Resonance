@@ -111,6 +111,23 @@ Considerations:
 
 ---
 
+Lots of work on the robot
+- 18650 inverse holder 2S2P, connected 4S1P
+- border
+- hole for switch
+- support for regulator PCB
+- hex nuts below for the lattepanda
+
+I printed it in opaline PETG with supports, it came out really well! Tollerances for the battery holders are perfect!
+
+![](/Images/2025-11-08-T2104_assembled_powered_above.jpg)
+
+![](/Images/2025-11-08-T2104_assembled_powered_below.jpg)
+
+Video of the assembly Process
+
+<video src="Videos/2025-11-08-T2103_assembly_battery_regulator_480p.mp4" controls="controls" style="max-width: 730px;">
+
 ## Electronics
 
 ### Raspberry Pi
