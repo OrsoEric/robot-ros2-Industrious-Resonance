@@ -126,8 +126,6 @@ I printed it in opaline PETG with supports, it came out really well! Tollerances
 
 Video of the assembly Process
 
-<video src="Videos/2025-11-08-T2103_assembly_battery_regulator_480p.mp4" controls="controls" style="max-width: 730px;">
-
 [Github is incompetently made and I have no way to embed a video bigger than 10MB](https://github.com/orgs/community/discussions/19403)
 
 The video will work when you fork and open with VS Code with the preview MD. Otherwise download it and watch it.
@@ -154,6 +152,30 @@ Using the Lattepanda Mu I need a different electronics setup
 I think I'll do a Longan Nano because of the screen, use one of my regulators, and an adapter to connect the servomotors. Feels like a good experimental setup without committing too much
 
 I would like encoders on the motors...
+
+### Servomotors - Longan Nano
+
+I need a board to move the servomotors and have a screen.
+
+First choice was the Longan Nano, it's compact, powerful and has a nice screen and I deed lots of drivers.
+
+[Longan Nano](https://fatherofmachines.blogspot.com/p/longan-nano-gd32vf103.html)
+
+I tried and it's bricked on Platform IO. I can probably make it work.
+
+[](/log-longan-nano.md)
+
+### Servomotors - AT324PA
+
+I made useful boards based on AT324 and others, the one from Unit Zero has already the servo adapters and works fine.
+
+[Install Microchip Studio](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio#Downloads), open project, recompile and upload, everything works!
+
+![](/Images/2025-11-09-T0953_AT324_electronics_avrispmk2_programmer.jpg)
+
+From here I need a firmware with the parser and uart in order to control it from an SBC
+
+I'm thinking of doing it simple, possibly a mov speed duration instruction, that is very easy for the MCP server to produce, even if not very useful for doing useful applications. This is just an MVP.
 
 
 
