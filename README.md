@@ -177,6 +177,44 @@ From here I need a firmware with the parser and uart in order to control it from
 
 I'm thinking of doing it simple, possibly a mov speed duration instruction, that is very easy for the MCP server to produce, even if not very useful for doing useful applications. This is just an MVP.
 
+## Firmware
+
+SPECS:
+- UART link
+- Parser
+- Ability to move servos
+- Ability to display text on the screen
+
+### Seesaw
+
+Make a demo to move at seesaw speed the two wheels
+
+<video src="https://github.com/user-attachments/assets/5bb4f36e-5e4b-4e43-b68f-162d931d1378" width="720" height="480"></video>
+
+### Serial Commands
+
+OrangeHat is programmed with the following functions
+
+```
+ARG_S8 = 's',
+ARG_U8 = 'u',
+ARG_S16 = 'S',
+ARG_U16 = 'U',
+ARG_U32 = 'D',
+ARG_S32 = 'd'
+
+//Register ping command. It's used to reset the communication timeout
+f_ret = parser_tmp.add_cmd( "P", (void *)&ping_handler );
+//Register the Find command. Board answers with board signature
+f_ret |= parser_tmp.add_cmd( "F", (void *)&send_signature_handler );
+//Platform set PPM command
+f_ret |= parser_tmp.add_cmd( "PPM%u:%S:%S", (void *)&set_servo_ppm );
+```
+
+### Protocol
+
+
+
 
 
 ---
@@ -202,7 +240,7 @@ Power is good, now try with ping, putty and launching the streaming demo and enu
 
 TODO: Do I really want to move to Ubuntu and have ROS2? If I'm already good like this perhaps I should drop the ROS2 requirement
 
-## Interface OrangeHat with Raspberry Pi 5
+### Raspberry Pi 5
 
 Test that the power supply is good
 - 10V 0.5A streaming with camera and connected via webserver
@@ -211,22 +249,3 @@ Connect with VS Code Remote
 
 Make an application that clears the reset 
 
-### Serial Commands
-
-OrangeHat is programmed with the following functions
-
-```
-ARG_S8 = 's',
-ARG_U8 = 'u',
-ARG_S16 = 'S',
-ARG_U16 = 'U',
-ARG_U32 = 'D',
-ARG_S32 = 'd'
-
-//Register ping command. It's used to reset the communication timeout
-f_ret = parser_tmp.add_cmd( "P", (void *)&ping_handler );
-//Register the Find command. Board answers with board signature
-f_ret |= parser_tmp.add_cmd( "F", (void *)&send_signature_handler );
-//Platform set PPM command
-f_ret |= parser_tmp.add_cmd( "PPM%u:%S:%S", (void *)&set_servo_ppm );
-```
