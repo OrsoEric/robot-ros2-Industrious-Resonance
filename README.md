@@ -165,7 +165,17 @@ I tried and it's bricked on Platform IO. I can probably make it work.
 
 [](/log-longan-nano.md)
 
-### Servomotors
+### Servomotors - AT324PA
+
+I made useful boards based on AT324 and others, the one from Unit Zero has already the servo adapters and works fine.
+
+[Install Microchip Studio](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio#Downloads), open project, recompile and upload, everything works!
+
+![](/Images/2025-11-09-T0953_AT324_electronics_avrispmk2_programmer.jpg)
+
+From here I need a firmware with the parser and uart in order to control it from an SBC
+
+I'm thinking of doing it simple, possibly a mov speed duration instruction, that is very easy for the MCP server to produce, even if not very useful for doing useful applications. This is just an MVP.
 
 
 
