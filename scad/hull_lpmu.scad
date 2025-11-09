@@ -1,6 +1,8 @@
 //Primitives
 include <libs/shape_rounded_rectangle.scad>
 
+include <libs/shape_rounded_rectangle_tub.scad>
+
 include <libs/shape_donut_square.scad>
 
 include <libs/shape_cylinder.scad>
@@ -50,7 +52,7 @@ module industrious_resonance
 	//Thickness of the base
 	i_t_base = 2.0,
 	//Precision
-	i_e_precision = 0.05
+	i_e_precision = 0.01
 )
 {
 	//------------------------------------------------------------------
@@ -75,6 +77,7 @@ module industrious_resonance
 	//Base Dimension
 	c_l_base = 220.0;
 	c_w_base = 2 * l_battery + 2 * t_battery_cap + l_spring_loaded;
+	c_h_base = 15.0;
 	c_r_base = 60.0;
 
 	echo("Dimension L: ", c_l_base, " | W: ", c_w_base );
@@ -128,7 +131,7 @@ module industrious_resonance
 	//------------------------------------------------------------------
 
 	//SBC Offset Position
-	lo_sbc = 20.0;
+	lo_sbc = 23.0;
 	wo_sbc = 0.0;
 
 	//Height of the SBC from the top of the base
@@ -161,8 +164,14 @@ module industrious_resonance
 	wi_regulator_hole = 25.0;
 	//Position Offset on the robot
 	lo_regulator = 50.0;
-	wo_regulator = 00.0;
+	wo_regulator = 0.0;
 	ho_regulator = 10.0;
+
+	//------------------------------------------------------------------
+	//	SWITCH
+	//------------------------------------------------------------------
+
+	d_switch_hole = 6.0 + 1.0;
 
 	//------------------------------------------------------------------
 	//	GEOMETRY
@@ -176,6 +185,7 @@ module industrious_resonance
 			// BASE
 			//---------------------------------------------------------------------
 
+			if (false)
 			color("#888888")
 			shape_rounded_rectangle
 			(
@@ -187,6 +197,21 @@ module industrious_resonance
 				i_r_rounding = c_r_base,
 				//Error by the approximation
 				i_n_error = i_e_precision
+			);
+
+			color("#888888")
+			shape_rounded_rectangle_tub
+			(
+				//Dimensions of the rectangle
+				i_l = c_l_base,
+				i_w = c_w_base,
+				i_h = c_h_base,
+				i_t_base = i_t_base,
+				i_t_wall = i_t_base,
+				//Rounding of the corners in the XY direction
+				i_r_rounding = c_r_base,
+				//Error by the approximation
+				i_e_precision = i_e_precision
 			);
 
 			//---------------------------------------------------------------------
@@ -262,7 +287,7 @@ module industrious_resonance
 						i_li = li_regulator_hole,
 						i_wi = wi_regulator_hole,
 						
-						i_e_precision = 0.01
+						i_e_precision = i_e_precision
 					);
 				}
 
@@ -336,6 +361,7 @@ module industrious_resonance
 				i_x_show_servo = i_x_show_servo,
 				i_x_show_wheel = i_x_show_servo
 			);
+
 		}
 		//Extrude
 		union()
@@ -468,6 +494,24 @@ module industrious_resonance
 				}
 			}	//REGULATOR HOLE AND NUT
 
+			//---------------------------------------------------------------------
+			// SWITCH HOLE
+			//---------------------------------------------------------------------
+
+			translate
+			([
+				-47,
+				-c_w_base/2 +t_base,
+				i_t_base + d_switch_hole/2 + 3
+			])
+			rotate([90,0,0])
+			shape_cylinder
+			(
+				i_d = d_switch_hole,
+				i_h = t_base,
+				i_e = i_e_precision
+			);
+
 
 		}	//Geometry difference
 	}	//Geometry
@@ -527,8 +571,9 @@ module industrious_resonance
 //if (false)
 industrious_resonance
 (
-	i_x_show_sbc = false,
+	i_x_show_sbc = true,
 	i_x_show_battery = true,
 	i_x_show_servo = true,
-	i_x_show_pivot = true
+	i_x_show_pivot = true,
+	i_e_precision = 0.01
 );
