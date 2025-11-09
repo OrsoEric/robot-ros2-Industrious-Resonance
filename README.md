@@ -185,6 +185,11 @@ SPECS:
 - Ability to move servos
 - Ability to display text on the screen
 
+### Seesaw
+
+Make a demo to move at seesaw speed the two wheels
+
+<video src="https://github.com/user-attachments/assets/5bb4f36e-5e4b-4e43-b68f-162d931d1378" width="720" height="480"></video>
 
 ### Serial Commands
 
