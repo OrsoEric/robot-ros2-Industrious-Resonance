@@ -189,6 +189,8 @@
 **	prototype need it, it help the leggibility of the code
 ****************************************************************************/
 
+extern U8 seesaw();
+
 /****************************************************************************
 **	PROTOTYPE: GLOBAL VARIABILE
 ****************************************************************************/
@@ -254,8 +256,6 @@ U16 servo_global_time 	= 0;
 //Current motion plan
 //Trajectories trajectory = MOVE_IDLE;
 
-
-
 /****************************************************************************
 **	MAIN
 ****************************************************************************/
@@ -275,8 +275,6 @@ int main( void )
 
 	U8 pre_traj = 0;
 
-	U8 status_traj = 0;
-
 	///**********************************************************************
 	///	VARIABILES INITIALISATION
 	///**********************************************************************
@@ -288,20 +286,11 @@ int main( void )
 	//attach vector to buffer
 	AT_BUF_ATTACH( uart_tx_buf, v1, UART_TX_BUF_SIZE);
 	
-	
-	//Correct mechanical offsets of the servos
-	servo_off[ SERVO_FDX ] 		= +14;
-	servo_off[ SERVO_FSX ] 		= +24;
-	servo_off[ SERVO_RDX ] 		= +4;
-	servo_off[ SERVO_RSX ] 		= -5;
-	servo_off[ SERVO_FHIP ] 	= +0;
-	servo_off[ SERVO_RHIP ] 	= +12;
-	servo_off[ SERVO_TORSO ] 	= +0;
-
 	//Clear global servo time
 	//Initialize servo position to zero (offset is accounted for during calculations, i must not add it here)
 	for (u8t = 0;u8t < N_SERVOS;u8t++)
 	{
+		servo_off[u8t]			= +0;
 		servo_delay[u8t] 		= K0;	//Servo true position
 		servo_target_pos[u8t] 	= +0;	//Servo targt position (user)
 		servo_target_speed[u8t]	= MOVE_SPEED;	//Servo target speed (default)
@@ -371,6 +360,10 @@ int main( void )
 			{
 				f.servo_traj = 1;
 			}
+			
+			
+			
+			
 		}	//End If: motor scan flag
 
 		//-----------------------------------------------------------------------
@@ -383,125 +376,14 @@ int main( void )
 			
 			//Debug send via UART
 			AT_BUF_PUSH( uart_tx_buf, 'Z' );
-			
-			TOGGLE_BIT( PORTC, PC0 );
 			//TOGGLE_BIT( PORTD, PD1 );
 			
-			//Switch: traj index
-			switch(status_traj)
-			{
-				//reset
-				case 0:
-				{			
-					servo_trajectory_point( MOVE_ALL_ZERO, 0, 0 );
-					status_traj++;
-					break;
-				}
-				//Test hip +
-				case 1:
-				{
-					servo_trajectory_point( MOVE_HIP_MIRROR, +MOVE_STEP_HIP, 0 );
-					status_traj++;
-					break;
-				}
-				//Test hip -
-				case 2:
-				{
-					servo_trajectory_point( MOVE_HIP_MIRROR, -MOVE_STEP_HIP, 0 );
-					status_traj++;
-					break;
-				}
-				//Pushup
-				case 3:
-				{
-					servo_trajectory_point( MOVE_HIP, 0, 0 );
-					servo_trajectory_point( MOVE_LEGS, MOVE_LOAD_LEG, 0 );
-					status_traj++;
-					break;
-				}
-				//reset
-				case 4:
-				{
-					servo_trajectory_point( MOVE_LEGS, 0, 0 );
-					status_traj++;
-					break;
-				}
-				//Pushup
-				case 5:
-				{
-					servo_trajectory_point( MOVE_LEGS, MOVE_LOAD_LEG, 0 );
-					status_traj++;
-					break;
-				}
-				//Default
-				case 6:
-				{
-					servo_trajectory_point( MOVE_HIP, 0, 0 );
-					servo_trajectory_point( MOVE_LEGS, 0, 0 );
-					status_traj++;
-					break;
-				}
-				//Dreset
-				case 7:
-				{
-					servo_trajectory_point( MOVE_LEGS, 0, 0 );
-					servo_trajectory_point( MOVE_HIP, 0, 0 );
-					status_traj++;
-					//status_traj = 0;
-					break;
-				}
-				//load
-				case 8:
-				{
-					servo_trajectory_point( MOVE_FRONT_LEGS_MIRROR, +MOVE_LOAD_LEG, MOVE_NOLOAD_LEG );
-					servo_trajectory_point( MOVE_REAR_LEGS_MIRROR, -MOVE_LOAD_LEG, MOVE_NOLOAD_LEG );
-					status_traj++;
-					break;
-				}
-				//Advance
-				case 9:
-				{
-					servo_trajectory_point( MOVE_HIP_MIRROR, +MOVE_STEP_HIP, 0 );
-					status_traj++;
-					break;
-				}
-				//Wait
-				case 10:
-				{
-					status_traj++;
-					break;
-				}
-				//load opposite
-				case 11:
-				{
-					servo_trajectory_point( MOVE_FRONT_LEGS_MIRROR, -MOVE_LOAD_LEG, 0 );
-					servo_trajectory_point( MOVE_REAR_LEGS_MIRROR, +MOVE_LOAD_LEG, 0 );
-					status_traj++;
-					break;
-				}
-				//Advance Opposite
-				case 12:
-				{
-					servo_trajectory_point( MOVE_HIP_MIRROR, -MOVE_STEP_HIP, 0 );
-					status_traj++;
-					break;
-				}
-				//Wait
-				case 13:
-				{
-					//status_traj++;
-					status_traj = 8;
-					break;
-				}
-
-				default:
-				{
-					status_traj = 255;
-					
-				}
-			}	//End Switch: traj index
-
-
+			//Toggle LED
+			TOGGLE_BIT( PORTC, PC0 );
+			
+			seesaw();
+			
+			
 			/*
 			//fetch global time
 			u16t = servo_global_time;
@@ -566,6 +448,36 @@ int main( void )
 ** FUNCTION:
 ****************************************************************************/
 
+U8 seesaw()
+{
+	//static U8 u8_cnt = 0;
+	static U8 u8_dir = 0;
+	
+	servo_target_speed[0] = 5;
+	
+	if (u8_dir == FALSE)
+	{
+		servo_target_pos[0] += 1;
+		if (servo_target_pos[0]>=10)
+		{
+			u8_dir = TRUE;
+		}
+	}
+	else
+	{
+		servo_target_pos[0] -= 1;
+		if (servo_target_pos[0]<=-10)
+		{
+			u8_dir = FALSE;
+		}
+	}
+	
+	servo_target_pos[1] = servo_target_pos[0];
+	
+	return 0;
+}
+
+
 /****************************************************************************
 **	SERVO CALC POS
 *****************************************************************************
@@ -592,7 +504,6 @@ U16 servo_calc_delay( U8 index )
 	S16 slew_rate;
 
 	S16 s16t;
-
 
 	U16 ret;
 
@@ -657,132 +568,3 @@ U16 servo_calc_delay( U8 index )
 
 	return ret;
 }	//end function: servo_calc_delay
-
-/****************************************************************************
-**	servo_trajectory_point
-*****************************************************************************
-**	PARAMETER:
-**	RETURN:
-**	DESCRIPTION:
-**	Load a precalculated trajectory point. Allow for parameters
-****************************************************************************/
-
-U8 servo_trajectory_point( U8 index, S8 arg, S8 arg_aux )
-{
-	///--------------------------------------------------------------------------
-	///	STATIC VARIABILE
-	///--------------------------------------------------------------------------
-
-	///--------------------------------------------------------------------------
-	///	LOCAL VARIABILE
-	///--------------------------------------------------------------------------
-
-	//fast counter
-	register U8 t;
-
-	///--------------------------------------------------------------------------
-	///	CHECK
-	///--------------------------------------------------------------------------
-
-	///--------------------------------------------------------------------------
-	///	INITIALIZATIONS
-	///--------------------------------------------------------------------------
-
-	///--------------------------------------------------------------------------
-	///	BODY
-	///--------------------------------------------------------------------------
-
-	//Switch: index
-	switch (index)
-	{
-		//All engine to ZERO
-		case MOVE_ALL_ZERO:
-		{
-			//Initialize servo position to zero (offset is accounted for during calculations, i must not add it here)
-			for (t = 0;t < N_SERVOS;t++)
-			{
-				servo_target_pos[t] 	= 0;	//Servo targt position (user)
-			}
-
-			break;
-		}
-		//All legs to arg
-		case MOVE_LEGS:
-		{
-			servo_target_pos[ SERVO_FDX ]	= +arg;
-			servo_target_pos[ SERVO_FSX ]	= +arg;
-			servo_target_pos[ SERVO_RDX ]	= +arg;
-			servo_target_pos[ SERVO_RSX ]	= +arg;
-			break;
-		}
-		//All legs to arg
-		case MOVE_HIP:
-		{
-			servo_target_pos[ SERVO_FHIP ]	= +arg;
-			servo_target_pos[ SERVO_RHIP ]	= +arg;
-			break;
-		}
-		//All legs to arg
-		case MOVE_TORSO:
-		{
-			servo_target_pos[ SERVO_TORSO ]	= +arg;
-			break;
-		}
-		//All legs to arg
-		case MOVE_FRONT_LEGS_MIRROR:
-		{
-			//I limit to 0. can't be negative
-			if (arg > 0)
-			{
-				servo_target_pos[ SERVO_FDX ]	= +arg;
-				servo_target_pos[ SERVO_FSX ]	= MOVE_NOLOAD_LEG;
-			}
-			else
-			{
-				servo_target_pos[ SERVO_FDX ]	= MOVE_NOLOAD_LEG;
-				servo_target_pos[ SERVO_FSX ]	= -arg;
-			}
-			
-			break;
-		}
-		//All legs to arg
-		case MOVE_REAR_LEGS_MIRROR:
-		{
-			//I limit to 0. can't be negative
-			if (arg > 0)
-			{
-				servo_target_pos[ SERVO_RDX ]	= +arg;
-				servo_target_pos[ SERVO_RSX ]	= MOVE_NOLOAD_LEG;
-			}
-			else
-			{
-				servo_target_pos[ SERVO_RDX ]	= MOVE_NOLOAD_LEG;
-				servo_target_pos[ SERVO_RSX ]	= -arg;
-			}
-			break;
-		}
-		//All legs to arg
-		case MOVE_HIP_MIRROR:
-		{
-			servo_target_pos[ SERVO_FHIP ]	= +arg;
-			servo_target_pos[ SERVO_RHIP ]	= -arg;
-			break;
-		}
-		default:
-		{
-			return 255;	//FAIL
-		}
-
-
-	}	//End Switch: index
-
-	///--------------------------------------------------------------------------
-	///	FINALIZATIONS
-	///--------------------------------------------------------------------------
-
-	///--------------------------------------------------------------------------
-	///	RETURN
-	///--------------------------------------------------------------------------
-
-	return 0;	//OK
-}	//end function:

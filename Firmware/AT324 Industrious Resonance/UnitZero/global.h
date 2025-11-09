@@ -44,10 +44,8 @@
 
 	//56818
 	//#define UART_UBRR			(23-1)
-
 	//156 250
 	//#define UART_UBRR			(9-1)
-
 	//250 000 
 	#define UART_UBRR			(5-1)
 
@@ -98,14 +96,8 @@
 	//enum servos names (positions and functions in the robot)
 	enum
 	{
-		SERVO_FDX		= 0,	//Leg Front DX 			(+ => Leg front -> Rear)
-		SERVO_FSX		= 1,	//Leg Front SX 			(+ => Leg rear -> front)
-		SERVO_RDX		= 2,	//Leg Rear DX			(+ => Leg front -> Rear)
-		SERVO_RSX		= 3,	//Leg Rear SX			(+ => Leg rear -> front)
-		SERVO_FHIP		= 4,	//Hip Front Hip			(+ => rise leg dx, lower leg sx)
-		SERVO_RHIP		= 5,	//Hip Rear Hip			(+ => lower leg dx, rise leg sx)
-		SERVO_TORSO		= 6,	//Torso joint (Z)
-		SERVO_NECK		= 7		//Neck joint
+		SERVO_WHEEL_RIGHT		= 0,	//Leg Front DX 			(+ => Leg front -> Rear)
+		SERVO_WHEEL_LEFT		= 1,	//Leg Front SX 			(+ => Leg rear -> front)
 	};
 
 		//-----------------------------------------------------------------------
@@ -114,7 +106,7 @@
 
 	//servo direction correction mask, allow for the logical direction of a joint to be reversed in sign
 	//each bit is associated with a servo, if the bit is '1', the direction is reversed
-	#define SERVO_DIR	( MASK(SERVO_FSX) | MASK(SERVO_RDX) | MASK(SERVO_FHIP) | MASK(SERVO_RHIP) | MASK(SERVO_TORSO))
+	#define SERVO_DIR	( MASK(SERVO_WHEEL_LEFT) )
 
 		//-----------------------------------------------------------------------
 		//	PHYSICAL CONSTANTS OF THE ROBOT
@@ -139,28 +131,8 @@
 
 	//Step time in 1/50 of seconds
 	#define MOVE_STEP_TIME		20
-	//Angle of pushing required to load the legs
-	#define MOVE_LOAD_LEG		40
-
-	#define MOVE_NOLOAD_LEG		10
-	//Angle of HIP that adavnce of half step
-	#define MOVE_STEP_HIP		60
-	
+	//Maximum movement speed
 	#define MOVE_SPEED			80
-	//unit per sencond
-	//#define MOVE_LEG_SPEED		90
-	//#define MOVE_HIP_SPEED		
-
-	enum
-	{
-		MOVE_ALL_ZERO,			//All servos to zero.
-		MOVE_LEGS,				//Only legs to arg
-		MOVE_HIP,				//Only hips to arg
-		MOVE_TORSO,				//Only torso to arg
-		MOVE_FRONT_LEGS_MIRROR,	//Front legs in opposite ways
-		MOVE_REAR_LEGS_MIRROR,	//Rear legs in opposite ways
-		MOVE_HIP_MIRROR			//Move thw hips in opposite ways
-	};
 
 	/****************************************************************************
 	**	MACRO
