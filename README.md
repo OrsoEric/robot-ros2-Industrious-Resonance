@@ -155,6 +155,20 @@ I think I'll do a Longan Nano because of the screen, use one of my regulators, a
 
 I would like encoders on the motors...
 
+### Servomotors - Longan Nano
+
+I need a board to move the servomotors and have a screen.
+
+First choice was the Longan Nano, it's compact, powerful and has a nice screen and I deed lots of drivers.
+
+[Longan Nano](https://fatherofmachines.blogspot.com/p/longan-nano-gd32vf103.html)
+
+I tried and it's bricked on Platform IO. I can probably make it work.
+
+[](/log-longan-nano.md)
+
+### Servomotors
+
 
 
 ---
