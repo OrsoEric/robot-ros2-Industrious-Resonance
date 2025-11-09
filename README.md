@@ -126,8 +126,6 @@ I printed it in opaline PETG with supports, it came out really well! Tollerances
 
 Video of the assembly Process
 
-<video src="Videos/2025-11-08-T2103_assembly_battery_regulator_480p.mp4" controls="controls" style="max-width: 730px;">
-
 [Github is incompetently made and I have no way to embed a video bigger than 10MB](https://github.com/orgs/community/discussions/19403)
 
 The video will work when you fork and open with VS Code with the preview MD. Otherwise download it and watch it.
