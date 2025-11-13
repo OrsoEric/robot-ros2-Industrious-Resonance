@@ -1,0 +1,54 @@
+# depslib dependency file v1.0
+1578489603 source:d:\project\project programming\project codeblock incomplete\2020-01-16 uniparser v6\debug.cpp
+	<cstdio>
+	"debug.h"
+
+1579154064 d:\project\project programming\project codeblock incomplete\2020-01-16 uniparser v6\debug.h
+
+1579159563 source:d:\project\project programming\project codeblock incomplete\2020-01-16 uniparser v6\example.cpp
+	<iostream>
+	"debug.h"
+	"uniparser.h"
+
+1579158026 d:\project\project programming\project codeblock incomplete\2020-01-16 uniparser v6\uniparser.h
+
+1579160003 source:d:\project\project programming\project codeblock incomplete\2020-01-16 uniparser v6\uniparser.cpp
+	<cstdio>
+	<stdint.h>
+	"debug.h"
+	"uniparser.h"
+
+1578489603 source:f:\data\project\project programming\project codeblock incomplete\2020-01-16 uniparser v6\debug.cpp
+	<cstdio>
+	"debug.h"
+
+1579154064 f:\data\project\project programming\project codeblock incomplete\2020-01-16 uniparser v6\debug.h
+
+1763027237 source:f:\data\project\project programming\project codeblock incomplete\2020-01-16 uniparser v6\example.cpp
+	<stdint.h>
+	<iostream>
+	"debug.h"
+	"uniparser.h"
+
+1579158026 f:\data\project\project programming\project codeblock incomplete\2020-01-16 uniparser v6\uniparser.h
+
+1579160003 source:f:\data\project\project programming\project codeblock incomplete\2020-01-16 uniparser v6\uniparser.cpp
+	<cstdio>
+	<stdint.h>
+	"debug.h"
+	"uniparser.h"
+
+1578489603 source:f:\data\project\project orangebot\robot industrious resonance - ros2 lattepanda mu\github\firmware\test bench parser\debug.cpp
+	<cstdio>
+	"debug.h"
+
+1579154064 f:\data\project\project orangebot\robot industrious resonance - ros2 lattepanda mu\github\firmware\test bench parser\debug.h
+
+1579160003 source:f:\data\project\project orangebot\robot industrious resonance - ros2 lattepanda mu\github\firmware\test bench parser\uniparser.cpp
+	<cstdio>
+	<stdint.h>
+	"debug.h"
+	"uniparser.h"
+
+1579158026 f:\data\project\project orangebot\robot industrious resonance - ros2 lattepanda mu\github\firmware\test bench parser\uniparser.h
+

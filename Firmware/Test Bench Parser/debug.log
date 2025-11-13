@@ -1,0 +1,348 @@
+Start Debug!
+-->> "main" |
+	OrangeBot Projects
+	-->> "test_bench" |
+		-->> "init" |
+		<<-- "init" |
+		-->> "parse" | exe: >0x0<
+			354 | Terminator detected | Number of partial matches: 0
+			494 | No partial matches
+			831 | FSM RESET
+			-->> "init_arg_decoder" |
+			<<-- "init_arg_decoder" |
+		<<-- "parse" | Err_code: 0
+		-->> "add_cmd" | cmd: 001e80f7 >VR%sL%sT%u<
+			-->> "chk_cmd" | cmd: 001e80f7
+			<<-- "chk_cmd" |
+			Command >VR%sL%sT%u< with handler >001d1fc8< has been added with index: 0
+			Total number of commands: 1
+		<<-- "add_cmd" |
+		-->> "parser_executor" | in: 0
+			-->> "parse" | exe: >0x50< >P<
+				510 | PARSER_IDLE
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x0<
+				354 | Terminator detected | Number of partial matches: 0
+				494 | No partial matches
+				831 | FSM RESET
+				-->> "init_arg_decoder" |
+				<<-- "init_arg_decoder" |
+			<<-- "parse" | Err_code: 0
+		<<-- "parser_executor" |
+		-->> "parser_executor" | in: 0
+			-->> "parse" | exe: >0x46< >F<
+				510 | PARSER_IDLE
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x0<
+				354 | Terminator detected | Number of partial matches: 0
+				494 | No partial matches
+				831 | FSM RESET
+				-->> "init_arg_decoder" |
+				<<-- "init_arg_decoder" |
+			<<-- "parse" | Err_code: 0
+		<<-- "parser_executor" |
+		-->> "parser_executor" | in: 0
+			-->> "parse" | exe: >0x52< >R<
+				510 | PARSER_IDLE
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x45< >E<
+				510 | PARSER_IDLE
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x56< >V<
+				510 | PARSER_IDLE
+				536 | Match command 0, total partial matches: 1
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x0<
+				354 | Terminator detected | Number of partial matches: 1
+				377 | Scanning partially matched commands for terminators
+				425 | no match in 0 cmd 52 | 				831 | FSM RESET
+				-->> "init_arg_decoder" |
+				<<-- "init_arg_decoder" |
+			<<-- "parse" | Err_code: 0
+		<<-- "parser_executor" |
+		-->> "parser_executor" | in: 0
+			-->> "parse" | exe: >0x53< >S<
+				510 | PARSER_IDLE
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x54< >T<
+				510 | PARSER_IDLE
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x4f< >O<
+				510 | PARSER_IDLE
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x50< >P<
+				510 | PARSER_IDLE
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x0<
+				354 | Terminator detected | Number of partial matches: 0
+				494 | No partial matches
+				831 | FSM RESET
+				-->> "init_arg_decoder" |
+				<<-- "init_arg_decoder" |
+			<<-- "parse" | Err_code: 0
+		<<-- "parser_executor" |
+		-->> "parser_executor" | in: 0
+			-->> "parse" | exe: >0x56< >V<
+				510 | PARSER_IDLE
+				536 | Match command 0, total partial matches: 1
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x52< >R<
+				561 | PARSER_ID - ID
+				700 | Only one partial match remains. Num_match: -1
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x2b<
+				561 | PARSER_ID - ARG | num_match -1
+				644 | ARG begins | command: 0
+				-->> "add_arg" | command index: 0
+					argument of type >s< added | Num arguments: 0 | Arg index: 0 | Arg sign + 
+					-->> "set_arg<signed char>" | argument: 0
+					<<-- "set_arg<signed char>" | Index: 0 | Binary:   0
+				<<-- "add_arg" | Success: 0
+				-->> "accumulate_arg" | data >+<
+				<<-- "accumulate_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x31< >1<
+				766 | PARSER_ARG
+				-->> "accumulate_arg" | data >1<
+					-->> "get_arg<signed char>" | arg_index: 0
+					<<-- "get_arg<signed char>" | Decoded: 0
+					-->> "set_arg<signed char>" | argument: 1
+					<<-- "set_arg<signed char>" | Index: 0 | Binary:   1
+					Updated argument with value: 1 | index: 0
+				<<-- "accumulate_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x30< >0<
+				766 | PARSER_ARG
+				-->> "accumulate_arg" | data >0<
+					-->> "get_arg<signed char>" | arg_index: 0
+					<<-- "get_arg<signed char>" | Decoded: 1
+					-->> "set_arg<signed char>" | argument: 10
+					<<-- "set_arg<signed char>" | Index: 0 | Binary:   a
+					Updated argument with value: 10 | index: 0
+				<<-- "accumulate_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x30< >0<
+				766 | PARSER_ARG
+				-->> "accumulate_arg" | data >0<
+					-->> "get_arg<signed char>" | arg_index: 0
+					<<-- "get_arg<signed char>" | Decoded: 10
+					-->> "set_arg<signed char>" | argument: 100
+					<<-- "set_arg<signed char>" | Index: 0 | Binary:  64
+					Updated argument with value: 100 | index: 0
+				<<-- "accumulate_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x4c< >L<
+				766 | PARSER_ARG
+				Closing argument
+				-->> "close_arg" |
+					Argument closed | num arg: 1 | arg index: 1
+				<<-- "close_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x2d<
+				561 | PARSER_ID - ARG | num_match -1
+				644 | ARG begins | command: 0
+				-->> "add_arg" | command index: 0
+					argument of type >s< added | Num arguments: 1 | Arg index: 1 | Arg sign + 
+					-->> "set_arg<signed char>" | argument: 0
+					<<-- "set_arg<signed char>" | Index: 1 | Binary:   0
+				<<-- "add_arg" | Success: 0
+				-->> "accumulate_arg" | data >-<
+				<<-- "accumulate_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x35< >5<
+				766 | PARSER_ARG
+				-->> "accumulate_arg" | data >5<
+					-->> "get_arg<signed char>" | arg_index: 1
+					<<-- "get_arg<signed char>" | Decoded: 0
+					-->> "set_arg<signed char>" | argument: -5
+					<<-- "set_arg<signed char>" | Index: 1 | Binary:  fb
+					Updated argument with value: -5 | index: 1
+				<<-- "accumulate_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x30< >0<
+				766 | PARSER_ARG
+				-->> "accumulate_arg" | data >0<
+					-->> "get_arg<signed char>" | arg_index: 1
+					<<-- "get_arg<signed char>" | Decoded: -5
+					-->> "set_arg<signed char>" | argument: -50
+					<<-- "set_arg<signed char>" | Index: 1 | Binary:  ce
+					Updated argument with value: -50 | index: 1
+				<<-- "accumulate_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x0<
+				354 | Terminator detected | Number of partial matches: -1
+				361 | Terminator after ARG
+				-->> "close_arg" |
+					Argument closed | num arg: 2 | arg index: 2
+				<<-- "close_arg" |
+				just one partial match: 0
+				480 | no match. given: >0x0< expected: >0x54<
+				831 | FSM RESET
+				-->> "init_arg_decoder" |
+				<<-- "init_arg_decoder" |
+			<<-- "parse" | Err_code: 0
+		<<-- "parser_executor" |
+		-->> "parser_executor" | in: 0
+			-->> "parse" | exe: >0x56< >V<
+				510 | PARSER_IDLE
+				536 | Match command 0, total partial matches: 1
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x52< >R<
+				561 | PARSER_ID - ID
+				700 | Only one partial match remains. Num_match: -1
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x2b<
+				561 | PARSER_ID - ARG | num_match -1
+				644 | ARG begins | command: 0
+				-->> "add_arg" | command index: 0
+					argument of type >s< added | Num arguments: 0 | Arg index: 0 | Arg sign + 
+					-->> "set_arg<signed char>" | argument: 0
+					<<-- "set_arg<signed char>" | Index: 0 | Binary:   0
+				<<-- "add_arg" | Success: 0
+				-->> "accumulate_arg" | data >+<
+				<<-- "accumulate_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x31< >1<
+				766 | PARSER_ARG
+				-->> "accumulate_arg" | data >1<
+					-->> "get_arg<signed char>" | arg_index: 0
+					<<-- "get_arg<signed char>" | Decoded: 0
+					-->> "set_arg<signed char>" | argument: 1
+					<<-- "set_arg<signed char>" | Index: 0 | Binary:   1
+					Updated argument with value: 1 | index: 0
+				<<-- "accumulate_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x32< >2<
+				766 | PARSER_ARG
+				-->> "accumulate_arg" | data >2<
+					-->> "get_arg<signed char>" | arg_index: 0
+					<<-- "get_arg<signed char>" | Decoded: 1
+					-->> "set_arg<signed char>" | argument: 12
+					<<-- "set_arg<signed char>" | Index: 0 | Binary:   c
+					Updated argument with value: 12 | index: 0
+				<<-- "accumulate_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x33< >3<
+				766 | PARSER_ARG
+				-->> "accumulate_arg" | data >3<
+					-->> "get_arg<signed char>" | arg_index: 0
+					<<-- "get_arg<signed char>" | Decoded: 12
+					-->> "set_arg<signed char>" | argument: 123
+					<<-- "set_arg<signed char>" | Index: 0 | Binary:  7b
+					Updated argument with value: 123 | index: 0
+				<<-- "accumulate_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x4c< >L<
+				766 | PARSER_ARG
+				Closing argument
+				-->> "close_arg" |
+					Argument closed | num arg: 1 | arg index: 1
+				<<-- "close_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x2d<
+				561 | PARSER_ID - ARG | num_match -1
+				644 | ARG begins | command: 0
+				-->> "add_arg" | command index: 0
+					argument of type >s< added | Num arguments: 1 | Arg index: 1 | Arg sign + 
+					-->> "set_arg<signed char>" | argument: 0
+					<<-- "set_arg<signed char>" | Index: 1 | Binary:   0
+				<<-- "add_arg" | Success: 0
+				-->> "accumulate_arg" | data >-<
+				<<-- "accumulate_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x31< >1<
+				766 | PARSER_ARG
+				-->> "accumulate_arg" | data >1<
+					-->> "get_arg<signed char>" | arg_index: 1
+					<<-- "get_arg<signed char>" | Decoded: 0
+					-->> "set_arg<signed char>" | argument: -1
+					<<-- "set_arg<signed char>" | Index: 1 | Binary:  ff
+					Updated argument with value: -1 | index: 1
+				<<-- "accumulate_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x32< >2<
+				766 | PARSER_ARG
+				-->> "accumulate_arg" | data >2<
+					-->> "get_arg<signed char>" | arg_index: 1
+					<<-- "get_arg<signed char>" | Decoded: -1
+					-->> "set_arg<signed char>" | argument: -12
+					<<-- "set_arg<signed char>" | Index: 1 | Binary:  f4
+					Updated argument with value: -12 | index: 1
+				<<-- "accumulate_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x33< >3<
+				766 | PARSER_ARG
+				-->> "accumulate_arg" | data >3<
+					-->> "get_arg<signed char>" | arg_index: 1
+					<<-- "get_arg<signed char>" | Decoded: -12
+					-->> "set_arg<signed char>" | argument: -123
+					<<-- "set_arg<signed char>" | Index: 1 | Binary:  85
+					Updated argument with value: -123 | index: 1
+				<<-- "accumulate_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x54< >T<
+				766 | PARSER_ARG
+				Closing argument
+				-->> "close_arg" |
+					Argument closed | num arg: 2 | arg index: 2
+				<<-- "close_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x32< >2<
+				561 | PARSER_ID - ARG | num_match -1
+				644 | ARG begins | command: 0
+				-->> "add_arg" | command index: 0
+					argument of type >u< added | Num arguments: 2 | Arg index: 2 | Arg sign + 
+					-->> "set_arg<unsigned char>" | argument: 0
+					<<-- "set_arg<unsigned char>" | Index: 2 | Binary:   0
+				<<-- "add_arg" | Success: 0
+				-->> "accumulate_arg" | data >2<
+					-->> "get_arg<unsigned char>" | arg_index: 2
+					<<-- "get_arg<unsigned char>" | Decoded: 0
+					-->> "set_arg<unsigned char>" | argument: 2
+					<<-- "set_arg<unsigned char>" | Index: 2 | Binary:   2
+					Updated argument with value: 2 | index: 2
+				<<-- "accumulate_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x33< >3<
+				766 | PARSER_ARG
+				-->> "accumulate_arg" | data >3<
+					-->> "get_arg<unsigned char>" | arg_index: 2
+					<<-- "get_arg<unsigned char>" | Decoded: 2
+					-->> "set_arg<unsigned char>" | argument: 23
+					<<-- "set_arg<unsigned char>" | Index: 2 | Binary:  17
+					Updated argument with value: 23 | index: 2
+				<<-- "accumulate_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x34< >4<
+				766 | PARSER_ARG
+				-->> "accumulate_arg" | data >4<
+					-->> "get_arg<unsigned char>" | arg_index: 2
+					<<-- "get_arg<unsigned char>" | Decoded: 23
+					-->> "set_arg<unsigned char>" | argument: 234
+					<<-- "set_arg<unsigned char>" | Index: 2 | Binary:  ea
+					Updated argument with value: 234 | index: 2
+				<<-- "accumulate_arg" |
+			<<-- "parse" | Err_code: 0
+			-->> "parse" | exe: >0x0<
+				354 | Terminator detected | Number of partial matches: -1
+				361 | Terminator after ARG
+				-->> "close_arg" |
+					Argument closed | num arg: 3 | arg index: 3
+				<<-- "close_arg" |
+				just one partial match: 0
+				469 | Valid command ID0 decoded
+				831 | FSM RESET
+				862 | Executing handler of command 0 | num arguments: 3
+				-->> "execute_callback" |
+					-->> "handle_set_velocity_timed" | in: Right=123, Left=-123, Time=234
+					<<-- "handle_set_velocity_timed" |
+					Executing uint8_t, uint8_t, uint8_t -> void: 001d1fc8 | Args: 123 133 234 
+				<<-- "execute_callback" |
+				-->> "init_arg_decoder" |
+				<<-- "init_arg_decoder" |
+			<<-- "parse" | Err_code: 0
+		<<-- "parser_executor" |
+	<<-- "test_bench" | out: 0
+<<-- "main" |
+
+Debug has Ended!
