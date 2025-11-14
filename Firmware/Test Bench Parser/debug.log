@@ -11,40 +11,40 @@ Start Debug!
 			-->> "init_arg_decoder" |
 			<<-- "init_arg_decoder" |
 		<<-- "parse" | Err_code: 0
-		-->> "add_cmd" | cmd: 00007ff76875b071 >P<
-			-->> "chk_cmd" | cmd: 00007ff76875b071
+		-->> "add_cmd" | cmd: 00007ff7ef97b071 >P<
+			-->> "chk_cmd" | cmd: 00007ff7ef97b071
 			<<-- "chk_cmd" |
-			Command >P< with handler >00007ff7687417de< has been added with index: 0
+			Command >P< with handler >00007ff7ef9617de< has been added with index: 0
 			Total number of commands: 1
 		<<-- "add_cmd" |
-		-->> "add_cmd" | cmd: 00007ff76875b073 >F<
-			-->> "chk_cmd" | cmd: 00007ff76875b073
+		-->> "add_cmd" | cmd: 00007ff7ef97b073 >F<
+			-->> "chk_cmd" | cmd: 00007ff7ef97b073
 			<<-- "chk_cmd" |
-			Command >F< with handler >00007ff768741806< has been added with index: 1
+			Command >F< with handler >00007ff7ef961806< has been added with index: 1
 			Total number of commands: 2
 		<<-- "add_cmd" |
-		-->> "add_cmd" | cmd: 00007ff76875b075 >REV<
-			-->> "chk_cmd" | cmd: 00007ff76875b075
+		-->> "add_cmd" | cmd: 00007ff7ef97b075 >REV<
+			-->> "chk_cmd" | cmd: 00007ff7ef97b075
 			<<-- "chk_cmd" |
-			Command >REV< with handler >00007ff768741847< has been added with index: 2
+			Command >REV< with handler >00007ff7ef961847< has been added with index: 2
 			Total number of commands: 3
 		<<-- "add_cmd" |
-		-->> "add_cmd" | cmd: 00007ff76875b079 >STOP<
-			-->> "chk_cmd" | cmd: 00007ff76875b079
+		-->> "add_cmd" | cmd: 00007ff7ef97b079 >STOP<
+			-->> "chk_cmd" | cmd: 00007ff7ef97b079
 			<<-- "chk_cmd" |
-			Command >STOP< with handler >00007ff768741888< has been added with index: 3
+			Command >STOP< with handler >00007ff7ef961888< has been added with index: 3
 			Total number of commands: 4
 		<<-- "add_cmd" |
-		-->> "add_cmd" | cmd: 00007ff76875b07e >VR%sL%s<
-			-->> "chk_cmd" | cmd: 00007ff76875b07e
+		-->> "add_cmd" | cmd: 00007ff7ef97b07e >VR%sL%s<
+			-->> "chk_cmd" | cmd: 00007ff7ef97b07e
 			<<-- "chk_cmd" |
-			Command >VR%sL%s< with handler >00007ff7687418bf< has been added with index: 4
+			Command >VR%sL%s< with handler >00007ff7ef9618bf< has been added with index: 4
 			Total number of commands: 5
 		<<-- "add_cmd" |
-		-->> "add_cmd" | cmd: 00007ff76875b086 >VR%sL%sT%u<
-			-->> "chk_cmd" | cmd: 00007ff76875b086
+		-->> "add_cmd" | cmd: 00007ff7ef97b086 >VR%sL%sT%u<
+			-->> "chk_cmd" | cmd: 00007ff7ef97b086
 			<<-- "chk_cmd" |
-			Command >VR%sL%sT%u< with handler >00007ff76874191b< has been added with index: 5
+			Command >VR%sL%sT%u< with handler >00007ff7ef96191b< has been added with index: 5
 			Total number of commands: 6
 		<<-- "add_cmd" |
 		-->> "parser_executor" | in: 0
@@ -59,7 +59,7 @@ Start Debug!
 				834 | FSM RESET
 				865 | Executing handler of command 0 | num arguments: 0
 				-->> "execute_callback" |
-					Executing void -> void: 00007ff7687417de | Args: NONE 
+					Executing void -> void: 00007ff7ef9617de | Args: NONE 
 				<<-- "execute_callback" |
 				-->> "init_arg_decoder" |
 				<<-- "init_arg_decoder" |
@@ -84,7 +84,7 @@ Start Debug!
 				834 | FSM RESET
 				865 | Executing handler of command 1 | num arguments: 0
 				-->> "execute_callback" |
-					Executing void -> void: 00007ff768741806 | Args: NONE 
+					Executing void -> void: 00007ff7ef961806 | Args: NONE 
 				<<-- "execute_callback" |
 				-->> "init_arg_decoder" |
 				<<-- "init_arg_decoder" |
@@ -117,7 +117,7 @@ Start Debug!
 				834 | FSM RESET
 				865 | Executing handler of command 2 | num arguments: 0
 				-->> "execute_callback" |
-					Executing void -> void: 00007ff768741847 | Args: NONE 
+					Executing void -> void: 00007ff7ef961847 | Args: NONE 
 				<<-- "execute_callback" |
 				-->> "init_arg_decoder" |
 				<<-- "init_arg_decoder" |
@@ -154,7 +154,7 @@ Start Debug!
 				834 | FSM RESET
 				865 | Executing handler of command 3 | num arguments: 0
 				-->> "execute_callback" |
-					Executing void -> void: 00007ff768741888 | Args: NONE 
+					Executing void -> void: 00007ff7ef961888 | Args: NONE 
 				<<-- "execute_callback" |
 				-->> "init_arg_decoder" |
 				<<-- "init_arg_decoder" |
@@ -267,7 +267,7 @@ Start Debug!
 				834 | FSM RESET
 				865 | Executing handler of command 4 | num arguments: 2
 				-->> "execute_callback" |
-					Executing uint8_t, uint8_t -> void: 00007ff7687418bf | Args: 100 206 
+					Executing uint8_t, uint8_t -> void: 00007ff7ef9618bf | Args: 100 206 
 				<<-- "execute_callback" |
 				-->> "init_arg_decoder" |
 				<<-- "init_arg_decoder" |
