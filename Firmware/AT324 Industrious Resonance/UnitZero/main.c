@@ -214,7 +214,7 @@ extern U8 seesaw();
 
 //Those are the flags updated by ISRs
 volatile Isr_flags f;
-//Status variabile for the servos, keep track of which servo to do next
+//Status variable for the servos, keep track of which servo to do next
 volatile U8 servo_cnt	= N_SERVOS;
 
 	///----------------------------------------------------------------------
@@ -264,7 +264,7 @@ int main( void )
 {
 	///**********************************************************************
 	///	LOCAL VARIABILE
-	///	TIPS: main local variabile last the entiere program, but unlike the global variabile,
+	///	TIPS: main local variable last the entire program, but unlike the global variable,
 	///	they are not visible from other function, the c compiler can better optimize them
 	///**********************************************************************
 
@@ -292,7 +292,7 @@ int main( void )
 	{
 		servo_off[u8t]			= +0;
 		servo_delay[u8t] 		= K0;	//Servo true position
-		servo_target_pos[u8t] 	= +0;	//Servo targt position (user)
+		servo_target_pos[u8t] 	= +0;	//Servo target position (user)
 		servo_target_speed[u8t]	= MOVE_SPEED;	//Servo target speed (default)
 	}
 
@@ -328,7 +328,7 @@ int main( void )
 		//-----------------------------------------------------------------------
 		//	START MOTOR SCAN (5.8uS max all servo functions)
 		//-----------------------------------------------------------------------
-		//	Flag rised by [Timer 0]
+		//	Flag raised by [Timer 0]
 		//	>activity pin (led signal uC use, oscilloscope allow to measure function times)
 		//	>clear servo status var
 		//	>calculate first delay, pull down first line
@@ -476,7 +476,6 @@ U8 seesaw()
 	
 	return 0;
 }
-
 
 /****************************************************************************
 **	SERVO CALC POS

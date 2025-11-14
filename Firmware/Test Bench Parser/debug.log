@@ -11,10 +11,10 @@ Start Debug!
 			-->> "init_arg_decoder" |
 			<<-- "init_arg_decoder" |
 		<<-- "parse" | Err_code: 0
-		-->> "add_cmd" | cmd: 001e80f7 >VR%sL%sT%u<
-			-->> "chk_cmd" | cmd: 001e80f7
+		-->> "add_cmd" | cmd: 00007ff79cadc107 >VR%sL%sT%u<
+			-->> "chk_cmd" | cmd: 00007ff79cadc107
 			<<-- "chk_cmd" |
-			Command >VR%sL%sT%u< with handler >001d1fc8< has been added with index: 0
+			Command >VR%sL%sT%u< with handler >00007ff79cac23ab< has been added with index: 0
 			Total number of commands: 1
 		<<-- "add_cmd" |
 		-->> "parser_executor" | in: 0
@@ -336,7 +336,7 @@ Start Debug!
 				-->> "execute_callback" |
 					-->> "handle_set_velocity_timed" | in: Right=123, Left=-123, Time=234
 					<<-- "handle_set_velocity_timed" |
-					Executing uint8_t, uint8_t, uint8_t -> void: 001d1fc8 | Args: 123 133 234 
+					Executing uint8_t, uint8_t, uint8_t -> void: 00007ff79cac23ab | Args: 123 133 234 
 				<<-- "execute_callback" |
 				-->> "init_arg_decoder" |
 				<<-- "init_arg_decoder" |

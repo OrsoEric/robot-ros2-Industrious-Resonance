@@ -35,13 +35,14 @@
 		<Unit filename="debug.cpp" />
 		<Unit filename="debug.h" />
 		<Unit filename="debug.log" />
-		<Unit filename="example.cpp" />
+		<Unit filename="example.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="serial_parser.cpp" />
 		<Unit filename="uniparser.cpp" />
 		<Unit filename="uniparser.h" />
 		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
 			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>
