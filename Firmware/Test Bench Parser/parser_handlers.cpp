@@ -60,7 +60,8 @@ extern void handle_ping(void);
 extern void handle_sign(void);
 extern void handle_revision(void);
 extern void handle_stop(void);
-extern void handle_set_velocity(int16_t right_speed, int16_t left_speed);
+extern void handle_set_velocity(int8_t right_speed, int8_t left_speed);
+
 extern void handle_set_velocity_timed(int8_t right_speed, int8_t left_speed, uint8_t time);
 
 /****************************************************************
@@ -146,10 +147,15 @@ bool init_parser_commands( Orangebot::Uniparser &i_rcl_parser )
 	//Register all UART commands with their handlers
 
     f_ret = false;
+
 	f_ret |= i_rcl_parser.add_cmd( "P", (void *)&handle_ping );
+
 	f_ret |= i_rcl_parser.add_cmd( "F", (void *)&handle_sign );
+
 	f_ret |= i_rcl_parser.add_cmd( "REV", (void *)&handle_revision );
+
 	f_ret |= i_rcl_parser.add_cmd( "STOP", (void *)&handle_stop );
+
 	f_ret |= i_rcl_parser.add_cmd( "VR%sL%s", (void *)&handle_set_velocity );
 
 	f_ret |= i_rcl_parser.add_cmd( "VR%sL%sT%u", (void *)&handle_set_velocity_timed );
@@ -205,6 +211,7 @@ void handle_sign(void)
 //! @brief Handles firmware revision request command
 //! @details Responds with firmware revision string
 /***************************************************************************/
+
 void handle_revision(void)
 {
 	DENTER();
@@ -221,6 +228,7 @@ void handle_revision(void)
 //! @brief Handles stop command - sets motor speeds to zero
 //! @details Stops all motors by setting speed to 0
 /***************************************************************************/
+
 void handle_stop(void)
 {
 	DENTER();
@@ -239,12 +247,13 @@ void handle_stop(void)
 //! @param left_speed Speed for left motor
 //! @details Sets the speed of both motors to specified values
 /***************************************************************************/
-void handle_set_velocity(int16_t right_speed, int16_t left_speed)
+
+void handle_set_velocity(int8_t i_s8_right_speed, int8_t i_s8_left_speed)
 {
-	DENTER_ARG("in: Right=%d, Left=%d\n", right_speed, left_speed);
+	DENTER_ARG("in: Right=%d, Left=%d\n", i_s8_right_speed, i_s8_left_speed);
 	printf("EXE | %s  -> Set velocity command\n", __FUNCTION__);
-	printf("Right motor speed: %d\n", right_speed);
-	printf("Left motor speed: %d\n", left_speed);
+	printf("Right motor speed: %d\n", i_s8_right_speed);
+	printf("Left motor speed: %d\n", i_s8_left_speed);
 	DRETURN();
 	return;
 }
@@ -259,8 +268,8 @@ void handle_set_velocity(int16_t right_speed, int16_t left_speed)
 //! @param time Duration in seconds
 //! @details Sets the speed of both motors for specified duration
 /***************************************************************************/
+
 void handle_set_velocity_timed(int8_t right_speed, int8_t left_speed, uint8_t time)
-//void handle_set_velocity_timed(int16_t right_speed, int16_t left_speed, uint8_t time)
 {
 	DENTER_ARG("in: Right=%d, Left=%d, Time=%d\n", right_speed, left_speed, time);
 	printf("EXE | %s  -> Set velocity timed command\n", __FUNCTION__);

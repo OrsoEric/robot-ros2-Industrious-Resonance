@@ -281,6 +281,8 @@ void parser_executor( Orangebot::Uniparser &my_parser, uint8_t *ptr )
 			exit(0);
 		}
 	}
+	//Feed an additional terminator
+    my_parser.parse('\0');
 
 	//----------------------------------------------------------------
 	//	RETURN

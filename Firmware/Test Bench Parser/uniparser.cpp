@@ -801,8 +801,11 @@ bool Uniparser::parse( uint8_t data )
 				uint8_t cmd_id = -this -> g_num_match -1;
 				//Update the parser index by skipping % and the argument descriptor
 				this -> g_cmd_index[ cmd_id ] += 2;
+				//Get the next cmd match
+				uint8_t u8_next_cmd_id = this -> g_cmd_txt[ cmd_id ][ this -> g_cmd_index[ cmd_id ] ];
+				DPRINT("%d | Expected CMD ID %d | Got CMD ID %c\n", __LINE__, this -> g_cmd_txt[ cmd_id ][ this -> g_cmd_index[ cmd_id ] ], data);
 				//check that the dictionary holds the same value as data
-				if (this -> g_cmd_txt[ cmd_id ][ this -> g_cmd_index[ cmd_id ] ] == data)
+				if (u8_next_cmd_id == data)
 				{
 					//Advance to the next dictionary entry for this command
 					this -> g_cmd_index[ cmd_id ]++;
@@ -810,7 +813,7 @@ bool Uniparser::parse( uint8_t data )
 				//No match
 				else
 				{
-					DPRINT("%d | Pruning away last match\n", __LINE__);
+					DPRINT("%d | Pruning away last match\n", __LINE__ );
 					//I can recover from this by resetting the FSM
 					f_rst_fsm = true;
 				}

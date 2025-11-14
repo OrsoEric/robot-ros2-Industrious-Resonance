@@ -39,6 +39,7 @@
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
+		<Unit filename="parser_handlers.cpp" />
 		<Unit filename="serial_parser.cpp" />
 		<Unit filename="uniparser.cpp" />
 		<Unit filename="uniparser.h" />
