@@ -11,20 +11,56 @@ Start Debug!
 			-->> "init_arg_decoder" |
 			<<-- "init_arg_decoder" |
 		<<-- "parse" | Err_code: 0
-		-->> "add_cmd" | cmd: 00007ff79cadc107 >VR%sL%sT%u<
-			-->> "chk_cmd" | cmd: 00007ff79cadc107
+		-->> "add_cmd" | cmd: 00007ff7979ab071 >P<
+			-->> "chk_cmd" | cmd: 00007ff7979ab071
 			<<-- "chk_cmd" |
-			Command >VR%sL%sT%u< with handler >00007ff79cac23ab< has been added with index: 0
+			Command >P< with handler >00007ff7979917de< has been added with index: 0
 			Total number of commands: 1
+		<<-- "add_cmd" |
+		-->> "add_cmd" | cmd: 00007ff7979ab073 >F<
+			-->> "chk_cmd" | cmd: 00007ff7979ab073
+			<<-- "chk_cmd" |
+			Command >F< with handler >00007ff797991806< has been added with index: 1
+			Total number of commands: 2
+		<<-- "add_cmd" |
+		-->> "add_cmd" | cmd: 00007ff7979ab075 >REV<
+			-->> "chk_cmd" | cmd: 00007ff7979ab075
+			<<-- "chk_cmd" |
+			Command >REV< with handler >00007ff797991847< has been added with index: 2
+			Total number of commands: 3
+		<<-- "add_cmd" |
+		-->> "add_cmd" | cmd: 00007ff7979ab079 >STOP<
+			-->> "chk_cmd" | cmd: 00007ff7979ab079
+			<<-- "chk_cmd" |
+			Command >STOP< with handler >00007ff797991888< has been added with index: 3
+			Total number of commands: 4
+		<<-- "add_cmd" |
+		-->> "add_cmd" | cmd: 00007ff7979ab07e >VR%sL%s<
+			-->> "chk_cmd" | cmd: 00007ff7979ab07e
+			<<-- "chk_cmd" |
+			Command >VR%sL%s< with handler >00007ff7979918bf< has been added with index: 4
+			Total number of commands: 5
+		<<-- "add_cmd" |
+		-->> "add_cmd" | cmd: 00007ff7979ab086 >VR%sL%sT%u<
+			-->> "chk_cmd" | cmd: 00007ff7979ab086
+			<<-- "chk_cmd" |
+			Command >VR%sL%sT%u< with handler >00007ff79799191d< has been added with index: 5
+			Total number of commands: 6
 		<<-- "add_cmd" |
 		-->> "parser_executor" | in: 0
 			-->> "parse" | exe: >0x50< >P<
 				510 | PARSER_IDLE
+				536 | Match command 0, total partial matches: 1
 			<<-- "parse" | Err_code: 0
 			-->> "parse" | exe: >0x0<
-				354 | Terminator detected | Number of partial matches: 0
-				494 | No partial matches
+				354 | Terminator detected | Number of partial matches: 1
+				377 | Scanning partially matched commands for terminators
+				Valid command ID0 decoded
 				831 | FSM RESET
+				862 | Executing handler of command 0 | num arguments: 0
+				-->> "execute_callback" |
+					Executing void -> void: 00007ff7979917de | Args: NONE 
+				<<-- "execute_callback" |
 				-->> "init_arg_decoder" |
 				<<-- "init_arg_decoder" |
 			<<-- "parse" | Err_code: 0
@@ -32,11 +68,17 @@ Start Debug!
 		-->> "parser_executor" | in: 0
 			-->> "parse" | exe: >0x46< >F<
 				510 | PARSER_IDLE
+				536 | Match command 1, total partial matches: 1
 			<<-- "parse" | Err_code: 0
 			-->> "parse" | exe: >0x0<
-				354 | Terminator detected | Number of partial matches: 0
-				494 | No partial matches
+				354 | Terminator detected | Number of partial matches: 1
+				377 | Scanning partially matched commands for terminators
+				Valid command ID1 decoded
 				831 | FSM RESET
+				862 | Executing handler of command 1 | num arguments: 0
+				-->> "execute_callback" |
+					Executing void -> void: 00007ff797991806 | Args: NONE 
+				<<-- "execute_callback" |
 				-->> "init_arg_decoder" |
 				<<-- "init_arg_decoder" |
 			<<-- "parse" | Err_code: 0
@@ -44,18 +86,25 @@ Start Debug!
 		-->> "parser_executor" | in: 0
 			-->> "parse" | exe: >0x52< >R<
 				510 | PARSER_IDLE
+				536 | Match command 2, total partial matches: 1
 			<<-- "parse" | Err_code: 0
 			-->> "parse" | exe: >0x45< >E<
-				510 | PARSER_IDLE
+				561 | PARSER_ID - ID
+				700 | Only one partial match remains. Num_match: -3
 			<<-- "parse" | Err_code: 0
 			-->> "parse" | exe: >0x56< >V<
-				510 | PARSER_IDLE
-				536 | Match command 0, total partial matches: 1
+				561 | PARSER_ID - ID
+				746 | Match still valid...
 			<<-- "parse" | Err_code: 0
 			-->> "parse" | exe: >0x0<
-				354 | Terminator detected | Number of partial matches: 1
-				377 | Scanning partially matched commands for terminators
-				425 | no match in 0 cmd 52 | 				831 | FSM RESET
+				354 | Terminator detected | Number of partial matches: -3
+				just one partial match: 2
+				469 | Valid command ID2 decoded
+				831 | FSM RESET
+				862 | Executing handler of command 2 | num arguments: 0
+				-->> "execute_callback" |
+					Executing void -> void: 00007ff797991847 | Args: NONE 
+				<<-- "execute_callback" |
 				-->> "init_arg_decoder" |
 				<<-- "init_arg_decoder" |
 			<<-- "parse" | Err_code: 0
@@ -63,20 +112,29 @@ Start Debug!
 		-->> "parser_executor" | in: 0
 			-->> "parse" | exe: >0x53< >S<
 				510 | PARSER_IDLE
+				536 | Match command 3, total partial matches: 1
 			<<-- "parse" | Err_code: 0
 			-->> "parse" | exe: >0x54< >T<
-				510 | PARSER_IDLE
+				561 | PARSER_ID - ID
+				700 | Only one partial match remains. Num_match: -4
 			<<-- "parse" | Err_code: 0
 			-->> "parse" | exe: >0x4f< >O<
-				510 | PARSER_IDLE
+				561 | PARSER_ID - ID
+				746 | Match still valid...
 			<<-- "parse" | Err_code: 0
 			-->> "parse" | exe: >0x50< >P<
-				510 | PARSER_IDLE
+				561 | PARSER_ID - ID
+				746 | Match still valid...
 			<<-- "parse" | Err_code: 0
 			-->> "parse" | exe: >0x0<
-				354 | Terminator detected | Number of partial matches: 0
-				494 | No partial matches
+				354 | Terminator detected | Number of partial matches: -4
+				just one partial match: 3
+				469 | Valid command ID3 decoded
 				831 | FSM RESET
+				862 | Executing handler of command 3 | num arguments: 0
+				-->> "execute_callback" |
+					Executing void -> void: 00007ff797991888 | Args: NONE 
+				<<-- "execute_callback" |
 				-->> "init_arg_decoder" |
 				<<-- "init_arg_decoder" |
 			<<-- "parse" | Err_code: 0
@@ -84,16 +142,16 @@ Start Debug!
 		-->> "parser_executor" | in: 0
 			-->> "parse" | exe: >0x56< >V<
 				510 | PARSER_IDLE
-				536 | Match command 0, total partial matches: 1
+				536 | Match command 4, total partial matches: 1
+				536 | Match command 5, total partial matches: 2
 			<<-- "parse" | Err_code: 0
 			-->> "parse" | exe: >0x52< >R<
 				561 | PARSER_ID - ID
-				700 | Only one partial match remains. Num_match: -1
 			<<-- "parse" | Err_code: 0
 			-->> "parse" | exe: >0x2b<
-				561 | PARSER_ID - ARG | num_match -1
-				644 | ARG begins | command: 0
-				-->> "add_arg" | command index: 0
+				561 | PARSER_ID - ARG | num_match 2
+				582 | ARG begins | command: 4
+				-->> "add_arg" | command index: 4
 					argument of type >s< added | Num arguments: 0 | Arg index: 0 | Arg sign + 
 					-->> "set_arg<signed char>" | argument: 0
 					<<-- "set_arg<signed char>" | Index: 0 | Binary:   0
@@ -139,9 +197,9 @@ Start Debug!
 				<<-- "close_arg" |
 			<<-- "parse" | Err_code: 0
 			-->> "parse" | exe: >0x2d<
-				561 | PARSER_ID - ARG | num_match -1
-				644 | ARG begins | command: 0
-				-->> "add_arg" | command index: 0
+				561 | PARSER_ID - ARG | num_match -5
+				644 | ARG begins | command: 4
+				-->> "add_arg" | command index: 4
 					argument of type >s< added | Num arguments: 1 | Arg index: 1 | Arg sign + 
 					-->> "set_arg<signed char>" | argument: 0
 					<<-- "set_arg<signed char>" | Index: 1 | Binary:   0
@@ -170,14 +228,18 @@ Start Debug!
 				<<-- "accumulate_arg" |
 			<<-- "parse" | Err_code: 0
 			-->> "parse" | exe: >0x0<
-				354 | Terminator detected | Number of partial matches: -1
+				354 | Terminator detected | Number of partial matches: -5
 				361 | Terminator after ARG
 				-->> "close_arg" |
 					Argument closed | num arg: 2 | arg index: 2
 				<<-- "close_arg" |
-				just one partial match: 0
-				480 | no match. given: >0x0< expected: >0x54<
+				just one partial match: 4
+				469 | Valid command ID4 decoded
 				831 | FSM RESET
+				862 | Executing handler of command 4 | num arguments: 2
+				-->> "execute_callback" |
+					Executing uint8_t, uint8_t -> void: 00007ff7979918bf | Args: 100 206 
+				<<-- "execute_callback" |
 				-->> "init_arg_decoder" |
 				<<-- "init_arg_decoder" |
 			<<-- "parse" | Err_code: 0
@@ -185,16 +247,16 @@ Start Debug!
 		-->> "parser_executor" | in: 0
 			-->> "parse" | exe: >0x56< >V<
 				510 | PARSER_IDLE
-				536 | Match command 0, total partial matches: 1
+				536 | Match command 4, total partial matches: 1
+				536 | Match command 5, total partial matches: 2
 			<<-- "parse" | Err_code: 0
 			-->> "parse" | exe: >0x52< >R<
 				561 | PARSER_ID - ID
-				700 | Only one partial match remains. Num_match: -1
 			<<-- "parse" | Err_code: 0
 			-->> "parse" | exe: >0x2b<
-				561 | PARSER_ID - ARG | num_match -1
-				644 | ARG begins | command: 0
-				-->> "add_arg" | command index: 0
+				561 | PARSER_ID - ARG | num_match 2
+				582 | ARG begins | command: 4
+				-->> "add_arg" | command index: 4
 					argument of type >s< added | Num arguments: 0 | Arg index: 0 | Arg sign + 
 					-->> "set_arg<signed char>" | argument: 0
 					<<-- "set_arg<signed char>" | Index: 0 | Binary:   0
@@ -240,9 +302,9 @@ Start Debug!
 				<<-- "close_arg" |
 			<<-- "parse" | Err_code: 0
 			-->> "parse" | exe: >0x2d<
-				561 | PARSER_ID - ARG | num_match -1
-				644 | ARG begins | command: 0
-				-->> "add_arg" | command index: 0
+				561 | PARSER_ID - ARG | num_match -5
+				644 | ARG begins | command: 4
+				-->> "add_arg" | command index: 4
 					argument of type >s< added | Num arguments: 1 | Arg index: 1 | Arg sign + 
 					-->> "set_arg<signed char>" | argument: 0
 					<<-- "set_arg<signed char>" | Index: 1 | Binary:   0
@@ -286,58 +348,33 @@ Start Debug!
 				-->> "close_arg" |
 					Argument closed | num arg: 2 | arg index: 2
 				<<-- "close_arg" |
+				813 | Pruning away last match
+				831 | FSM RESET
+				-->> "init_arg_decoder" |
+				<<-- "init_arg_decoder" |
 			<<-- "parse" | Err_code: 0
 			-->> "parse" | exe: >0x32< >2<
-				561 | PARSER_ID - ARG | num_match -1
-				644 | ARG begins | command: 0
-				-->> "add_arg" | command index: 0
-					argument of type >u< added | Num arguments: 2 | Arg index: 2 | Arg sign + 
-					-->> "set_arg<unsigned char>" | argument: 0
-					<<-- "set_arg<unsigned char>" | Index: 2 | Binary:   0
-				<<-- "add_arg" | Success: 0
-				-->> "accumulate_arg" | data >2<
-					-->> "get_arg<unsigned char>" | arg_index: 2
-					<<-- "get_arg<unsigned char>" | Decoded: 0
-					-->> "set_arg<unsigned char>" | argument: 2
-					<<-- "set_arg<unsigned char>" | Index: 2 | Binary:   2
-					Updated argument with value: 2 | index: 2
-				<<-- "accumulate_arg" |
+				510 | PARSER_IDLE
+				831 | FSM RESET
+				-->> "init_arg_decoder" |
+				<<-- "init_arg_decoder" |
 			<<-- "parse" | Err_code: 0
 			-->> "parse" | exe: >0x33< >3<
-				766 | PARSER_ARG
-				-->> "accumulate_arg" | data >3<
-					-->> "get_arg<unsigned char>" | arg_index: 2
-					<<-- "get_arg<unsigned char>" | Decoded: 2
-					-->> "set_arg<unsigned char>" | argument: 23
-					<<-- "set_arg<unsigned char>" | Index: 2 | Binary:  17
-					Updated argument with value: 23 | index: 2
-				<<-- "accumulate_arg" |
+				510 | PARSER_IDLE
+				831 | FSM RESET
+				-->> "init_arg_decoder" |
+				<<-- "init_arg_decoder" |
 			<<-- "parse" | Err_code: 0
 			-->> "parse" | exe: >0x34< >4<
-				766 | PARSER_ARG
-				-->> "accumulate_arg" | data >4<
-					-->> "get_arg<unsigned char>" | arg_index: 2
-					<<-- "get_arg<unsigned char>" | Decoded: 23
-					-->> "set_arg<unsigned char>" | argument: 234
-					<<-- "set_arg<unsigned char>" | Index: 2 | Binary:  ea
-					Updated argument with value: 234 | index: 2
-				<<-- "accumulate_arg" |
+				510 | PARSER_IDLE
+				831 | FSM RESET
+				-->> "init_arg_decoder" |
+				<<-- "init_arg_decoder" |
 			<<-- "parse" | Err_code: 0
 			-->> "parse" | exe: >0x0<
-				354 | Terminator detected | Number of partial matches: -1
-				361 | Terminator after ARG
-				-->> "close_arg" |
-					Argument closed | num arg: 3 | arg index: 3
-				<<-- "close_arg" |
-				just one partial match: 0
-				469 | Valid command ID0 decoded
+				354 | Terminator detected | Number of partial matches: 0
+				494 | No partial matches
 				831 | FSM RESET
-				862 | Executing handler of command 0 | num arguments: 3
-				-->> "execute_callback" |
-					-->> "handle_set_velocity_timed" | in: Right=123, Left=-123, Time=234
-					<<-- "handle_set_velocity_timed" |
-					Executing uint8_t, uint8_t, uint8_t -> void: 00007ff79cac23ab | Args: 123 133 234 
-				<<-- "execute_callback" |
 				-->> "init_arg_decoder" |
 				<<-- "init_arg_decoder" |
 			<<-- "parse" | Err_code: 0
